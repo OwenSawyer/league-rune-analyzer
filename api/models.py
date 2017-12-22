@@ -3,7 +3,7 @@ from django.db.models import Max
 import string
 import random
 
-class User(models.Model):
+class Champion(models.Model):
     id = models.BigIntegerField(primary_key=True)
     user = models.TextField()
     address = models.TextField()
