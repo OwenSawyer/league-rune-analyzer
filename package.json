@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "node_modules/webpack/bin/webpack.js",
-    "webpack": "node_modules/webpack/bin/webpack.js --progress --colors --watch"
+    "webpack": "node node_modules/webpack/bin/webpack.js --progress --colors"
   },
   "keywords": [
     "django",
