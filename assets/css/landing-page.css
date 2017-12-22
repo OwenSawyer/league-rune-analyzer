@@ -18,7 +18,7 @@ h6 {
 header.masthead {
   position: relative;
   background-color: #343a40;
-  background: url("../img/bg-masthead.jpg") no-repeat center center;
+  background: url("/static/img/bg-masthead.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -53,6 +53,20 @@ header.masthead {
   .showcase .showcase-text {
     padding: 7rem; } }
 
+.about-icon {
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.about-icon:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 .features-icons {
   padding-top: 7rem;
   padding-bottom: 7rem; }
@@ -77,7 +91,7 @@ header.masthead {
 .call-to-action {
   position: relative;
   background-color: #343a40;
-  background: url("../img/bg-masthead.jpg") no-repeat center center;
+  background: url("static/img/bg-masthead.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

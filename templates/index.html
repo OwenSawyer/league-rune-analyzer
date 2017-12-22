@@ -40,16 +40,29 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-9 mx-auto">
-            <h1 class="mb-5">Build a landing page for your business or project and generate more leads!</h1>
+            <h1 class="mb-5">Start optimizing your champion runes!</h1>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <form>
               <div class="form-row">
                 <div class="col-12 col-md-9 mb-2 mb-md-0">
-                  <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
+                  <input type="text" class="form-control form-control-lg" placeholder="Enter your summoner name..."><br>
+                  <select>
+                  	<option value="NA">North America</option>\
+                  	<option value="KR">Korea</option>
+                  	<option value="JP">Japan</option>
+                  	<option value="EUW">Europe West</option>
+                  	<option value="EUNE">Europe Nordic and East</option>
+                  	<option value="OCE">Oceania</option>
+                  	<option value="BR">Brazil</option>
+                  	<option value="LAS">LAS</option>
+                  	<option value="LAN">LAN</option>
+                  	<option value="RU">Russia</option>
+                  	<option value="TR">Turkey</option>
+                  </select>
                 </div>
                 <div class="col-12 col-md-3">
-                  <button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+                  <button type="submit" class="btn btn-block btn-lg btn-primary">Reforge</button>
                 </div>
               </div>
             </form>
@@ -65,28 +78,28 @@
           <div class="col-lg-4">
             <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
               <div class="features-icons-icon d-flex">
-                <i class="icon-screen-desktop m-auto text-primary"></i>
+                <img class="about-icon m-auto text-primary" alt="Select Summoner" height="100px" src="{% static 'img/LeagueIcon.png' %}">
               </div>
-              <h3>Fully Responsive</h3>
-              <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
+              <h3>Enter Summoner Name</h3>
+              <p class="lead mb-0">Enter your summoner name and corresponding region.</p>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
               <div class="features-icons-icon d-flex">
-                <i class="icon-layers m-auto text-primary"></i>
+                <img class="about-icon m-auto text-primary" alt="Choose Champion" height="100px" src="{% static 'img/MysteryChampionIcon.png' %}">
               </div>
-              <h3>Bootstrap 4 Ready</h3>
-              <p class="lead mb-0">Featuring the latest build of the new Bootstrap 4 framework!</p>
+              <h3>View Rune History</h3>
+              <p class="lead mb-0">Look through your match history on different champions and how optimal your runes were in each game.</p>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="features-icons-item mx-auto mb-0 mb-lg-3">
               <div class="features-icons-icon d-flex">
-                <i class="icon-check m-auto text-primary"></i>
+                <img class="about-icon m-auto text-primary" alt="Reforge Runes" height="100px" src="{% static 'img/RuneIcon.png' %}">
               </div>
-              <h3>Easy to Use</h3>
-              <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+              <h3>Discover Optimal Runes</h3>
+              <p class="lead mb-0">Compare your runes with the most optimal runes on each champion and understand their advantages!</p>
             </div>
           </div>
         </div>
@@ -97,44 +110,8 @@
     <footer class="footer bg-light">
       <div class="container">
         <div class="row">
-          <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item">
-                <a href="#">About</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#">Contact</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#">Terms of Use</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#">Privacy Policy</a>
-              </li>
-            </ul>
-            <p class="text-muted small mb-4 mb-lg-0">&copy; Start Bootstrap 2017. All Rights Reserved.</p>
-          </div>
-          <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item mr-3">
-                <a href="#">
-                  <i class="fa fa-facebook fa-2x fa-fw"></i>
-                </a>
-              </li>
-              <li class="list-inline-item mr-3">
-                <a href="#">
-                  <i class="fa fa-twitter fa-2x fa-fw"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-instagram fa-2x fa-fw"></i>
-                </a>
-              </li>
-            </ul>
+          <div class="text-center my-auto">
+            <p class="text-muted small mb-4 mb-lg-0">Champions Reforged isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</p>
           </div>
         </div>
       </div>
