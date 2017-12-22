@@ -19,6 +19,8 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^404/', TemplateView.as_view(template_name='404.html')),
+    url(r'^results/', TemplateView.as_view(template_name='results.html')),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'^api/', include('api.urls')),
 ]

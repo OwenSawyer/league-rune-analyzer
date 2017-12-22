@@ -1,0 +1,126 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Champions Reforged</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-light static-top">
+      <div class="container">
+        <a class="navbar-brand" href="/"><img alt="Champions Reforged Logo" height="80px" src="{% static 'img/Logo.png' %}">Champions Reforged</a>
+      </div>
+    </nav>
+
+    <!-- Masthead -->
+    <header class="masthead text-white text-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h1 class="mb-5">Start optimizing your champion runes!</h1>
+          </div>
+          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+            <form>
+              <div class="form-row">
+                <div class="col-12 col-md-9 mb-2 mb-md-0">
+                  <input type="text" class="form-control form-control-lg" placeholder="Enter your summoner name..."><br>
+                  <select>
+                  	<option value="NA">North America</option>\
+                  	<option value="KR">Korea</option>
+                  	<option value="JP">Japan</option>
+                  	<option value="EUW">Europe West</option>
+                  	<option value="EUNE">Europe Nordic and East</option>
+                  	<option value="OCE">Oceania</option>
+                  	<option value="BR">Brazil</option>
+                  	<option value="LAS">LAS</option>
+                  	<option value="LAN">LAN</option>
+                  	<option value="RU">Russia</option>
+                  	<option value="TR">Turkey</option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-3">
+                  <button type="submit" class="btn btn-block btn-lg btn-primary">Reforge</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Icons Grid -->
+    <section class="features-icons bg-light text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <img class="about-icon m-auto text-primary" alt="Select Summoner" height="100px" src="{% static 'img/LeagueIcon.png' %}">
+              </div>
+              <h3>Enter Summoner Name</h3>
+              <p class="lead mb-0">Enter your summoner name and corresponding region.</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <img class="about-icon m-auto text-primary" alt="Choose Champion" height="100px" src="{% static 'img/MysteryChampionIcon.png' %}">
+              </div>
+              <h3>View Rune History</h3>
+              <p class="lead mb-0">Look through your match history on different champions and how optimal your runes were in each game.</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <img class="about-icon m-auto text-primary" alt="Reforge Runes" height="100px" src="{% static 'img/RuneIcon.png' %}">
+              </div>
+              <h3>Discover Optimal Runes</h3>
+              <p class="lead mb-0">Compare your runes with the most optimal runes on each champion and understand their advantages!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="text-center my-auto">
+            <p class="text-muted small mb-4 mb-lg-0">Champions Reforged isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  </body>
+
+</html>
