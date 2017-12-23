@@ -76,13 +76,57 @@ header.masthead {
   background-size: cover;
 }
 
-.match-panel {
+.carousel-panel{
   background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 25px;
+  margin-top: 20px;
   padding-top: 50px;
+  border-radius: 25px;
+}
+
+.match-panel {
   padding-bottom: 50px;
-  padding-right: 100px;
-  padding-left: 100px;
+  padding-right: 10%;
+  padding-left: 10%;
+  width: auto !important;
+}
+/* Rune images */
+.rune-panel {
+  border-radius: 25px;
+  min-height: 460px;
+  background-color: rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.tree-icon img {
+  height: 60px;
+}
+
+.keystones td img {
+  height: 60px;
+  opacity: 0.3;
+}
+
+.active-keystone img {
+  opacity: 1.0 !important;
+} 
+
+.secondary-tree tbody .keystones {
+  visibility: hidden;
+}
+
+.rune-row td img {
+  height: 50px;
+  margin: 5px;
+  opacity: 0.3;
+}
+
+.active-rune img{
+  opacity: 1.0 !important;
 }
 
 /* Profile container */
@@ -163,16 +207,7 @@ header.masthead {
 }
 
 /* Profile Content */
-.profile-content {
-  padding: 20px;
-  border-radius: 25px;
-  min-height: 460px;
-  background-color: rgba(0, 0, 0, 0.15);
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 12px;
-  font-weight: 600;
-}
+
 
 small {
 display: block;
