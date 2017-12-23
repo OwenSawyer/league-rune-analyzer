@@ -1,6 +1,4 @@
-import time
 from bs4 import BeautifulSoup
-import requests
 import json
 import grequests
 
@@ -37,18 +35,25 @@ def aggregate_top_runes_for_champ_role_pair():
 
     urls= []
     roles = ['top', 'jungle', 'mid', 'adc', 'support']
-    for champ in list(champ_dict.keys())[:20]:
+    for champ in list(champ_dict.keys()):
         for role in roles:
             urls.append(BASE_URL.format(champ, role))
     pages = async(urls)
     counter = 0
-    for champ in list(champ_dict.keys())[:20]:
+    for champ in list(champ_dict.keys()):
         for role in roles:
             runes = get_opt_runes_for_champion(pages[counter])
             champ_dict[champ][role] = runes
+            for i in runes:
+                if not champ in rune_dict[i]:
+                    rune_dict[i].append(champ)
             counter += 1
-    print(champ_dict)
-    print(rune_dict)
+
+    with open('json/champ_role_popular_runes.json', 'w') as fp:
+        json.dump(champ_dict, fp)
+
+    with open('json/runes_with_champs.json', 'w') as fp2:
+        json.dump(rune_dict, fp2)
 
 def exception_handler(request, exception):
     print("Problem: {}: {}".format(request.url, exception))
@@ -77,15 +82,13 @@ def get_rune_names():
         for tier in category['slots']:
             for rune in tier['runes']:
                 rune_list.append(rune['name'])
-    return {key: set() for key in rune_list}
+    return {key: [] for key in rune_list}
 
 
 if __name__=='__main__':
+    print(get_rune_names().keys())
     #start = time.time()
-    #print(get_opt_runes_for_champion('bard', 'support'))
-    #print(get_opt_runes_for_champion('bard', 'adc'))
-
     #print(get_runes())
-    aggregate_top_runes_for_champ_role_pair()
+    #aggregate_top_runes_for_champ_role_pair()
     #end = time.time()
     #print(end - start)
