@@ -6,9 +6,9 @@ module.exports = {
     //the base directory (absolute path) for resolving the entry option
     context: __dirname,
     //the entry point we created earlier. Note that './' means 
-    //your current directory. You don't have to specify the extension  now,
+    //your current directory. You don't have to specify the extension now,
     //because you will specify extensions later in the `resolve` section
-    entry: './assets/js/index', 
+    entry: './assets/js',
     
     output: {
         //where you want your compiled bundle to be stored
