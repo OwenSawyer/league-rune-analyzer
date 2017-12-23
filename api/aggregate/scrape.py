@@ -1,5 +1,12 @@
 from bs4 import BeautifulSoup
 import json
+
+#Imports below: the requests module has a naming collision with grequests that breaks requests.
+#The import code below is to address this..
+from gevent import monkey
+def stub(*args, **kwargs):  # pylint: disable=unused-argument
+    pass
+monkey.patch_all = stub
 import grequests
 
 BASE_HEADERS = {
@@ -14,11 +21,6 @@ BASE_URL = 'http://na.op.gg/champion/{}/statistics/{}/rune'
 
 def get_opt_runes_for_champion(page):
 
-    #top 2 choices for keystone 1 and keystone 2
-    #k1:
-    #    if p2 > .5*p1 take p2 as well
-    #if k2 > .5*k1:
-    #   take k2 as well? and redo p1 p2 choice
     runes = []
     soup = BeautifulSoup(page.content, "html.parser")
     if soup.find("table", class_="champion-stats__table--rune"):
@@ -84,9 +86,21 @@ def get_rune_names():
                 rune_list.append(rune['name'])
     return {key: [] for key in rune_list}
 
+def get_rune_dict():
+    rune_list = {}
+    runes = list(json.loads(open('json/runes_reforged.json').read()))
+    for category in runes:
+        rune_list[category['id']] = category['name']
+        for tier in category['slots']:
+            for rune in tier['runes']:
+                rune_list[rune['id']] = rune['name']
+    return rune_list
+
+def champ_tag_lookup():
+    return {key: list(value['tags']) for key, value in dict(json.loads(open('json/champions.json').read())['data']).items()}
 
 if __name__=='__main__':
-    print(get_rune_names().keys())
+    print(champ_tag_lookup())
     #start = time.time()
     #print(get_runes())
     #aggregate_top_runes_for_champ_role_pair()
