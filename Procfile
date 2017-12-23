@@ -1,1 +1,1 @@
-web: gunicorn drf_react.wsgi --log-file -w 3
+web: gunicorn drf_react.wsgi -w 3 --log-file -
