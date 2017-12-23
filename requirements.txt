@@ -8,3 +8,4 @@ psycopg2==2.6.1
 whitenoise==2.0.6
 requests
 BeautifulSoup4
+grequests
