@@ -55,6 +55,47 @@ def aggregate_top_runes_for_champ_role_pair():
     with open('json/runes_with_champs.json', 'w') as fp2:
         json.dump(rune_dict, fp2)
 
+
+# def aggregate_top_runes_for_champ_role_pair2():
+#     champ_dict = get_champion_names()
+#     rune_dict = get_rune_names()
+#
+#     urls= []
+#     roles = ['top', 'jungle', 'mid', 'adc', 'support']
+#     for champ in list(champ_dict.keys()):
+#         for role in roles:
+#             urls.append(BASE_URL.format(champ, role))
+#     pages = async(urls)
+#     counter = 0
+#     for champ in list(champ_dict.keys()):
+#         for role in roles:
+#             runes = get_opt_runes_for_champion2(pages[counter])
+#             champ_dict[champ][role] = runes
+#             for i in runes:
+#                 if not champ in rune_dict[i]:
+#                     rune_dict[i].append(champ)
+#             counter += 1
+#
+#     with open('json/runes_with_champs.json', 'w') as fp2:
+#         json.dump(rune_dict, fp2)
+#
+# def get_opt_runes_for_champion2(page):
+#
+#     #top 2 choices for keystone 1 and keystone 2
+#     #k1:
+#     #    if p2 > .5*p1 take p2 as well
+#     #if k2 > .5*k1:
+#     #   take k2 as well? and redo p1 p2 choice
+#     runes = []
+#     soup = BeautifulSoup(page.content, "html.parser")
+#     if soup.find("table", class_="champion-stats__table--rune"):
+#         top_rune_page = soup.find("table", class_="champion-stats__table--rune").find("tbody").find("tr")
+#         pickrate = top_rune_page.find("td", class_="champion-stats__table__cell champion-stats__table__cell--pickrate").find("em").getText()
+#         if int(pickrate.replace(',', '')) > 75:
+#             for active in top_rune_page.findAll("div", class_="perk-page__item--active"):
+#                 runes.append(active.find("img")['alt'])
+#     return runes
+
 def exception_handler(request, exception):
     print("Problem: {}: {}".format(request.url, exception))
 
@@ -84,9 +125,56 @@ def get_rune_names():
                 rune_list.append(rune['name'])
     return {key: [] for key in rune_list}
 
+def get_rune_dict():
+    rune_list = {}
+    runes = list(json.loads(open('json/runes_reforged.json').read()))
+    for category in runes:
+        rune_list[category['id']] = category['name']
+        for tier in category['slots']:
+            for rune in tier['runes']:
+                rune_list[rune['id']] = rune['name']
+    return rune_list
+
+
+def champ_tag_lookup():
+    return {key: list(value['tags']) for key, value in dict(json.loads(open('json/champions.json').read())['data']).items()}
+
+def rune_usage_analysis():
+    rune_dict = dict(json.loads(open('json/runes_with_champs.json').read()))
+    champ_tags = champ_tag_lookup()
+    rune_analysis = {key: {} for key in rune_dict.keys()}
+    for rune, champlist in rune_dict.items():
+        for champ in champlist:
+            tags = champ_tags[champ]
+            for t in tags:
+                if t in rune_analysis[rune]:
+                    rune_analysis[rune][t] += 1
+                else:
+                    rune_analysis[rune][t] = 1
+    return rune_analysis
+
+# def get_opt_runes_for_champion2(page):
+#
+#     #top 2 choices for keystone 1 and keystone 2
+#     #k1:
+#     #    if p2 > .5*p1 take p2 as well
+#     #if k2 > .5*k1:
+#     #   take k2 as well? and redo p1 p2 choice
+#     runes = []
+#     soup = BeautifulSoup(page.content, "html.parser")
+#     if len(soup.find("div", class_="champion-box-content tabItems").findAll("div")) > 1:
+#         for keystone_combo in soup.find("div", class_="champion-box-content tabItems").findAll("div"):
+#
+#         pickrate = top_rune_page.find("td", class_="champion-stats__table__cell champion-stats__table__cell--pickrate").find("em").getText()
+#         if int(pickrate.replace(',', '')) > 75:
+#             for active in top_rune_page.findAll("div", class_="perk-page__item--active"):
+#                 runes.append(active.find("img")['alt'])
+#     return runes
 
 if __name__=='__main__':
-    print(get_rune_names().keys())
+    print(champ_tag_lookup())
+
+    print(rune_usage_analysis())
     #start = time.time()
     #print(get_runes())
     #aggregate_top_runes_for_champ_role_pair()
