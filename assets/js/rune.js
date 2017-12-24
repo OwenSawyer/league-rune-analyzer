@@ -54,7 +54,8 @@ var Child = React.createClass({
 
 var Parent = React.createClass({
   getInitialState: function() {
-     this.state = {data : 'Electrocute'}
+      this.state = {}
+     this.setState({data : 'Electrocute'});
      return {childsData: [
          {childText: "Lethal Tempo", childNumber: 1},
          {childText: "Magical Footwear", childNumber: 2}
@@ -66,8 +67,9 @@ var Parent = React.createClass({
     }.bind(this));
     return(
       <div className="row">
-          <div className="column">{childrens}</div>
-          <div className="column"><RuneInfo rune={this.state.data}/></div>
+          <div className="col-md-3">{childrens}</div>
+          <div className="col-md-6"><RuneInfo rune={this.state.data}/></div>
+          <div className="col-md-3">{childrens}</div>
      </div>)
   },
   handleChildClick: function(childData,event) {
@@ -87,24 +89,29 @@ var RuneInfo = React.createClass({
   render: function () {
     return(
         <div>
-            <div className="col-md-12">
-                <div className="col-sm-12 col-md-8">
+            <div className="row">
+                <div className="col-sm-8">
                     <h2>{this.props.rune}</h2>
                     <p><strong>Description</strong></p>
                 </div>
-                <div className="col-sm-12 col-md-4 text-center">
-                    <figure>
+                <div className="col-sm-4">
                         <img src="https://i.pinimg.com/originals/a9/ff/b2/a9ffb2e901c09caf4837542e72719e41.jpg"
-                             alt="" className="img-circle img-responsive"/>
-                    </figure>
+                             alt="" className="img-circle img-responsive rune-img"/>
                 </div>
             </div>
-            <div className="col-sm-12">
+            <div className="row">
+                <div className="col-sm-8">
+                  <Radarz data={data3}/>
+                </div>
+                <div className="col-sm-4">
+                   idk something here
+                </div>
+            </div>
+            <div className="row">
                 <BooksList data={data2}/>
-                <Radarz data={data3}/>
             </div>
         </div>
-    )
+        )
   }
 });
 
