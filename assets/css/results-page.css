@@ -102,8 +102,11 @@ header.masthead {
   margin-right: 5px;
 }
 
-.tree-icon img {
+
+
+.tree-icon thead thead img {
   height: 60px;
+  vertical-align: middle;
 }
 
 .keystones td img {
@@ -129,23 +132,58 @@ header.masthead {
   opacity: 1.0 !important;
 }
 
+.chosen-rune img {
+  height: 150px;
+}
+
+.chosen-rune-name {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.optimal-roles-title {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.optimal-roles {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.rune-description-text{
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 600;
+}
+
 /* Profile container */
 .profile {
   margin: 20px 0;
 }
 
+.borderless td, .borderless th {
+    border: none !important;
+    vertical-align:   middle !important;
+    padding: 6px;
+}
+
 /* Profile sidebar */
 .profile-sidebar {
   border-radius: 25px;
-  padding: 20px 0 10px 0;
+  padding: auto;
   background-color: rgba(53, 206, 135, 0.3);;
+  text-align: center;
+  width: 100%;
 }
 
 .profile-userpic img {
   float: none;
-  margin: 0 auto;
-  width: 50%;
-  height: 50%;
+  width: 120px;
+  height: 120px;
   -webkit-border-radius: 50% !important;
   -moz-border-radius: 50% !important;
   border-radius: 50% !important;
@@ -153,53 +191,53 @@ header.masthead {
 
 .profile-usertitle {
   text-align: center;
-  margin-top: 20px;
 }
 
 .profile-usertitle-time {
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: 15px;
 }
 
 .profile-usertitle-name {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: 7px;
 }
 
 .profile-usertitle-job {
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.8);
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 
 .profile-usertitle-kda {
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 20px;
 }
 
 .profile-summ-spells {
   text-align: center;
-  margin-top: 10px;
 }
 
 .profile-summ-spells .spell {
-  text-transform: uppercase;
   font-size: 11px;
   font-weight: 600;
   padding: 6px 6px;
-  margin-right: 2px;
   height: 72px;
   border-radius: 25px;
+}
+
+.rune-rating {
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  font-weight: 600;
 }
     
 .profile-usermenu {
