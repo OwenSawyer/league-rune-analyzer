@@ -10,7 +10,8 @@ module.exports = {
     //because you will specify extensions later in the `resolve` section
     entry: [
       './assets/js/index',
-      './assets/js/test',
+      //'./assets/js/test',
+      './assets/js/rune',
     ],
     output: {
         //where you want your compiled bundle to be stored
