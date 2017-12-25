@@ -9,7 +9,7 @@ module.exports = {
     //your current directory. You don't have to specify the extension  now,
     //because you will specify extensions later in the `resolve` section
     entry: ['./assets/js/index', 
-            './assets/js/results.js',
+            './assets/js/results',
             ],
     
     output: {
@@ -43,7 +43,7 @@ module.exports = {
                 loader: 'babel-loader', 
                 query: {
                     //specify that we will be dealing with React code
-                    presets: ['react'] 
+                    presets: ['es2015', 'react']
                 }
             },
             // the next regex tells webpack to use style-loader and css-loader
