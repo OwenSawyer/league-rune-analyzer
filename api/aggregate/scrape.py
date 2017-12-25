@@ -1,3 +1,8 @@
+import urllib
+from urllib.error import HTTPError
+from urllib.request import urlopen
+
+import requests
 from bs4 import BeautifulSoup
 import json
 
@@ -8,6 +13,7 @@ def stub(*args, **kwargs):  # pylint: disable=unused-argument
     pass
 monkey.patch_all = stub
 import grequests
+import os
 
 BASE_HEADERS = {
     "Origin": "https://developer.riotgames.com",
@@ -17,7 +23,11 @@ BASE_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
 }
 
+url = 'https://ddragon.leagueoflegends.com/api/versions.json'
+PATCH_VERSION = str(requests.get(url).json()[0])
 BASE_URL = 'http://na.op.gg/champion/{}/statistics/{}/rune'
+CHAMPION_IMAGE_URL = 'http://ddragon.leagueoflegends.com/cdn/{}/img/champion/'.format(PATCH_VERSION)
+SUMMONER_IMAGE_URL = 'http://ddragon.leagueoflegends.com/cdn/{}/img/spell/'.format(PATCH_VERSION)
 
 def get_opt_runes_for_champion(page):
 
@@ -77,6 +87,9 @@ def async(urls):
 def get_champion_names():
     return {key: {} for key in dict(json.loads(open('json/champions.json').read())['data']).keys()}
 
+def get_summoner_spell_names():
+    return {key: {} for key in dict(json.loads(open('json/summoners.json').read())['data']).keys()}
+
 def get_rune_names():
     rune_list = []
     runes = list(json.loads(open('json/runes_reforged.json').read()))
@@ -96,11 +109,35 @@ def get_rune_dict():
                 rune_list[rune['id']] = rune['name']
     return rune_list
 
+def scrape_champion_images():
+    champions = [(val['key'], str(val['id'])) for val in dict(json.loads(open('json/champions.json').read())['data']).values()]
+
+    base_path = os.path.dirname(__file__) + '/../../assets/img/champion/'
+    for tup in champions:
+        filename = base_path + tup[1] + '.png'
+        try:
+            urllib.request.urlretrieve(CHAMPION_IMAGE_URL + tup[0] + '.png', filename)
+        except HTTPError as e:
+            print("name not found:" + tup[0])
+
+def scrape_summoner_images():
+    summoners = [(val['id'], str(val['key'])) for val in dict(json.loads(open('json/summoner.json').read())['data']).values()]
+
+    base_path = os.path.dirname(__file__) + '/../../assets/img/summoner/'
+    for tup in summoners:
+        filename = base_path + tup[1] + '.png'
+        try:
+            urllib.request.urlretrieve(SUMMONER_IMAGE_URL + tup[0] + '.png', filename)
+        except HTTPError as e:
+            print("summoner not found:" + tup[0])
+
 def champ_tag_lookup():
     return {key: list(value['tags']) for key, value in dict(json.loads(open('json/champions.json').read())['data']).items()}
 
 if __name__=='__main__':
-    print(champ_tag_lookup())
+    #scrape_champion_images()
+    #scrape_summoner_images()
+    print(get_champion_names())
     #start = time.time()
     #print(get_runes())
     #aggregate_top_runes_for_champ_role_pair()

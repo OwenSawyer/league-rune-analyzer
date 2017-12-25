@@ -1,11 +1,10 @@
 import requests
-import time
-import json
+from datetime import datetime, timedelta
 
 BASE_HEADERS = {
     "Origin": "https://developer.riotgames.com",
     "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-    "X-Riot-Token": "RGAPI-ffe23147-23fe-4042-87e7-40a38c10ca97",
+    "X-Riot-Token": "RGAPI-1ba8d334-ef2b-44b9-807a-1f49f29f8fe5",
     "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
 }
@@ -24,26 +23,52 @@ def get_matchlist(region, accountId):
 
 def get_match(region, matchId):
     url = 'https://{}.api.riotgames.com/lol/match/v3/matches/{}'.format(region, matchId)
-    return requests.get(url, headers=BASE_HEADERS).json() #flags?
+    return requests.get(url, headers=BASE_HEADERS).json()
+
+def serialize_match(accountId, matchJson):
+
+    json = {}
+    playerInfo = next(id for id in matchJson['participants'] if lambda x: x['participantId'] == accountId)
+    json['champion'] = playerInfo['championId']
+    json['lane'] = playerInfo['timeline']['lane']
+    json['gameDate'] = datetime.fromtimestamp(matchJson['gameCreation']/1000).strftime("%d/%m/%y")
+    json['gameDuration'] = str(timedelta(seconds=matchJson['gameDuration']))
+    json['gameMode'] = matchJson['gameMode'].title()
+    json['win'] = playerInfo['stats']['win']
+    json['kills'] = playerInfo['stats']['kills']
+    json['deaths'] = playerInfo['stats']['deaths']
+    json['spell1'] = playerInfo['spell1Id']
+    json['spell2'] = playerInfo['spell2Id']
+
+    rune_info = {"primary": {}, "secondary": {}}
+    rune_info['primary']['id'] = playerInfo['stats']['perkPrimaryStyle']
+    rune_info['secondary']['id'] = playerInfo['stats']['perkSubStyle']
+
+    rune_info['primary']['runes'] = [
+        playerInfo['stats']['perk0'],
+        playerInfo['stats']['perk1'],
+        playerInfo['stats']['perk2'],
+        playerInfo['stats']['perk3'],
+    ]
+    rune_info['secondary']['runes'] = [
+        playerInfo['stats']['perk4'],
+        playerInfo['stats']['perk5']
+    ]
+
+    json['runes'] = rune_info
+    return json
 
 
-# def get_match2(i):
-#     return get_match('na1', '2675889004')
-
-# def pool_match():
-#     orders_pool = Pool(20)
-#     results = orders_pool.map(get_match2, range(20))
-#     #Do something with the results here
-
-if __name__=='__main__':
-    champs = get_champions()
-    print(json.dumps(champs))
-    for i in json.dumps(champs):
-        print(i)
+#if __name__=='__main__':
+    # champs = get_champions()
+    # print(json.dumps(champs))
+    # for i in json.dumps(champs):
+    #     print(i)
     #print(get_champions())
     #print(get_summoner('na1', 'owen3times'))
     #print(get_matchlist('na1', '210164502'))
-    #print(get_match('na1', '2675889004'))
+    #print(serialize_match('210164502', get_match('na1', '2675889004')))
+    #print(get_match('na1', '2674267941'))
     #start = time.time()
     #print(get_summoner('na1', 'owen3times'))
     #print(get_matchlist('na1', '210164502'))

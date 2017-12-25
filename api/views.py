@@ -7,6 +7,7 @@ import json
 from rest_framework.decorators import api_view
 
 from api.aggregate import aggregate, scrape, rune
+from api.aggregate.aggregate import serialize_match
 from .models import User, Url
 from .serializers import UserSerializer, UrlSerializer
 
@@ -28,11 +29,13 @@ def get_matchlist(request):
 @api_view(['POST'])
 def get_match(request):
     response = aggregate.get_match(request.POST.get('region'), request.POST.get('matchId'))
-    return response_handler(response)
+    match = serialize_match(request.POST.get('accountId'), response)
+    return response_handler(match)
 
 @api_view(['POST'])
 def get_opt_runes(request):
     response = rune.get_popular_runes_for_champ(request.POST.get('champion'), request.POST.get('role'))
+    response = serialize_match(response)
     return response_handler(response)
 
 @api_view(['POST'])
