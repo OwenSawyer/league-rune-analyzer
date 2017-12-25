@@ -2,7 +2,7 @@ import requests
 from datetime import datetime, timedelta
 import json
 
-from api.aggregate import scrape
+from api.aggregate import rune
 
 BASE_HEADERS = {
     "Origin": "https://developer.riotgames.com",
@@ -31,12 +31,13 @@ def get_match(region, matchId):
 def serialize_match(accountId, matchJson):
 
     serialized = {}
-    playerInfo = next(id for id in matchJson['participants'] if lambda x: x['participantId'] == accountId)
+    participantId = next(id['participantId'] for id in matchJson['participantIdentities'] if id['player']['accountId'] == int(accountId))
+    playerInfo = next(id for id in matchJson['participants'] if id['participantId'] == participantId)
     serialized['champion'] = playerInfo['championId']
 
     champion_json = dict(json.loads(open('json/champions.json').read())['data'])
-    champions = [(val['key'], str(val['id'])) for val in champion_json.values()]
-    serialized['championName'] = next(key for key in champions if lambda x: x[1] == serialized['champion'])[0]
+    champions = [(val['key'], val['id']) for val in champion_json.values()]
+    serialized['championName'] = next(i for i in champions if i[1] == serialized['champion'])[0]
     serialized['lane'] = playerInfo['timeline']['lane']
     serialized['gameDate'] = datetime.fromtimestamp(matchJson['gameCreation']/1000).strftime("%d/%m/%y")
     serialized['gameDuration'] = str(timedelta(seconds=matchJson['gameDuration']))
@@ -61,6 +62,11 @@ def serialize_match(accountId, matchJson):
         playerInfo['stats']['perk4'],
         playerInfo['stats']['perk5']
     ]
+    #rune_info['rating'] = rune.get_rune_page_rating_for_champ(rune_info, champ, role)
+    rune_info['championTags'] =  next(v['tags'] for (k,v) in dict(json.loads(open('json/champions.json').read())['data']).items()
+                                      if k == serialized['championName'])
+    rune_info['championAttributes'] = next(v['attributes'] for (k,v) in dict(json.loads(open('json/champion_info.json').read())).items()
+                                      if k == serialized['championName'])
 
     serialized['runes'] = rune_info
     return serialized

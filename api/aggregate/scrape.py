@@ -5,6 +5,7 @@ from urllib.request import urlopen
 import requests
 from bs4 import BeautifulSoup
 import json
+import re
 
 #Imports below: the requests module has a naming collision with grequests that breaks requests.
 #The import code below is to address this..
@@ -23,9 +24,10 @@ BASE_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
 }
 
-url = 'https://ddragon.leagueoflegends.com/api/versions.json'
-PATCH_VERSION = str(requests.get(url).json()[0])
+PATCH_URL = 'https://ddragon.leagueoflegends.com/api/versions.json'
+PATCH_VERSION = str(requests.get(PATCH_URL).json()[0])
 BASE_URL = 'http://na.op.gg/champion/{}/statistics/{}/rune'
+CHAMPION_INFO_URL = 'http://leagueoflegends.wikia.com/wiki/List_of_champions/Ratings'
 CHAMPION_IMAGE_URL = 'http://ddragon.leagueoflegends.com/cdn/{}/img/champion/'.format(PATCH_VERSION)
 SUMMONER_IMAGE_URL = 'http://ddragon.leagueoflegends.com/cdn/{}/img/spell/'.format(PATCH_VERSION)
 
@@ -134,10 +136,50 @@ def scrape_summoner_images():
 def champ_tag_lookup():
     return {key: list(value['tags']) for key, value in dict(json.loads(open('json/champions.json').read())['data']).items()}
 
+def scrape_champ_info():
+
+    def clean(d):
+        for k, v in d.items():
+            if isinstance(v, dict):
+                clean(v)
+            elif isinstance(v, str):
+                d[k] = str(re.sub(r"[\s']+", '', v))
+
+    champ_dict = {}
+    soup = BeautifulSoup(requests.get(CHAMPION_INFO_URL).content, "html.parser")
+    for row in soup.find("table", class_="article-table sortable").findAll("tr")[1:]:
+        champ_info = {}
+        cols = row.findAll("td")
+        name = cols[0].findAll("a")[1].getText()
+
+        champ_info['primary'] = cols[1].findAll("a")[1].getText()
+        if cols[2].find("span"):
+            champ_info['secondary'] = cols[2].findAll("a")[1].getText()
+
+        attributes = {}
+        attributes['attack'] = int(cols[3].getText())
+        attributes['defense'] = int(cols[4].getText())
+        attributes['toughness'] = int(cols[5].getText())
+        attributes['mobility'] = int(cols[6].getText())
+        attributes['utility'] = int(cols[7].getText())
+        champ_info['attributes'] = attributes
+
+        champ_info['championStyle'] = int(cols[8].findAll("span")[1]['title'])
+        champ_info['championDamage'] = cols[9].getText()
+
+        clean(champ_info)
+
+        champ_dict[re.sub(r"[\s'.]+", '', name)] = champ_info
+
+    with open('json/champion_info.json', 'w') as fp:
+        json.dump(champ_dict, fp)
+
+
 if __name__=='__main__':
+    scrape_champ_info()
     #scrape_champion_images()
     #scrape_summoner_images()
-    print(get_champion_names())
+    #print(get_champion_names())
     #start = time.time()
     #print(get_runes())
     #aggregate_top_runes_for_champ_role_pair()
