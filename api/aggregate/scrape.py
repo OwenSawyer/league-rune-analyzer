@@ -137,7 +137,7 @@ def champ_tag_lookup():
 if __name__=='__main__':
     #scrape_champion_images()
     #scrape_summoner_images()
-    #print(champ_tag_lookup())
+    print(get_champion_names())
     #start = time.time()
     #print(get_runes())
     #aggregate_top_runes_for_champ_role_pair()

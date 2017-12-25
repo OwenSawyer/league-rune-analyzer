@@ -29,7 +29,8 @@ def get_matchlist(request):
 @api_view(['POST'])
 def get_match(request):
     response = aggregate.get_match(request.POST.get('region'), request.POST.get('matchId'))
-    return response_handler(response)
+    match = serialize_match(request.POST.get('accountId'), response)
+    return response_handler(match)
 
 @api_view(['POST'])
 def get_opt_runes(request):

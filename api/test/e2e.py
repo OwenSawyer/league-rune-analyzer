@@ -30,7 +30,8 @@ class FormTests(TestCase):
     def test_get_match(self):
         data = {
             'region': 'NA1',
-            'matchId': '2675889004'
+            'matchId': '2675889004',
+            'accountId': '210164502'
         }
         response = self.client.post('/api/match/', data)
         self.assertEquals(response.status_code, 200)
