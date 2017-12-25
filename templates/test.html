@@ -1,0 +1,65 @@
+{% load static %}
+{% load render_bundle from webpack_loader %}
+
+<!doctype html>
+<head>
+	<title>react-chartjs-2</title>
+        <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/rune_info.css' %}" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+             <div id="parent"></div>
+    {% render_bundle 'main' %}
+</div>
+{#<div class="container">#}
+{#	<div class="row">#}
+{#	    <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">#}
+{#            <div class="well profile">#}
+{#                <div class="col-sm-12">#}
+{#                    <div id="app">#}
+{#                    {% render_bundle 'main' %}#}
+{#                    </div>#}
+{#                    <div class="col-xs-12 col-sm-8">#}
+{#                        <h2>Nicole Pearson</h2>#}
+{#                        <p><strong>Description#}
+{#                        </p>#}
+{#                    </div>#}
+{#                    <div class="col-xs-12 col-sm-4 text-center">#}
+{#                        <figure>#}
+{#                            <img src="http://www.localcrimenews.com/wp-content/uploads/2013/07/default-user-icon-profile.png" alt="" class="img-circle img-responsive">#}
+{#                        </figure>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-12">#}
+{#                    <div id="app">#}
+{#                    {% render_bundle 'main' %}#}
+{#                    </div>#}
+{#                    <div class="col-xs-12 col-sm-8">#}
+{#                        <h2>Nicole Pearson</h2>#}
+{#                        <p><strong>Description#}
+{#                        </p>#}
+{#                    </div>#}
+{#                    <div class="col-xs-12 col-sm-4 text-center">#}
+{#                        <div>#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-12">#}
+{#                    <div id="app">#}
+{#                    {% render_bundle 'main' %}#}
+{#                    </div>#}
+{#                </div>#}
+{#    	    </div>#}
+{#		</div>#}
+{#	</div>#}
+{#</div>#}
+</body>
