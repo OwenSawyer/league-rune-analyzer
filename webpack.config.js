@@ -43,7 +43,7 @@ module.exports = {
                 loader: 'babel-loader', 
                 query: {
                     //specify that we will be dealing with React code
-                    presets: ['react'] 
+                    presets: ['es2015', 'react']
                 }
             },
             // the next regex tells webpack to use style-loader and css-loader
