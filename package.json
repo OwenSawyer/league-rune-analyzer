@@ -4,7 +4,7 @@
   "description": "Django and React",
   "main": "index.js",
   "scripts": {
-    "postinstall": "node_modules/webpack/bin/webpack.js",
+    "postinstall": "node node_modules/webpack/bin/webpack.js",
     "webpack": "node node_modules/webpack/bin/webpack.js --progress --colors"
   },
   "keywords": [

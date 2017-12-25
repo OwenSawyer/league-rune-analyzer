@@ -18,7 +18,11 @@ h6 {
 header.masthead {
   position: relative;
   background-color: #343a40;
+<<<<<<< HEAD
   background: url("/static/img/bg-masthead.jpg") no-repeat center center;
+=======
+  background: url("../img/bg-masthead.png") no-repeat center center;
+>>>>>>> origin/result-page-template-fix
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -69,7 +73,11 @@ header.masthead {
 
 .results-nav {
   position: relative;
+<<<<<<< HEAD
   background: url("/static/img/banner.png") no-repeat center center;
+=======
+  background: url("../img/banner.png") no-repeat center center;
+>>>>>>> origin/result-page-template-fix
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -295,7 +303,11 @@ color: #999;
 .call-to-action {
   position: relative;
   background-color: #343a40;
+<<<<<<< HEAD
   background: url("static/img/bg-masthead.jpg") no-repeat center center;
+=======
+  background: url("../img/bg-masthead.png") no-repeat center center;
+>>>>>>> origin/result-page-template-fix
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
