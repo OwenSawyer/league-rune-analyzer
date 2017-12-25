@@ -9,6 +9,9 @@ module.exports = {
     //your current directory. You don't have to specify the extension now,
     //because you will specify extensions later in the `resolve` section
 
+    entry: ['./assets/js/index', 
+            './assets/js/results',
+            ],
     output: {
         //where you want your compiled bundle to be stored
         path: path.resolve('./assets/bundles/'),
