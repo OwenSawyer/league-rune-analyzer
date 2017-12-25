@@ -1,41 +1,4 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-var BooksList = React.createClass({
-    loadBooksFromServer: function(){
-        $.ajax({
-            url: this.props.url,
-            datatype: 'json',
-            success: function(data) {
-                this.setState({data: data});
-            }.bind(this)
-        })
-    },
-
-    getInitialState: function() {
-        return {data: []};
-    },
-
-    componentDidMount: function() {
-        this.loadBooksFromServer();
-    }, 
-    render: function() {
-        if (this.state.data) {
-            console.log('DATA!')
-            var bookNodes = this.state.data.map(function(book){
-                return <li> {book.title} </li>
-            })
-        }
-        return (
-            <div>
-                <h1>Hello React!</h1>
-                <ul>
-                    {bookNodes}
-                </ul>
-            </div>
-        )
-    }
-})
-
-ReactDOM.render(<BooksList url='/api/'/>,
-    document.getElementById('container'))
+ReactDOM.render(<h1>testing</h1>, document.getElementById(''));

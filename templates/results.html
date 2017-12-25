@@ -51,7 +51,6 @@
       </div>
     </nav>
 
-
     <!-- Recent game slides -->
     <section class="bg-light text-center">
       <div class="container-fluid text-center">
@@ -65,16 +64,16 @@
             <div class="carousel-item active">
 
               <div class="row profile match-panel table-responsive">
-                <table class="table borderless">
-                    <thead class="profile-sidebar">
-                        <th>
-                            <div class="profile-usertitle-time">DD/MM/YYYY</div>
-                        </th>
-                        <th class="profile-userpic">
-                          <img src="{% static 'img/MfIcon.png' %}" class="img-responsive" alt="">
-                        </th>
-                        <th class="profile-usertitle">
-                          <div class="profile-usertitle-name">
+
+                <div class="row profile-sidebar">
+                    <div class="text-center col-md-2 profile-usertitle-time">
+                      DD/MM/YYYY
+                    </div>
+                    <div class="profile-userpic col-md-2">
+                      <img src="{% static 'img/MfIcon.png' %}" class="img-responsive" alt="">
+                    </div>
+                    <div class="col-md-3 profile-usertitle">
+                        <div class="profile-usertitle-name">
                             Miss Fortune
                           </div>
                           <div class="profile-usertitle-job">
@@ -83,357 +82,172 @@
                           <div class="profile-usertitle-kda">
                             15/0/1
                           </div>
-                        </th>
-                        <th class="profile-summ-spells">
-                          <img class="spell" src="{% static 'img/flash-icon.jpg' %}" class="img-responsive" alt="">
-                          <img class="spell" src="{% static 'img/flash-icon.jpg' %}" class="img-responsive" alt="">
-                        </th>
-                        <th class="rune-rating">
-                            Hi! I am Radar
-                        </th>
+                    </div>
+                    <div class="profile-summ-spells col-md-2">
+                      <img class="spell" src="{% static 'img/flash-icon.jpg' %}" class="img-responsive" alt="">
+                      <img class="spell" src="{% static 'img/flash-icon.jpg' %}" class="img-responsive" alt="">
+                    </div>
+                    <div class="rune-rating col-md-3">
+                      Hi! I am Radar
+                    </div>
+              </div>
+
+              <div class="row">
+              <!-- Primary Player eunes -->
+                <div class="col-md-2">
+                  <table class="rune-panel player-runes text-center">
+                    <thead class="tree-icon text-center">
+                        <th></th>
+                        <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
                     </thead>
-
-                    <!-- Player runes -->
-                    <tr>
-                      <td><table class="rune-panel player-runes text-center">
-                            <thead class="tree-icon text-center">
-                                <th></th>
-                                <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
-                            </thead>
-                            <tbody>
-                              <tr class="keystones">
-                                <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8124.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8128.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8126.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8143.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8136.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8120.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8135.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8134.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
-                              </tr>
-                            </tbody>
-                        </table>
-                      </td>
-
-                      <td><table class="rune-panel player-runes text-center secondary-tree">
-                            <thead class="tree-icon text-center">
-                                <th></th>
-                                <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
-                            </thead>
-                            <tbody>
-                              <tr class="keystones">
-                                <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8124.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8128.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8126.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8143.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8136.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8120.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8135.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8134.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
-                              </tr>
-                            </tbody>
-                        </table>
-                      </td>
-
-                      <td>
-
-                          <table class="rune-panel rune-description">
-                              <thead>
-                                  <th class="chosen-rune"><img src="{% static 'img/perk/8112.png' %}"></th>
-                              </thead>
-                              <tbody>
-                              <tr class="chosen-rune-name">
-                                  <td>
-                                      Electrocute
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <p class="optimal-roles-title">Optimal roles:</p> 
-                                      <p class="optimal-roles">Assassin, Mage </p>
-                                  </td>
-                              </tr>
-                              <tr class="rune-description-text">
-                                  <td>
-                                      Hello I am a rune description, I will go here
-                                  </td>
-                              </tr>
-                              </tbody>
-                          </table>
-
-                      </td>
-
-                      <!-- Optimal Runes -->
-                      <td><table class="rune-panel optimal-runes text-center">
-                            <thead class="tree-icon text-center">
-                                <th></th>
-                                <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
-                            </thead>
-                            <tbody>
-                              <tr class="keystones">
-                                <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8124.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8128.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8126.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8143.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8136.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8120.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8135.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8134.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
-                              </tr>
-                            </tbody>
-                        </table>
-                      </td>
-
-                      <td><table class="rune-panel optimal-runes text-center secondary-tree">
-                            <thead class="tree-icon text-center">
-                                <th></th>
-                                <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
-                            </thead>
-                            <tbody>
-                              <tr class="keystones">
-                                <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8124.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8128.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8126.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8143.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8136.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8120.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8135.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8134.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
-                              </tr>
-                            </tbody>
-                        </table>
-                      </td>
-
-                    </tr>
+                    <tbody>
+                      <tr class="keystones">
+                        <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
+                        <td><img src="{% static 'img/perk/8124.png' %}"></td>
+                        <td><img src="{% static 'img/perk/8128.png' %}"></td>
+                      </tr>
+                      <tr class="rune-row">
+                        <td><img src="{% static 'img/perk/8126.png' %}"></td>
+                        <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
+                        <td><img src="{% static 'img/perk/8143.png' %}"></td>
+                      </tr>
+                      <tr class="rune-row">
+                        <td><img src="{% static 'img/perk/8136.png' %}"></td>
+                        <td><img src="{% static 'img/perk/8120.png' %}"></td>
+                        <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
+                      </tr>
+                      <tr class="rune-row">
+                        <td><img src="{% static 'img/perk/8135.png' %}"></td>
+                        <td><img src="{% static 'img/perk/8134.png' %}"></td>
+                        <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
+                      </tr>
+                    </tbody>
                 </table>
-                </div>
+              </div>
+
+              <!-- Secondary Player Runes -->
+              <div class="col-md-2">
+                <table class="rune-panel player-runes text-center secondary-tree">
+                    <thead class="tree-icon text-center">
+                        <th></th>
+                        <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
+                    </thead>
+                    <tbody>
+                      <tr class="keystones">
+                        <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
+                        <td><img src="{% static 'img/perk/8124.png' %}"></td>
+                        <td><img src="{% static 'img/perk/8128.png' %}"></td>
+                      </tr>
+                      <tr class="rune-row">
+                        <td><img src="{% static 'img/perk/8126.png' %}"></td>
+                        <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
+                        <td><img src="{% static 'img/perk/8143.png' %}"></td>
+                      </tr>
+                      <tr class="rune-row">
+                        <td><img src="{% static 'img/perk/8136.png' %}"></td>
+                        <td><img src="{% static 'img/perk/8120.png' %}"></td>
+                        <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
+                      </tr>
+                      <tr class="rune-row">
+                        <td><img src="{% static 'img/perk/8135.png' %}"></td>
+                        <td><img src="{% static 'img/perk/8134.png' %}"></td>
+                        <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
+                      </tr>
+                    </tbody>
+                </table>
+              </div>
+
+              <!-- rune Description -->
+              <div class="col-md-4">
+                <table class="rune-panel rune-description">
+                    <thead>
+                        <th class="chosen-rune"><img src="{% static 'img/perk/8112.png' %}"></th>
+                    </thead>
+                    <tbody>
+                    <tr class="chosen-rune-name">
+                        <td>
+                            Electrocute
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="optimal-roles-title">Optimal roles:</p> 
+                            <p class="optimal-roles">Assassin, Mage </p>
+                        </td>
+                    </tr>
+                    <tr class="rune-description-text">
+                        <td>
+                            Hello I am a rune description, I will go here
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+              </div>
+
+              <!-- Optimal Primary Runes -->
+            <div class="col-md-2">
+              <table class="rune-panel optimal-runes text-center">
+                  <thead class="tree-icon text-center">
+                      <th></th>
+                      <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
+                  </thead>
+                  <tbody>
+                    <tr class="keystones">
+                      <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
+                      <td><img src="{% static 'img/perk/8124.png' %}"></td>
+                      <td><img src="{% static 'img/perk/8128.png' %}"></td>
+                    </tr>
+                    <tr class="rune-row">
+                      <td><img src="{% static 'img/perk/8126.png' %}"></td>
+                      <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
+                      <td><img src="{% static 'img/perk/8143.png' %}"></td>
+                    </tr>
+                    <tr class="rune-row">
+                      <td><img src="{% static 'img/perk/8136.png' %}"></td>
+                      <td><img src="{% static 'img/perk/8120.png' %}"></td>
+                      <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
+                    </tr>
+                    <tr class="rune-row">
+                      <td><img src="{% static 'img/perk/8135.png' %}"></td>
+                      <td><img src="{% static 'img/perk/8134.png' %}"></td>
+                      <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
+                    </tr>
+                  </tbody>
+              </table>
             </div>
 
-            <div class="carousel-item">
 
-              <div class="row profile match-panel table-responsive">
-                <table class="table borderless">
-                    <thead class="profile-sidebar">
-                        <th>
-                            <div class="profile-usertitle-time">DD/MM/YYYY</div>
-                        </th>
-                        <th class="profile-userpic">
-                          <img src="{% static 'img/MfIcon.png' %}" class="img-responsive" alt="">
-                        </th>
-                        <th class="profile-usertitle">
-                          <div class="profile-usertitle-name">
-                            Miss Fortune
-                          </div>
-                          <div class="profile-usertitle-job">
-                            ADC
-                          </div>
-                          <div class="profile-usertitle-kda">
-                            15/0/1
-                          </div>
-                        </th>
-                        <th class="profile-summ-spells">
-                          <img class="spell" src="{% static 'img/flash-icon.jpg' %}" class="img-responsive" alt="">
-                          <img class="spell" src="{% static 'img/flash-icon.jpg' %}" class="img-responsive" alt="">
-                        </th>
-                        <th class="rune-rating">
-                            Hi! I am Radar
-                        </th>
-                    </thead>
-
-                    <!-- Player runes -->
-                    <tr>
-                      <td><table class="rune-panel player-runes text-center">
-                            <thead class="tree-icon text-center">
-                                <th></th>
-                                <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
-                            </thead>
-                            <tbody>
-                              <tr class="keystones">
-                                <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8124.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8128.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8126.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8143.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8136.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8120.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8135.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8134.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
-                              </tr>
-                            </tbody>
-                        </table>
-                      </td>
-
-                      <td><table class="rune-panel player-runes text-center secondary-tree">
-                            <thead class="tree-icon text-center">
-                                <th></th>
-                                <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
-                            </thead>
-                            <tbody>
-                              <tr class="keystones">
-                                <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8124.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8128.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8126.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8143.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8136.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8120.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8135.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8134.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
-                              </tr>
-                            </tbody>
-                        </table>
-                      </td>
-
-                      <td>
-
-                          <table class="rune-panel rune-description">
-                              <thead>
-                                  <th class="chosen-rune"><img src="{% static 'img/perk/8112.png' %}"></th>
-                              </thead>
-                              <tbody>
-                              <tr class="chosen-rune-name">
-                                  <td>
-                                      Electrocute
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <p class="optimal-roles-title">Optimal roles:</p> 
-                                      <p class="optimal-roles">Assassin, Mage </p>
-                                  </td>
-                              </tr>
-                              <tr class="rune-description-text">
-                                  <td class="description-text">
-                                      Hello I am a rune description, I will go here
-                                  </td>
-                              </tr>
-                              </tbody>
-                          </table>
-
-                      </td>
-
-                      <!-- Optimal Runes -->
-                      <td><table class="rune-panel optimal-runes text-center">
-                            <thead class="tree-icon text-center">
-                                <th></th>
-                                <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
-                            </thead>
-                            <tbody>
-                              <tr class="keystones">
-                                <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8124.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8128.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8126.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8143.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8136.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8120.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8135.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8134.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
-                              </tr>
-                            </tbody>
-                        </table>
-                      </td>
-
-                      <td><table class="rune-panel optimal-runes text-center secondary-tree">
-                            <thead class="tree-icon text-center">
-                                <th></th>
-                                <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
-                            </thead>
-                            <tbody>
-                              <tr class="keystones">
-                                <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8124.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8128.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8126.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8143.png' %}"></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8136.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8120.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
-                              </tr>
-                              <tr class="rune-row">
-                                <td><img src="{% static 'img/perk/8135.png' %}"></td>
-                                <td><img src="{% static 'img/perk/8134.png' %}"></td>
-                                <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
-                              </tr>
-                            </tbody>
-                        </table>
-                      </td>
-
+            <!-- Optimal Secondary Runes -->
+            <div class="col-md-2">
+              <table class="rune-panel optimal-runes text-center secondary-tree">
+                  <thead class="tree-icon text-center">
+                      <th></th>
+                      <th><img src="{% static 'img/perkStyle/8100.png' %}"></th>
+                  </thead>
+                  <tbody>
+                    <tr class="keystones">
+                      <td class="active-keystone"><img src="{% static 'img/perk/8112.png' %}"></td>
+                      <td><img src="{% static 'img/perk/8124.png' %}"></td>
+                      <td><img src="{% static 'img/perk/8128.png' %}"></td>
                     </tr>
-                </table>
-                </div>
+                    <tr class="rune-row">
+                      <td><img src="{% static 'img/perk/8126.png' %}"></td>
+                      <td class="active-rune"><img src="{% static 'img/perk/8139.png' %}"></td>
+                      <td><img src="{% static 'img/perk/8143.png' %}"></td>
+                    </tr>
+                    <tr class="rune-row">
+                      <td><img src="{% static 'img/perk/8136.png' %}"></td>
+                      <td><img src="{% static 'img/perk/8120.png' %}"></td>
+                      <td class="active-rune"><img src="{% static 'img/perk/8138.png' %}" ></td>
+                    </tr>
+                    <tr class="rune-row">
+                      <td><img src="{% static 'img/perk/8135.png' %}"></td>
+                      <td><img src="{% static 'img/perk/8134.png' %}"></td>
+                      <td class="active-rune"><img src="{% static 'img/perk/8105.png' %}"></td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div>
 
             </div>
           </div>

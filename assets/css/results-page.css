@@ -98,8 +98,7 @@ header.masthead {
   color: rgba(255, 255, 255, 0.7);
   font-size: 12px;
   font-weight: 600;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin:auto;
 }
 
 
@@ -177,7 +176,7 @@ header.masthead {
   padding: auto;
   background-color: rgba(53, 206, 135, 0.3);;
   text-align: center;
-  width: 100%;
+  margin-bottom: 20px;
 }
 
 .profile-userpic img {
@@ -191,6 +190,7 @@ header.masthead {
 
 .profile-usertitle {
   text-align: center;
+  margin-top: 10px;
 }
 
 .profile-usertitle-time {
@@ -198,6 +198,7 @@ header.masthead {
   color: rgba(255, 255, 255, 0.5);
   font-size: 20px;
   font-weight: 600;
+  margin-top: 50px;
 }
 
 .profile-usertitle-name {
@@ -223,6 +224,7 @@ header.masthead {
 
 .profile-summ-spells {
   text-align: center;
+  margin-top: 24px;
 }
 
 .profile-summ-spells .spell {
@@ -235,9 +237,10 @@ header.masthead {
 
 .rune-rating {
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 18px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
   font-weight: 600;
+  margin-top: 50px;
 }
     
 .profile-usermenu {
