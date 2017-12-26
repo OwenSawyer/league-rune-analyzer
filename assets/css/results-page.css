@@ -83,6 +83,11 @@ header.masthead {
   border-radius: 25px;
 }
 
+#summonerNameHeading{
+  padding-top: 20px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
 .match-panel {
   padding-bottom: 50px;
   padding-right: 10%;
