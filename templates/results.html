@@ -1,4 +1,6 @@
 {% load static %}
+{% load render_bundle from webpack_loader %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,90 +23,60 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'css/landing-page.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/results-page.css' %}" rel="stylesheet">
 
   </head>
 
-  <body>
+  <body class="fixed-nav sticky-footer">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-light bg-light static-top">
+    <nav class="results-nav navbar navbar-light bg-light fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="/"><img alt="Champions Reforged Logo" height="80px" src="{% static 'img/Logo.png' %}">Champions Reforged</a>
+        <a class="navbar-brand" href="/" style="color:white;"><img alt="Champions Reforged Logo" height="80px" src="{% static 'img/Logo.png' %}">Champions Reforged</a>
+        <form class="form-inline">
+        <input type="text" class="form-control" placeholder="Summoner Name...">&nbsp;&nbsp;&nbsp;    
+        <select class="form-control" name="execute_against" id="execute_against_match-v3_GET_getMatchlist">
+          <option value="NA1" selected="true">North America</option>
+          <option value="RU">Russia</option>
+          <option value="KR">Korea</option>
+          <option value="BR1">Brazil</option>
+          <option value="OC1">Oceania</option>
+          <option value="JP1">Japan</option>
+          <option value="EUN1">Europe Nordic and East</option>
+          <option value="EUW1">Europe West</option>
+          <option value="TR1">Turkey</option>
+          <option value="LA1">Latin America South</option>
+          <option value="LA2">Latin America North</option>
+          </select>&nbsp;&nbsp;&nbsp;  
+          <button type="submit" class="btn btn-primary">Reforge</button>
+        </form>
       </div>
     </nav>
 
-    <!-- Masthead -->
-    <header class="masthead text-white text-center">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <h1 class="mb-5">Start optimizing your champion runes!</h1>
-          </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
-              <div class="form-row">
-                <div class="col-12 col-md-9 mb-2 mb-md-0">
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter your summoner name..."><br>
-                  <select>
-                  	<option value="NA">North America</option>\
-                  	<option value="KR">Korea</option>
-                  	<option value="JP">Japan</option>
-                  	<option value="EUW">Europe West</option>
-                  	<option value="EUNE">Europe Nordic and East</option>
-                  	<option value="OCE">Oceania</option>
-                  	<option value="BR">Brazil</option>
-                  	<option value="LAS">LAS</option>
-                  	<option value="LAN">LAN</option>
-                  	<option value="RU">Russia</option>
-                  	<option value="TR">Turkey</option>
-                  </select>
-                </div>
-                <div class="col-12 col-md-3">
-                  <button type="submit" class="btn btn-block btn-lg btn-primary">Reforge</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </header>
+    <!-- Recent game slides -->
+    <section class="bg-light text-center">
+      <div class="container-fluid text-center">
+        <div style="padding-top:50px;" id="carouselExampleIndicators" class="carousel carousel-panel slide text-center" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          </ol>
 
-    <!-- Icons Grid -->
-    <section class="features-icons bg-light text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <img class="about-icon m-auto text-primary" alt="Select Summoner" height="100px" src="{% static 'img/LeagueIcon.png' %}">
-              </div>
-              <h3>Enter Summoner Name</h3>
-              <p class="lead mb-0">Enter your summoner name and corresponding region.</p>
+          <div id="carouselInner" class="carousel-inner" role="listbox">
+            <div id="test" class="carousel-item active">
             </div>
           </div>
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <img class="about-icon m-auto text-primary" alt="Choose Champion" height="100px" src="{% static 'img/MysteryChampionIcon.png' %}">
-              </div>
-              <h3>View Rune History</h3>
-              <p class="lead mb-0">Look through your match history on different champions and how optimal your runes were in each game.</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <img class="about-icon m-auto text-primary" alt="Reforge Runes" height="100px" src="{% static 'img/RuneIcon.png' %}">
-              </div>
-              <h3>Discover Optimal Runes</h3>
-              <p class="lead mb-0">Compare your runes with the most optimal runes on each champion and understand their advantages!</p>
-            </div>
-          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
       </div>
     </section>
+    <div id="Hello"></div>
 
     <!-- Footer -->
     <footer class="footer bg-light">
@@ -118,8 +90,10 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
+
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.js' %}"></script>
+    {% render_bundle 'main' %}
 
   </body>
 
