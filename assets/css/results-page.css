@@ -109,22 +109,29 @@ header.masthead {
 }
 
 .keystones td img {
-  height: 60px;
+  height: 70px;
   opacity: 0.3;
+  cursor: pointer;
 }
 
-.active-keystone img {
-  opacity: 1.0 !important;
-} 
+.keystones td img:hover{
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
 
 .secondary-tree tbody .keystones {
-  visibility: hidden;
 }
 
 .rune-row td img {
   height: 50px;
   margin: 5px;
   opacity: 0.3;
+  cursor: pointer;
+}
+
+.rune-row td img:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .active-rune img{
@@ -174,9 +181,16 @@ header.masthead {
 .profile-sidebar {
   border-radius: 25px;
   padding: auto;
-  background-color: rgba(53, 206, 135, 0.3);;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.victory {
+  background-color: rgba(53, 206, 135, 0.3);
+}
+
+.defeat {
+  background-color: rgba(232, 55, 55, 0.3);
 }
 
 .profile-userpic img {
