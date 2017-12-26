@@ -3,38 +3,28 @@ var ReactDOM = require('react-dom')
 
 // TODO: Create Match History Object
 
+var MatchResponse = {
+  'champion': 115, 
+  'championName': 'Ziggs', 
+  'lane': 'MIDDLE', 
+  'gameDate': '20/12/17', 
+  'gameDuration': '0:20:03', 
+  'gameMode': 'Snowurf', 
+  'win': true, 
+  'kills': 14, 
+  'deaths': 11, 
+  'assists': 10, 
+  'spell1': 39, 
+  'spell2': 4, 
+  'runes': {'primary': {'id': 8200, 'runes': [8229, 8224, 8210, 8237]}, 'secondary': {'id': 8300, 'runes': [8410, 8313]}, 
+  'championTags': ['Mage'], 
+  'championAttributes': {'attack': 3, 'defense': 0, 'toughness': 2, 'mobility': 2, 'utility': 0}}};
+
 var MatchPanel = React.createClass({
     render: function () {
         return (
             <div className="row profile match-panel table-responsive">
-
-                <div className="row profile-sidebar">
-                    <div className="text-center col-md-2 profile-usertitle-time">
-                      DD/MM/YYYY
-                    </div>
-                    <div className="profile-userpic col-md-2">
-                      <img src={require('../img/MfIcon.png')} className="img-responsive" alt="" />
-                    </div>
-                    <div className="col-md-3 profile-usertitle">
-                        <div className="profile-usertitle-name">
-                            Miss Fortune
-                          </div>
-                          <div className="profile-usertitle-job">
-                            ADC
-                          </div>
-                          <div className="profile-usertitle-kda">
-                            15/0/1
-                          </div>
-                    </div>
-                    <div className="profile-summ-spells col-md-2">
-                      <img className="spell img-responsive" src={require('../img/flash-icon.jpg')} alt="" />
-                      <img className="spell img-responsive" src={require('../img/flash-icon.jpg')} alt="" />
-                    </div>
-                    <div className="rune-rating col-md-3">
-                      Hi! I am Radar
-                    </div>
-              </div>
-
+              <MatchResults match={MatchResponse}/>
               <div className="row">
                 <div className="col-md-2">
 
@@ -193,5 +183,38 @@ var MatchPanel = React.createClass({
         );
     }
 });
+
+var MatchResults = React.createClass({
+  render() {
+    return (
+      <div className="row profile-sidebar">
+        <div className="text-center col-md-2 profile-usertitle-time">
+          {this.props.match.gameDate}
+        </div>
+        <div className="profile-userpic col-md-2">
+          <img src={require(`../img/champion/${this.props.match.champion}.png`)} className="img-responsive" alt="" />
+        </div>
+        <div className="col-md-3 profile-usertitle">
+            <div className="profile-usertitle-name">
+                {this.props.match.championName}
+              </div>
+              <div className="profile-usertitle-job">
+                {this.props.match.lane}
+              </div>
+              <div className="profile-usertitle-kda">
+                {this.props.match.kills}/{this.props.match.deaths}/{this.props.match.assists}
+              </div>
+        </div>
+        <div className="profile-summ-spells col-md-2">
+          <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell1}.png`)} alt="" />
+          <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell2}.png`)} alt="" />
+        </div>
+        <div className="rune-rating col-md-3">
+          Hi! I am Radar
+        </div>
+      </div>
+    )
+  }
+})
 
 ReactDOM.render(<MatchPanel />, document.getElementById('test'))
