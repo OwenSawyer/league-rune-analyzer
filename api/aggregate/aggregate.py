@@ -7,7 +7,7 @@ from api.aggregate import rune
 BASE_HEADERS = {
     "Origin": "https://developer.riotgames.com",
     "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-    "X-Riot-Token": "RGAPI-1ba8d334-ef2b-44b9-807a-1f49f29f8fe5",
+    "X-Riot-Token": "RGAPI-6fca30f3-50c6-4f6c-8d4a-45598c61a9bd",
     "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
 }
@@ -63,7 +63,7 @@ def serialize_match(accountId, matchJson):
         playerInfo['stats']['perk4'],
         playerInfo['stats']['perk5']
     ]
-    rune_info['rating'] = rune.get_rune_page_rating_for_champ(rune_info, serialized['championName'], serialized['lane'])
+    rune_info['rating'] = rune.get_rune_page_rating_for_champ(rune_info, serialized['championName'], serialized['lane'].lower())
     rune_info['championTags'] =  next(v['tags'] for (k,v) in dict(json.loads(open('json/champions.json').read())['data']).items()
                                       if k == serialized['championName'])
     rune_info['championAttributes'] = next(v['attributes'] for (k,v) in dict(json.loads(open('json/champion_info.json').read())).items()
@@ -79,8 +79,8 @@ if __name__=='__main__':
     # for i in json.dumps(champs):
     #     print(i)
     #print(get_champions())
-    #print(get_summoner('na1', 'owen3times'))
-    #print(get_matchlist('na1', '210164502'))
+    #print(get_summoner('na1', 'chow dog'))
+    #print(get_matchlist('na1', '226913554'))
     print(serialize_match('210164502', get_match('na1', '2675889004')))
     #print(get_match('na1', '2674267941'))
     #start = time.time()

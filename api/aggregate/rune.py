@@ -35,7 +35,7 @@ def get_popular_runes_for_champ(champ, role):
     return rune_info
 
 def get_rune_page_rating_for_champ(runes, champ, role):
-    
+
     score = 0
     popular = get_popular_runes_for_champ(champ, role)
     if popular:
@@ -117,10 +117,10 @@ def get_rune_info(runeId):
     return rune_info
 
 if __name__=='__main__':
-    #print(get_rune_info(8005))
+    print(get_rune_info(8005))
     # print(scrape.champ_tag_lookup())
     # print(rune_number_to_name(8124))
     # print(rune_name_to_number("Predator"))
     #print(rune_usage_analysis())
     #print(get_popular_runes_for_champ('Sona','support'))
-    print(get_rune_page_rating_for_champ(get_popular_runes_for_champ('Jhin','adc'), 'Bard','support'))
+    #print(get_rune_page_rating_for_champ(get_popular_runes_for_champ('Jhin','adc'), 'Bard','support'))

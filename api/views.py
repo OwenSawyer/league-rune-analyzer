@@ -35,7 +35,6 @@ def get_match(request):
 @api_view(['POST'])
 def get_popular_runes_for_champion(request):
     response = rune.get_popular_runes_for_champ(request.POST.get('champion'), request.POST.get('role'))
-    response = serialize_match(response)
     return response_handler(response)
 
 @api_view(['POST'])
