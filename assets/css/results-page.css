@@ -125,6 +125,7 @@ header.masthead {
 }
 
 .secondary-tree tbody .keystones {
+  visibility: hidden;
 }
 
 .rune-row td img {
