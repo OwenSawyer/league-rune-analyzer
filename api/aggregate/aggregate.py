@@ -2,12 +2,12 @@ import requests
 from datetime import datetime, timedelta
 import json
 
-from api.aggregate import scrape
+from api.aggregate import rune
 
 BASE_HEADERS = {
     "Origin": "https://developer.riotgames.com",
     "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-    "X-Riot-Token": "RGAPI-1ba8d334-ef2b-44b9-807a-1f49f29f8fe5",
+    "X-Riot-Token": "RGAPI-6fca30f3-50c6-4f6c-8d4a-45598c61a9bd",
     "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
 }
@@ -31,19 +31,21 @@ def get_match(region, matchId):
 def serialize_match(accountId, matchJson):
 
     serialized = {}
-    playerInfo = next(id for id in matchJson['participants'] if lambda x: x['participantId'] == accountId)
+    participantId = next(id['participantId'] for id in matchJson['participantIdentities'] if id['player']['accountId'] == int(accountId))
+    playerInfo = next(id for id in matchJson['participants'] if id['participantId'] == participantId)
     serialized['champion'] = playerInfo['championId']
 
     champion_json = dict(json.loads(open('json/champions.json').read())['data'])
-    champions = [(val['key'], str(val['id'])) for val in champion_json.values()]
-    serialized['championName'] = next(key for key in champions if lambda x: x[1] == serialized['champion'])[0]
+    champions = [(val['key'], val['id']) for val in champion_json.values()]
+    serialized['championName'] = next(i for i in champions if i[1] == serialized['champion'])[0]
     serialized['lane'] = playerInfo['timeline']['lane']
     serialized['gameDate'] = datetime.fromtimestamp(matchJson['gameCreation']/1000).strftime("%d/%m/%y")
     serialized['gameDuration'] = str(timedelta(seconds=matchJson['gameDuration']))
     serialized['gameMode'] = matchJson['gameMode'].title()
-    serialized['win'] = playerInfo['stats']['win']
+    serialized['win'] = str(playerInfo['stats']['win']).lower()
     serialized['kills'] = playerInfo['stats']['kills']
     serialized['deaths'] = playerInfo['stats']['deaths']
+    serialized['assists'] = playerInfo['stats']['assists']
     serialized['spell1'] = playerInfo['spell1Id']
     serialized['spell2'] = playerInfo['spell2Id']
 
@@ -61,6 +63,11 @@ def serialize_match(accountId, matchJson):
         playerInfo['stats']['perk4'],
         playerInfo['stats']['perk5']
     ]
+    rune_info['rating'] = rune.get_rune_page_rating_for_champ(rune_info, serialized['championName'], serialized['lane'].lower())
+    rune_info['championTags'] =  next(v['tags'] for (k,v) in dict(json.loads(open('json/champions.json').read())['data']).items()
+                                      if k == serialized['championName'])
+    rune_info['championAttributes'] = next(v['attributes'] for (k,v) in dict(json.loads(open('json/champion_info.json').read())).items()
+                                      if k == serialized['championName'])
 
     serialized['runes'] = rune_info
     return serialized
@@ -72,8 +79,8 @@ if __name__=='__main__':
     # for i in json.dumps(champs):
     #     print(i)
     #print(get_champions())
-    #print(get_summoner('na1', 'owen3times'))
-    #print(get_matchlist('na1', '210164502'))
+    #print(get_summoner('na1', 'chow dog'))
+    #print(get_matchlist('na1', '226913554'))
     print(serialize_match('210164502', get_match('na1', '2675889004')))
     #print(get_match('na1', '2674267941'))
     #start = time.time()
