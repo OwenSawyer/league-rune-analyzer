@@ -29,7 +29,7 @@ const Sorcery = {
 
 const Inspiration = {
   "treeIcon" : 8300,
-  "keystones" : [8326, 8351, 8539],
+  "keystones" : [8326, 8351, 8359],
   "r1" : [8306, 8345, 8313],
   "r2" : [8304, 8321, 8316],
   "r3" : [8347, 8410, 8339]
