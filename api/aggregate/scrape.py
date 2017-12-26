@@ -10,6 +10,10 @@ import re
 #Imports below: the requests module has a naming collision with grequests that breaks requests.
 #The import code below is to address this..
 from gevent import monkey
+
+from drf_react.settings import JSON_FOLDER
+
+
 def stub(*args, **kwargs):  # pylint: disable=unused-argument
     pass
 monkey.patch_all = stub
@@ -64,10 +68,10 @@ def aggregate_top_runes_for_champ_role_pair():
                     rune_dict[i].append(champ)
             counter += 1
 
-    with open('json/champ_role_popular_runes.json', 'w') as fp:
+    with open('./json/champ_role_popular_runes.json', 'w') as fp:
         json.dump(champ_dict, fp)
 
-    with open('json/runes_with_champs.json', 'w') as fp2:
+    with open('./json/runes_with_champs.json', 'w') as fp2:
         json.dump(rune_dict, fp2)
 
 def exception_handler(request, exception):
@@ -90,14 +94,14 @@ def async(urls):
     return final
 
 def get_champion_names():
-    return {key: {} for key in dict(json.loads(open('json/champions.json').read())['data']).keys()}
+    return {key: {} for key in dict(json.loads(open(JSON_FOLDER + 'champions.json').read())['data']).keys()}
 
 def get_summoner_spell_names():
-    return {key: {} for key in dict(json.loads(open('json/summoners.json').read())['data']).keys()}
+    return {key: {} for key in dict(json.loads(open(JSON_FOLDER + 'summoners.json').read())['data']).keys()}
 
 def get_rune_names():
     rune_list = []
-    runes = list(json.loads(open('json/runes_reforged.json').read()))
+    runes = list(json.loads(open(JSON_FOLDER + 'runes_reforged.json').read()))
     for category in runes:
         for tier in category['slots']:
             for rune in tier['runes']:
@@ -106,7 +110,7 @@ def get_rune_names():
 
 def get_rune_dict():
     rune_list = {}
-    runes = list(json.loads(open('json/runes_reforged.json').read()))
+    runes = list(json.loads(open(JSON_FOLDER + 'runes_reforged.json').read()))
     for category in runes:
         rune_list[category['id']] = category['name']
         for tier in category['slots']:
@@ -115,7 +119,7 @@ def get_rune_dict():
     return rune_list
 
 def scrape_champion_images():
-    champions = [(val['key'], str(val['id'])) for val in dict(json.loads(open('json/champions.json').read())['data']).values()]
+    champions = [(val['key'], str(val['id'])) for val in dict(json.loads(open(JSON_FOLDER + 'champions.json').read())['data']).values()]
 
     base_path = os.path.dirname(__file__) + '/../../assets/img/champion/'
     for tup in champions:
@@ -126,7 +130,7 @@ def scrape_champion_images():
             print("name not found:" + tup[0])
 
 def scrape_summoner_images():
-    summoners = [(val['id'], str(val['key'])) for val in dict(json.loads(open('json/summoner.json').read())['data']).values()]
+    summoners = [(val['id'], str(val['key'])) for val in dict(json.loads(open(JSON_FOLDER + 'summoner.json').read())['data']).values()]
 
     base_path = os.path.dirname(__file__) + '/../../assets/img/summoner/'
     for tup in summoners:
@@ -137,7 +141,7 @@ def scrape_summoner_images():
             print("summoner not found:" + tup[0])
 
 def champ_tag_lookup():
-    return {key: list(value['tags']) for key, value in dict(json.loads(open('json/champions.json').read())['data']).items()}
+    return {key: list(value['tags']) for key, value in dict(json.loads(open(JSON_FOLDER + 'champions.json').read())['data']).items()}
 
 def scrape_champ_info():
 
@@ -174,7 +178,7 @@ def scrape_champ_info():
 
         champ_dict[re.sub(r"[\s'.]+", '', name)] = champ_info
 
-    with open('json/champion_info.json', 'w') as fp:
+    with open('./json/champion_info.json', 'w') as fp:
         json.dump(champ_dict, fp)
 
 

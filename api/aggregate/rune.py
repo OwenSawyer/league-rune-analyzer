@@ -1,7 +1,13 @@
 from collections import Counter
 
+import os
+
 from api.aggregate import scrape
 import json
+
+from drf_react.settings import JSON_FOLDER, BASE_DIR
+
+my_path = os.path.abspath(os.path.dirname(__file__))
 
 def rune_number_to_name(number):
     table = scrape.get_rune_dict()
@@ -12,7 +18,7 @@ def rune_name_to_number(name):
     return list(table.keys())[list(table.values()).index(name)]
 
 def rune_class_type(name):
-    runes = list(json.loads(open('json/runes_reforged.json').read()))
+    runes = list(json.loads(open(JSON_FOLDER + 'runes_reforged.json').read()))
     for category in runes:
         for tier in category['slots']:
             for rune in tier['runes']:
@@ -21,7 +27,7 @@ def rune_class_type(name):
     return -1
 
 def get_popular_runes_for_champ(champ, role):
-    runes_json = dict(json.loads(open('json/champ_role_popular_runes.json').read()))[champ.title()][role]
+    runes_json = dict(json.loads(open(JSON_FOLDER + 'champ_role_popular_runes.json').read()))[champ.title()][role]
     if not runes_json:
         return {}
     id_mappings = [rune_name_to_number(i) for i in runes_json]
@@ -70,7 +76,7 @@ def get_rune_page_rating_for_champ(runes, champ, role):
     return score
 
 def rune_usage_analysis():
-    rune_dict = dict(json.loads(open('json/runes_with_champs.json').read()))
+    rune_dict = dict(json.loads(open(JSON_FOLDER + 'runes_with_champs.json').read()))
     champ_tags = scrape.champ_tag_lookup()
     rune_analysis = {key: {} for key in rune_dict.keys()}
     for rune, champlist in rune_dict.items():
@@ -90,7 +96,7 @@ def get_rune_info(runeId):
         return avg[:avg.find('.')+4]
 
     rune_info = {}
-    runes = list(json.loads(open('json/runes_reforged.json').read()))
+    runes = list(json.loads(open(JSON_FOLDER + 'runes_reforged.json').read()))
     for category in runes:
         for tier in category['slots']:
             for rune in tier['runes']:
@@ -105,8 +111,8 @@ def get_rune_info(runeId):
 
     #average attributes of all champs who use this rune
     champ_attributes = []
-    champ_json = dict(json.loads(open('json/champion_info.json').read()))
-    for champ in dict(json.loads(open('json/runes_with_champs.json').read()))[rune_info['name']]:
+    champ_json = dict(json.loads(open(JSON_FOLDER + 'champion_info.json').read()))
+    for champ in dict(json.loads(open(JSON_FOLDER + 'runes_with_champs.json').read()))[rune_info['name']]:
         champ_attributes.append(
             next(v['attributes'] for (k,v) in champ_json.items() if k.lower() == champ.lower()))
     sums = Counter()

@@ -1,6 +1,7 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+JSON_FOLDER = os.path.join(BASE_DIR, 'api/aggregate/json/')
 
 SECRET_KEY = 'v&r53xo5v!hwbh$#&o7-zc0xs59qu1ebt#r%9=(=qo^_e_#kaa'
 
