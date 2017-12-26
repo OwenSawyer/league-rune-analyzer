@@ -35,21 +35,39 @@ def get_popular_runes_for_champ(champ, role):
     return rune_info
 
 def get_rune_page_rating_for_champ(runes, champ, role):
-    popular = get_popular_runes_for_champ(champ,role)
-    if not popular:
-        return -1
+    
+    score = 0
+    popular = get_popular_runes_for_champ(champ, role)
+    if popular:
+        if popular['primary']['id'] == runes['primary']['id']:
+            score += 12.5
+        elif popular['primary']['id'] == runes['secondary']['id']:
+            score += 10
+        if popular['secondary']['id'] == runes['secondary']['id']:
+            score += 12.5
+        elif popular['secondary']['id'] == runes['primary']['id']:
+            score += 10
 
-    count = 0
-    if popular['primary']['id'] == runes['primary']['id'] and popular['secondary']['id'] == runes['secondary']['id']:
-        count += 7
-    elif popular['primary']['id'] == runes['primary']['id']:
-        count += 6
-    elif popular['primary']['id'] == runes['secondary']['id'] and popular['secondary']['id'] == runes['primary']['id']:
-        count += 5
-    elif popular['primary']['id'] == runes['secondary']['id']:
-        count += 4
+    player_runes = []
+    player_runes.extend(runes['primary']['runes'])
+    player_runes.extend(runes['secondary']['runes'])
+    popular_runes = []
+    if popular:
+        popular_runes.extend(popular['primary']['runes'])
+        popular_runes.extend(popular['secondary']['runes'])
 
-    #compare primary tree ratings by attributes
+    rune_tags = rune_usage_analysis()
+    champ_tags = scrape.champ_tag_lookup()[champ]
+    for rune in player_runes:
+        if rune in popular_runes:
+            score += 12.5
+        else:
+            tags = sorted(rune_tags[rune_number_to_name(rune)], key=rune_tags[rune_number_to_name(rune)].get, reverse=True)
+            if any(x in tags[:2] for x in champ_tags):
+                score += 10
+            else:
+                score += 7.5
+    return score
 
 def rune_usage_analysis():
     rune_dict = dict(json.loads(open('json/runes_with_champs.json').read()))
@@ -97,9 +115,6 @@ def get_rune_info(runeId):
     rune_info['attributes'] = {x: get_average(sums[x],len(champ_attributes)) for x in sums.keys()}
 
     return rune_info
-    #champion attributes av radar
-    #champ synergy for rune
-    #my champ av?
 
 if __name__=='__main__':
     #print(get_rune_info(8005))
@@ -107,4 +122,5 @@ if __name__=='__main__':
     # print(rune_number_to_name(8124))
     # print(rune_name_to_number("Predator"))
     #print(rune_usage_analysis())
-    print(get_popular_runes_for_champ('Bard','support'))
+    #print(get_popular_runes_for_champ('Sona','support'))
+    print(get_rune_page_rating_for_champ(get_popular_runes_for_champ('Jhin','adc'), 'Bard','support'))

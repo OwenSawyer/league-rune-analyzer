@@ -42,9 +42,10 @@ def serialize_match(accountId, matchJson):
     serialized['gameDate'] = datetime.fromtimestamp(matchJson['gameCreation']/1000).strftime("%d/%m/%y")
     serialized['gameDuration'] = str(timedelta(seconds=matchJson['gameDuration']))
     serialized['gameMode'] = matchJson['gameMode'].title()
-    serialized['win'] = playerInfo['stats']['win']
+    serialized['win'] = str(playerInfo['stats']['win']).lower()
     serialized['kills'] = playerInfo['stats']['kills']
     serialized['deaths'] = playerInfo['stats']['deaths']
+    serialized['assists'] = playerInfo['stats']['assists']
     serialized['spell1'] = playerInfo['spell1Id']
     serialized['spell2'] = playerInfo['spell2Id']
 
@@ -62,7 +63,7 @@ def serialize_match(accountId, matchJson):
         playerInfo['stats']['perk4'],
         playerInfo['stats']['perk5']
     ]
-    #rune_info['rating'] = rune.get_rune_page_rating_for_champ(rune_info, champ, role)
+    rune_info['rating'] = rune.get_rune_page_rating_for_champ(rune_info, serialized['championName'], serialized['lane'])
     rune_info['championTags'] =  next(v['tags'] for (k,v) in dict(json.loads(open('json/champions.json').read())['data']).items()
                                       if k == serialized['championName'])
     rune_info['championAttributes'] = next(v['attributes'] for (k,v) in dict(json.loads(open('json/champion_info.json').read())).items()
