@@ -7,7 +7,7 @@ from api.aggregate import rune
 BASE_HEADERS = {
     "Origin": "https://developer.riotgames.com",
     "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
-    "X-Riot-Token": "RGAPI-6fca30f3-50c6-4f6c-8d4a-45598c61a9bd",
+    "X-Riot-Token": "RGAPI-e8085f3a-3e1d-41e3-aa37-f77b4ec151eb",
     "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
     "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
 }

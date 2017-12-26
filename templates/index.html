@@ -43,10 +43,10 @@
             <h1 class="mb-5">Start optimizing your champion runes!</h1>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
+            <form id="searchSummonerForm">
               <div class="form-row">
                 <div class="col-12 col-md-9 mb-2 mb-md-0">
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter your summoner name..."><br>
+                  <input type="text" name="summonerName" class="form-control form-control-lg" placeholder="Enter your summoner name..." required><br>
                   <select class="form-control" name="execute_against" style="width: 200px" id="execute_against_match-v3_GET_getMatchlist">
                       <option value="NA1" selected="true">North America</option>
                       <option value="RU">Russia</option>
@@ -120,6 +120,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
 
   </body>
 
