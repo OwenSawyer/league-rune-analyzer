@@ -5,9 +5,7 @@ import os
 from api.aggregate import scrape
 import json
 
-from drf_react.settings import JSON_FOLDER, BASE_DIR
-
-my_path = os.path.abspath(os.path.dirname(__file__))
+from drf_react.settings import JSON_FOLDER
 
 def rune_number_to_name(number):
     table = scrape.get_rune_dict()
@@ -100,14 +98,18 @@ def get_rune_info(runeId):
     for category in runes:
         for tier in category['slots']:
             for rune in tier['runes']:
-                if rune['id'] == runeId:
+                if rune['id'] == int(runeId):
                     rune_info['id'] = rune['id']
                     rune_info['name'] = rune['name']
                     rune_info['desc'] = rune['shortDesc']
                     break
 
+    all_roles = ['Tank','Fighter','Mage','Assassin','Marksman','Support']
     rune_user_roles = rune_usage_analysis()[rune_info['name']]
     rune_info['roles'] = {x: get_average(rune_user_roles[x],sum(rune_user_roles.values())) for x in rune_user_roles.keys()}
+    for i in all_roles:
+        if i not in rune_info['roles']:
+            rune_info['roles'][i] = "0"
 
     #average attributes of all champs who use this rune
     champ_attributes = []
@@ -123,7 +125,7 @@ def get_rune_info(runeId):
     return rune_info
 
 if __name__=='__main__':
-    print(get_rune_info(8005))
+    print(get_rune_info('8224'))
     # print(scrape.champ_tag_lookup())
     # print(rune_number_to_name(8124))
     # print(rune_name_to_number("Predator"))

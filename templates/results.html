@@ -15,7 +15,7 @@
     <title>Champions Reforged</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
@@ -24,6 +24,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/results-page.css' %}" rel="stylesheet">
+    <link href="{% static 'css/rune-info.css' %}" rel="stylesheet">
 
   </head>
 
@@ -56,6 +57,7 @@
     <!-- Recent game slides -->
     <section class="bg-light text-center">
       <div class="container-fluid text-center">
+      <div id="summonerNameHeading"></div>
         <div style="padding-top:50px;" id="carouselExampleIndicators" class="carousel carousel-panel slide text-center" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

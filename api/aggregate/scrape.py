@@ -68,10 +68,10 @@ def aggregate_top_runes_for_champ_role_pair():
                     rune_dict[i].append(champ)
             counter += 1
 
-    with open('./json/champ_role_popular_runes.json', 'w') as fp:
+    with open(JSON_FOLDER + 'champ_role_popular_runes.json', 'w') as fp:
         json.dump(champ_dict, fp)
 
-    with open('./json/runes_with_champs.json', 'w') as fp2:
+    with open(JSON_FOLDER + 'runes_with_champs.json', 'w') as fp2:
         json.dump(rune_dict, fp2)
 
 def exception_handler(request, exception):
@@ -178,7 +178,7 @@ def scrape_champ_info():
 
         champ_dict[re.sub(r"[\s'.]+", '', name)] = champ_info
 
-    with open('./json/champion_info.json', 'w') as fp:
+    with open(JSON_FOLDER + 'champion_info.json', 'w') as fp:
         json.dump(champ_dict, fp)
 
 
