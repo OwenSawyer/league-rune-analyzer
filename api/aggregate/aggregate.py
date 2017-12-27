@@ -88,7 +88,7 @@ if __name__=='__main__':
     #print(get_champions())
     #print(get_summoner('na1', 'chow dog'))
     #print(get_matchlist('na1', '226913554'))
-    print(serialize_match('210164502', get_match('na1', '2680232430')))
+    print(serialize_match('210164502', get_match('na1', '2674242742')))
     #print(get_match('na1', '2674267941'))
     #start = time.time()
     #print(get_summoner('na1', 'owen3times'))
