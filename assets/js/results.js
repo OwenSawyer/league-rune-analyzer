@@ -1,8 +1,6 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
 
-// TODO: Create Match History Object
-
 function getAllUrlParams(url) {
 
   // get query string from url (optional) or window
@@ -59,10 +57,10 @@ function getAllUrlParams(url) {
   }
 
   return obj;
-}
+};
 
 const SummonerName = getAllUrlParams().name;
-const AccountID = getAllUrlParams().accoundId;
+const AccountID = getAllUrlParams().accountId;
 const Region = getAllUrlParams().region;
 
 const Precision = {
@@ -71,7 +69,7 @@ const Precision = {
   "r1" : [9101, 9111, 8009],
   "r2" : [9104, 9105, 9103],
   "r3" : [8014, 8017, 8229]
-}
+};
 
 const Domination = {
   "treeIcon" : 8100,
@@ -79,7 +77,7 @@ const Domination = {
   "r1" : [8126, 8139, 8143],
   "r2" : [8136, 8120, 8138],
   "r3" : [8135, 8134, 8105]
-}
+};
 
 const Sorcery = {
   "treeIcon" : 8200,
@@ -87,7 +85,7 @@ const Sorcery = {
   "r1" : [8224, 8226, 8243],
   "r2" : [8210, 8234, 8233],
   "r3" : [8237, 8232, 8236]
-}
+};
 
 const Inspiration = {
   "treeIcon" : 8300,
@@ -95,7 +93,7 @@ const Inspiration = {
   "r1" : [8306, 8345, 8313],
   "r2" : [8304, 8321, 8316],
   "r3" : [8347, 8410, 8339]
-}
+};
 
 const Resolve = {
   "treeIcon" : 8400,
@@ -103,31 +101,73 @@ const Resolve = {
   "r1" : [8242, 8446, 8463],
   "r2" : [8430, 8435, 8429],
   "r3" : [8451, 8453, 8444]
-}
-
-var MatchResponse = {
-  'champion': 115, 
-  'championName': 'Ziggs', 
-  'lane': 'MIDDLE', 
-  'gameDate': '20/12/17', 
-  'gameDuration': '0:20:03', 
-  'gameMode': 'Snowurf', 
-  'win': true, 
-  'kills': 14, 
-  'deaths': 11, 
-  'assists': 10, 
-  'spell1': 39, 
-  'spell2': 4, 
-  'runes': {'primary': {'id': 8200, 'runes': [8229, 8224, 8210, 8237]}, 'secondary': {'id': 8300, 'runes': [8410, 8313]},
-  'championTags': ['Mage'], 
-  'championAttributes': {'attack': 3, 'defense': 0, 'toughness': 2, 'mobility': 2, 'utility': 0}}};
+};
 
 var OptimalRunes = {
   'primary': {'id': 8200, 'runes': [8229, 8224, 8210, 8237]}, 'secondary': {'id': 8300, 'runes': [8410, 8313]}
-} 
+};
+
+var MatchHistory = React.createClass({
+  getInitialState: function(){
+    var MatchHistoryList;
+    $.ajax({
+      url: '/api/matchlist/',
+      type: 'post',
+      async: false,
+      data: {
+          "region" : Region,
+          "accountId" : AccountID
+      },
+      success : function(response){
+        console.log(response);
+        console.log(response.matches);
+        MatchHistoryList = response.matches;
+      },
+      error : function(response){
+          console.log(response);
+          MatchHistoryList = "";
+      }
+    });
+    console.log(MatchHistoryList);
+    return {
+      data : MatchHistoryList
+    }
+  },
+
+  render : function(){
+    var Indicators = this.state.data.map(function(Match, i) {
+        return (<li key={i} data-target="#carouselExampleIndicators" data-slide-to={i} className={(i == 0 ? 'active' : '')}></li>);
+    });
+
+    var that = this;
+    var MatchPanels = this.state.data.map(function(Match, i) {
+      return (<div key={i} className={"carousel-item " + (i == 0 ? 'active' : '')}><MatchPanel matchId={that.state.data[i].gameId} /></div>);
+    });
+
+    return (
+      <div id="carouselExampleIndicators" className="carousel carousel-panel slide text-center" data-ride="carousel">
+          <ol className="carousel-indicators">
+            {Indicators}
+          </ol>
+
+          <div id="carouselInner" className="carousel-inner" role="listbox">
+            {MatchPanels}
+          </div>
+          <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="sr-only">Previous</span>
+          </a>
+          <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="sr-only">Next</span>
+          </a>
+        </div>
+    )
+  }
+});
+
 
 var MatchPanel = React.createClass({
-
     selectTree : function(treeid){
       if(treeid == 8000){
         return Precision;
@@ -146,7 +186,28 @@ var MatchPanel = React.createClass({
       }
     },
 
+    getMatchResponse : function(){
+      $.ajax({
+            url: '/api/match/',
+            type: 'post',
+            async: false,
+            data: {
+                'region' : Region,
+                'matchId' : this.props.matchId,
+                'accountId' : AccountID
+            },
+            success : function(response){
+              console.log(response);
+              return response;
+            },
+            error : function(response){
+                console.log(response);
+            }
+        })
+    },
+
     render: function () {
+        var MatchResponse = this.getMatchResponse();
         var PlayerPrimaryTree = this.selectTree(MatchResponse.runes.primary.id);
         var PlayerSecondaryTree = this.selectTree(MatchResponse.runes.secondary.id);
 
@@ -320,4 +381,4 @@ var Rune = React.createClass({
 })
 
 ReactDOM.render(<h1>{SummonerName}</h1>, document.getElementById('summonerNameHeading'));
-ReactDOM.render(<MatchPanel />, document.getElementById('test'));
+ReactDOM.render(<MatchHistory />, document.getElementById('matchHistory'));
