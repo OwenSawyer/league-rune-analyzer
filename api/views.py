@@ -1,32 +1,25 @@
 # views.py
-from django.db import Error
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse
-import json
-
 from rest_framework.decorators import api_view
 
-from api.aggregate import aggregate, scrape, rune
+from api.aggregate import aggregate, rune
 from api.aggregate.aggregate import serialize_match
-from .models import User, Url
-from .serializers import UserSerializer, UrlSerializer
+
 
 @api_view(['GET'])
 def index(request):
-    return JsonResponse([{"title" : "ahhhh"},
-						 {"title" : "323333"}], safe=False)
+    return JsonResponse([{"title" : "test"}, {"title" : "test2"}], safe=False)
 
 @api_view(['POST'])
 def get_summoner(request):
-    print(request.POST)
-    print(request.data)
     response = aggregate.get_summoner(request.data['region'], request.data['name'])
-    return response_handler(response) #userSerializer?
+    return response_handler(response)
 
 @api_view(['POST'])
 def get_matchlist(request):
     response = aggregate.get_matchlist(request.data['region'], request.data['accountId'])
-    return response_handler(response) #matchlistSerializer?
+    return response_handler(response)
 
 @api_view(['POST'])
 def get_match(request):
