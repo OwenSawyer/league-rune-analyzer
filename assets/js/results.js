@@ -365,10 +365,11 @@ var Rune = React.createClass({
 })
 
 var MatchResults = React.createClass({
+  
   render: function() {
     var WinClass;
 
-    if(this.props.match.win){
+    if(this.props.match.win == "true"){
       WinClass = "row profile-sidebar victory";
     }
     else{

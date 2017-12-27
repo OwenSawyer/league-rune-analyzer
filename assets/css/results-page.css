@@ -111,6 +111,10 @@ header.masthead {
   padding-top: 60%;
 }
 
+.loaded {
+  display: none;
+}
+
 .tree-icon thead thead img {
   height: 60px;
   vertical-align: middle;

@@ -33,8 +33,8 @@
     <nav class="results-nav navbar navbar-light bg-light fixed-top">
       <div class="container">
         <a class="navbar-brand" href="/" style="color:white;"><img alt="Champions Reforged Logo" height="80px" src="{% static 'img/Logo.png' %}">Champions Reforged</a>
-        <form class="form-inline">
-        <input type="text" class="form-control" placeholder="Summoner Name...">&nbsp;&nbsp;&nbsp;    
+        <form id="searchSummonerForm" class="form-inline">
+        <input type="text" name="summonerName" class="form-control" placeholder="Summoner Name...">&nbsp;&nbsp;&nbsp;    
         <select class="form-control" name="execute_against" id="execute_against_match-v3_GET_getMatchlist">
           <option value="NA1" selected="true">North America</option>
           <option value="RU">Russia</option>
@@ -76,6 +76,8 @@
 
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.js' %}"></script>
+    <!-- For search functionality -->
+    <script src="{% static 'js/index.js' %}"></script>
     {% render_bundle 'main' %}
 
   </body>
