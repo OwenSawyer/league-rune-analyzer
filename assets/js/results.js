@@ -118,13 +118,17 @@ var MatchResponse = {
   'assists': 10, 
   'spell1': 39, 
   'spell2': 4, 
-  'runes': {'primary': {'id': 8200, 'runes': [8229, 8224, 8210, 8237]}, 'secondary': {'id': 8300, 'runes': [8410, 8313]}, 
+  'runes': {'primary': {'id': 8200, 'runes': [8229, 8224, 8210, 8237]}, 'secondary': {'id': 8300, 'runes': [8410, 8313]},
   'championTags': ['Mage'], 
   'championAttributes': {'attack': 3, 'defense': 0, 'toughness': 2, 'mobility': 2, 'utility': 0}}};
 
+var OptimalRunes = {
+  'primary': {'id': 8200, 'runes': [8229, 8224, 8210, 8237]}, 'secondary': {'id': 8300, 'runes': [8410, 8313]}
+} 
+
 var MatchPanel = React.createClass({
 
-    selectPlayerTree : function(treeid){
+    selectTree : function(treeid){
       if(treeid == 8000){
         return Precision;
       }
@@ -143,8 +147,11 @@ var MatchPanel = React.createClass({
     },
 
     render: function () {
-        var PlayerPrimaryTree = this.selectPlayerTree(MatchResponse.runes.primary.id);
-        var PlayerSecondaryTree = this.selectPlayerTree(MatchResponse.runes.secondary.id);
+        var PlayerPrimaryTree = this.selectTree(MatchResponse.runes.primary.id);
+        var PlayerSecondaryTree = this.selectTree(MatchResponse.runes.secondary.id);
+
+        var OptimalPrimaryTree = this.selectTree(OptimalRunes.primary.id);
+        var OptimalSecondaryTree = this.selectTree(OptimalRunes.secondary.id);
 
         return (
             <div className="row profile match-panel table-responsive">
@@ -185,65 +192,11 @@ var MatchPanel = React.createClass({
               </div>
 
             <div className="col-md-2">
-              <table className="rune-panel optimal-runes text-center">
-                  <thead className="tree-icon text-center">
-                      <th></th>
-                      <th><img src={require('../img/perkStyle/8100.png')} /></th>
-                  </thead>
-                  <tbody>
-                    <tr className="keystones">
-                      <td className="active-keystone"><img src={require('../img/perk/8112.png')} /></td>
-                      <td><img src={require('../img/perk/8124.png')} /></td>
-                      <td><img src={require('../img/perk/8128.png')} /></td>
-                    </tr>
-                    <tr className="rune-row">
-                      <td><img src={require('../img/perk/8126.png')} /></td>
-                      <td className="active-rune"><img src={require('../img/perk/8139.png')} /></td>
-                      <td><img src={require('../img/perk/8143.png')} /></td>
-                    </tr>
-                    <tr className="rune-row">
-                      <td><img src={require('../img/perk/8136.png')} /></td>
-                      <td><img src={require('../img/perk/8120.png')} /></td>
-                      <td className="active-rune"><img src={require('../img/perk/8138.png')} /></td>
-                    </tr>
-                    <tr className="rune-row">
-                      <td><img src={require('../img/perk/8135.png')} /></td>
-                      <td><img src={require('../img/perk/8134.png')} /></td>
-                      <td className="active-rune"><img src={require('../img/perk/8105.png')} /></td>
-                    </tr>
-                  </tbody>
-              </table>
+              <RunePanel runetype="optimal-runes" runes={OptimalPrimaryTree} chosen={OptimalRunes.primary.runes}/>
             </div>
 
             <div className="col-md-2">
-              <table className="rune-panel optimal-runes text-center secondary-tree">
-                  <thead className="tree-icon text-center">
-                      <th></th>
-                      <th><img src={require('../img/perkStyle/8100.png')} /></th>
-                  </thead>
-                  <tbody>
-                    <tr className="keystones">
-                      <td className="active-keystone"><img src={require('../img/perk/8112.png')} /></td>
-                      <td><img src={require('../img/perk/8124.png')} /></td>
-                      <td><img src={require('../img/perk/8128.png')} /></td>
-                    </tr>
-                    <tr className="rune-row">
-                      <td><img src={require('../img/perk/8126.png')} /></td>
-                      <td className="active-rune"><img src={require('../img/perk/8139.png')} /></td>
-                      <td><img src={require('../img/perk/8143.png')} /></td>
-                    </tr>
-                    <tr className="rune-row">
-                      <td><img src={require('../img/perk/8136.png')} /></td>
-                      <td><img src={require('../img/perk/8120.png')} /></td>
-                      <td className="active-rune"><img src={require('../img/perk/8138.png')} /></td>
-                    </tr>
-                    <tr className="rune-row">
-                      <td><img src={require('../img/perk/8135.png')}/></td>
-                      <td><img src={require('../img/perk/8134.png')}/></td>
-                      <td className="active-rune"><img src={require('../img/perk/8105.png')}/></td>
-                    </tr>
-                  </tbody>
-              </table>
+              <RunePanel runetype="optimal-runes secondary-tree" runes={OptimalSecondaryTree} chosen={OptimalRunes.secondary.runes}/>
             </div>
 
             </div>
