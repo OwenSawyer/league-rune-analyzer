@@ -106,7 +106,10 @@ header.masthead {
   margin:auto;
 }
 
-
+.rune-panel h2 { 
+  vertical-align: middle;
+  padding-top: 60%;
+}
 
 .tree-icon thead thead img {
   height: 60px;

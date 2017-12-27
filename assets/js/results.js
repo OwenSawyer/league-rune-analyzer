@@ -62,6 +62,14 @@ function getAllUrlParams(url) {
   return obj;
 };
 
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
+
 const SummonerName = getAllUrlParams().name;
 const AccountID = getAllUrlParams().accountId;
 const Region = getAllUrlParams().region;
@@ -104,10 +112,6 @@ const Resolve = {
   "r1" : [8242, 8446, 8463],
   "r2" : [8430, 8435, 8429],
   "r3" : [8451, 8453, 8444]
-};
-
-var OptimalRunes = {
-  'primary': {'id': 8200, 'runes': [8229, 8224, 8210, 8237]}, 'secondary': {'id': 8300, 'runes': [8410, 8313]}
 };
 
 var MatchHistory = React.createClass({
@@ -224,11 +228,42 @@ var MatchPanel = React.createClass({
             }
         })
         console.log(MatchResponse);
+        var OptimalRunes;
+        $.ajax({
+            url: '/api/rune/opt/',
+            type: 'post',
+            async: false,
+            data: {
+                "champion" : MatchResponse.championName,
+                "role" : MatchResponse.lane.toLowerCase(),
+            },
+            success : function(response){
+              console.log(response);
+              OptimalRunes = response;
+            },
+            error : function(response){
+              OptimalRunes = response;
+            }
+        })
         var PlayerPrimaryTree = this.selectTree(MatchResponse.runes.primary.id);
         var PlayerSecondaryTree = this.selectTree(MatchResponse.runes.secondary.id);
 
-        var OptimalPrimaryTree = this.selectTree(OptimalRunes.primary.id);
-        var OptimalSecondaryTree = this.selectTree(OptimalRunes.secondary.id);
+        var OptimalPrimaryTreePanel;
+        var OptimalSecondaryTreePanel;
+        console.log(OptimalRunes);
+        if(!isEmpty(OptimalRunes)){
+          console.log("inner optimal rune");
+          console.log(OptimalRunes);
+          var OptimalPrimaryTree = this.selectTree(OptimalRunes.primary.id);
+          OptimalPrimaryTreePanel = (<RunePanel runetype="optimal-runes" runes={OptimalPrimaryTree} chosen={OptimalRunes.primary.runes}/>);
+
+          var OptimalSecondaryTree = this.selectTree(OptimalRunes.secondary.id);
+          OptimalSecondaryTreePanel = (<RunePanel runetype="optimal-runes secondary-tree" runes={OptimalSecondaryTree} chosen={OptimalRunes.secondary.runes}/>);
+        }
+        else{
+          OptimalPrimaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available</h2></div>);
+          OptimalSecondaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available</h2></div>);
+        }
 
         return (
             <div className="row profile match-panel table-responsive">
@@ -247,11 +282,11 @@ var MatchPanel = React.createClass({
               </div>
 
             <div className="col-md-2">
-              <RunePanel runetype="optimal-runes" runes={OptimalPrimaryTree} chosen={OptimalRunes.primary.runes}/>
+              {OptimalPrimaryTreePanel}
             </div>
 
             <div className="col-md-2">
-              <RunePanel runetype="optimal-runes secondary-tree" runes={OptimalSecondaryTree} chosen={OptimalRunes.secondary.runes}/>
+              {OptimalSecondaryTreePanel}
             </div>
 
             </div>
