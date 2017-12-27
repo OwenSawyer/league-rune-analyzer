@@ -1,6 +1,8 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
 
+var RuneInfo = require('./runeInfo.js')
+
 // TODO: Create Match History Object
 
 var MatchPanel = React.createClass({
@@ -101,29 +103,7 @@ var MatchPanel = React.createClass({
               </div>
 
               <div className="col-md-4">
-                <table className="rune-panel rune-description">
-                    <thead>
-                        <th className="chosen-rune"><img src={require('../img/perk/8112.png')} /></th>
-                    </thead>
-                    <tbody>
-                    <tr className="chosen-rune-name">
-                        <td>
-                            Electrocute
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p className="optimal-roles-title">Optimal roles:</p> 
-                            <p className="optimal-roles">Assassin, Mage </p>
-                        </td>
-                    </tr>
-                    <tr className="rune-description-text">
-                        <td>
-                            Hello I am a rune description, I will go here
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <RuneInfo />
               </div>
 
             <div className="col-md-2">

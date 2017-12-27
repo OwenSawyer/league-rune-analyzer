@@ -5,9 +5,7 @@ import os
 from api.aggregate import scrape
 import json
 
-from drf_react.settings import JSON_FOLDER, BASE_DIR
-
-my_path = os.path.abspath(os.path.dirname(__file__))
+from drf_react.settings import JSON_FOLDER
 
 def rune_number_to_name(number):
     table = scrape.get_rune_dict()
