@@ -25,7 +25,7 @@ def rune_class_type(name):
     return -1
 
 def get_popular_runes_for_champ(champ, role):
-    runes_json = dict(json.loads(open(JSON_FOLDER + 'champ_role_popular_runes.json').read()))[champ.title()][role]
+    runes_json = dict(json.loads(open(JSON_FOLDER + 'champ_role_popular_runes.json').read()))[champ][role]
     if not runes_json:
         return {}
     id_mappings = [rune_name_to_number(i) for i in runes_json]
@@ -125,7 +125,7 @@ def get_rune_info(runeId):
     return rune_info
 
 if __name__=='__main__':
-    print(get_rune_info('8224'))
+    print(get_rune_info('8014'))
     # print(scrape.champ_tag_lookup())
     # print(rune_number_to_name(8124))
     # print(rune_name_to_number("Predator"))

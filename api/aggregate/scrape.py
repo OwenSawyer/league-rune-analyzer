@@ -158,6 +158,8 @@ def scrape_champ_info():
         champ_info = {}
         cols = row.findAll("td")
         name = cols[0].findAll("a")[1].getText()
+        if name == 'Wukong':
+            name = 'MonkeyKing'
 
         champ_info['primary'] = cols[1].findAll("a")[1].getText()
         if cols[2].find("span"):
@@ -183,12 +185,12 @@ def scrape_champ_info():
 
 
 if __name__=='__main__':
-    #scrape_champ_info()
+    scrape_champ_info()
     #scrape_champion_images()
     #scrape_summoner_images()
     #print(get_champion_names())
     #start = time.time()
     #print(get_runes())
-    aggregate_top_runes_for_champ_role_pair()
+    #aggregate_top_runes_for_champ_role_pair()
     #end = time.time()
     #print(end - start)
