@@ -25,7 +25,6 @@ def rune_class_type(name):
     return -1
 
 def get_popular_runes_for_champ(champ, role):
-    print(champ)
     runes_json = dict(json.loads(open(JSON_FOLDER + 'champ_role_popular_runes.json').read()))[champ][role]
     if not runes_json:
         return {}
@@ -116,7 +115,6 @@ def get_rune_info(runeId):
     champ_attributes = []
     champ_json = dict(json.loads(open(JSON_FOLDER + 'champion_info.json').read()))
     for champ in dict(json.loads(open(JSON_FOLDER + 'runes_with_champs.json').read()))[rune_info['name']]:
-        print(champ)
         champ_attributes.append(
             next(v['attributes'] for (k,v) in champ_json.items() if k.lower() == champ.lower()))
     sums = Counter()
