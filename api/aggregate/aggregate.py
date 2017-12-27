@@ -39,7 +39,13 @@ def serialize_match(accountId, matchJson):
     champion_json = dict(json.loads(open(JSON_FOLDER + 'champions.json').read())['data'])
     champions = [(val['key'], val['id']) for val in champion_json.values()]
     serialized['championName'] = next(i for i in champions if i[1] == serialized['champion'])[0]
-    serialized['lane'] = playerInfo['timeline']['lane']
+    if playerInfo['timeline']['lane'] == 'BOTTOM':
+        if playerInfo['timeline']['role'] == 'DUO_CARRY':
+            serialized['lane'] = 'BOTTOM'
+        else:
+            serialized['lane'] = 'SUPPORT'
+    else:
+        serialized['lane'] = playerInfo['timeline']['lane']
     serialized['gameDate'] = datetime.fromtimestamp(matchJson['gameCreation']/1000).strftime("%d/%m/%y")
     serialized['gameDuration'] = str(timedelta(seconds=matchJson['gameDuration']))
     serialized['gameMode'] = matchJson['gameMode'].title()
@@ -82,7 +88,7 @@ if __name__=='__main__':
     #print(get_champions())
     #print(get_summoner('na1', 'chow dog'))
     #print(get_matchlist('na1', '226913554'))
-    print(serialize_match('210164502', get_match('na1', '2675889004')))
+    print(serialize_match('210164502', get_match('na1', '2680232430')))
     #print(get_match('na1', '2674267941'))
     #start = time.time()
     #print(get_summoner('na1', 'owen3times'))

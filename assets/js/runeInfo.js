@@ -1,22 +1,26 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
 
-var data2 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+var barBase = {
+  labels: ['Tank', 'Support', 'Mage', 'Fighter', 'Assassin', 'Marksman'],
   datasets: [
     {
-      label: 'My First dataset',
+      label: 'Role Distribution',
       backgroundColor: 'rgba(255,99,132,0.2)',
       borderColor: 'rgba(255,99,132,1)',
       borderWidth: 1,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [65, 59, 80, 81, 56, 55, 40]
+      scaleOverride:true,
+      scaleSteps:1,
+      scaleStartValue:0,
+      scaleStepWidth:1,
+      data: []
     }
   ]
 };
 
-var data3 = {
+var radarBase = {
   labels: ['Attack', 'Defense', 'Toughness', 'Mobility', 'Utility'],
   datasets: [
     {
@@ -27,7 +31,11 @@ var data3 = {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(179,181,198,1)',
-      data: [2, 3, 2, 2, 0]
+      scaleOverride:true,
+      scaleSteps:3,
+      scaleStartValue:0,
+      scaleStepWidth:1,
+      data: []
     },
     {
       label: 'Champion Stats',
@@ -37,13 +45,17 @@ var data3 = {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(255,99,132,1)',
-      data: [1, 2, 1.5, 1, 1]
+      scaleOverride:true,
+      scaleSteps:3,
+      scaleStartValue:0,
+      scaleStepWidth:1,
+      data: []
     }
   ]
 };
 
-var BooksList = require('./chartjs').HorizontalBar
-var Radarz = require('./chartjs').Radar
+var BarGraph = require('./chartjs').HorizontalBar
+var RadarGraph = require('./chartjs').Radar
 
 //
 // var Child = React.createClass({
@@ -77,43 +89,99 @@ var Radarz = require('./chartjs').Radar
 //   }
 // });
 
+var sample = {
+   "id":8229,
+   "name":"Arcane Comet",
+   "desc":"Damaging a champion with an ability hurls a damaging comet at their location.",
+   "roles":{
+      "Marksman":"0.127",
+      "Mage":"0.404",
+      "Assassin":"0.085",
+      "Fighter":"0.127",
+      "Support":"0.170",
+      "Tank":"0.085"
+   },
+   "attributes":{
+      "attack":"2.75",
+      "defense":"0.785",
+      "toughness":"2.214",
+      "mobility":"0.857",
+      "utility":"0.75"
+   }
+}
+
 var RuneInfo = React.createClass({
+    getBarData(data){
+        return [
+            data["Tank"], data["Support"],data["Mage"], data["Fighter"],data["Assassin"], data["Marksman"]
+        ]
+    },
+    getRadarData(data){
+        return [
+            data["attack"], data["defense"],data["toughness"], data["mobility"],data["utility"]
+        ]
+    },
+    setStateResponse(response){
+        var barBaseCopy = Object.assign({}, barBase);
+        barBaseCopy['datasets'][0]['data'] = this.getBarData(response.roles).map(Number)
+
+        var radarBaseCopy = Object.assign({}, radarBase);
+        radarBaseCopy['datasets'][0]['data'] = this.getRadarData(response.attributes).map(Number)
+        radarBaseCopy['datasets'][1]['data'] = [0,0,0,0,0]
+
+        this.setState({
+            data : response,
+            barData : barBaseCopy,
+            radarData : radarBaseCopy
+        });
+    },
    componentWillReceiveProps(nextProps) {
-    //api calls to refresh
-  },
-  _makeApiCall(endpoint) {
-    fetch(endpoint)
-    	.then((response) => response.json())
-      .then((response) => this.setState({ response }));
+        if(this.props != nextProps && nextProps != -1) {
+            fetch('/api/rune/info/', {
+                    method: 'post',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify(nextProps)})
+                .then((response) => response.json())
+                .then((response) => this.setStateResponse(response));
+        }
+
   },
   render() {
-    return(
+    var ret = <div></div>
+
+    if (this.state) {
+        ret = (
         <div>
             <div className="row">
                 <div className="col-sm-8">
-                    <h2>aaaaaaaa</h2>
-                    <p><strong>Description</strong></p>
+                    <h2>{this.state.data.name}</h2>
+                    <p><strong>{this.state.data.desc}</strong></p>
                 </div>
                 <div className="col-sm-4">
-                        <img src="https://i.pinimg.com/originals/a9/ff/b2/a9ffb2e901c09caf4837542e72719e41.jpg"
-                             alt="" className="img-circle img-responsive rune-img"/>
+                        <img src={require(`../img/perk/${this.state.data.id}.png`)}
+                          alt="" className="img-circle img-responsive rune-img"/>
                 </div>
             </div>
             <div className="row">
                 <div className="col-sm-8">
-                  <Radarz data={data3}/>
+                  <RadarGraph data={this.state.radarData}/>
                 </div>
                 <div className="col-sm-4">
                    idk something here
                 </div>
             </div>
             <div className="row">
-                <BooksList data={data2}/>
+                <BarGraph data={this.state.barData}/>
             </div>
         </div>
         )
+    }
+    return ret
   }
 })
+
+RuneInfo.defaultProps = {
+};
 
 module.exports = RuneInfo;
 

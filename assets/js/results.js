@@ -7,59 +7,40 @@ var RuneInfo = require('./runeInfo.js')
 
 function getAllUrlParams(url) {
 
-  // get query string from url (optional) or window
   var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
 
-  // we'll store the parameters here
   var obj = {};
 
-  // if query string exists
   if (queryString) {
-
-    // stuff after # is not part of query string, so get rid of it
-    queryString = queryString.split('#')[0];
-
-    // split our query string into its component parts
-    var arr = queryString.split('&');
+      queryString = queryString.split('#')[0];
+      var arr = queryString.split('&');
 
     for (var i=0; i<arr.length; i++) {
-      // separate the keys and the values
       var a = arr[i].split('=');
-
-      // in case params look like: list[]=thing1&list[]=thing2
       var paramNum = undefined;
       var paramName = a[0].replace(/\[\d*\]/, function(v) {
         paramNum = v.slice(1,-1);
         return '';
       });
 
-      // set parameter value (use 'true' if empty)
       var paramValue = typeof(a[1])==='undefined' ? true : a[1];
 
-      // if parameter name already exists
       if (obj[paramName]) {
-        // convert value to array (if still string)
         if (typeof obj[paramName] === 'string') {
           obj[paramName] = [obj[paramName]];
         }
-        // if no array index number specified...
         if (typeof paramNum === 'undefined') {
-          // put the value on the end of the array
           obj[paramName].push(paramValue);
         }
-        // if array index number specified...
         else {
-          // put the value at that index number
           obj[paramName][paramNum] = paramValue;
         }
       }
-      // if param name doesn't exist yet, set it
       else {
         obj[paramName] = paramValue;
       }
     }
   }
-
   return obj;
 }
 
@@ -125,6 +106,16 @@ var MatchResponse = {
   'championAttributes': {'attack': 3, 'defense': 0, 'toughness': 2, 'mobility': 2, 'utility': 0}}};
 
 var MatchPanel = React.createClass({
+    getInitialState: function() {
+        this.state = {}
+        this.state.rune = -1
+        return this.state
+    },
+    handler(runeId) {
+        this.setState({
+          rune: runeId
+        })
+    },
 
     selectPlayerTree : function(treeid){
       if(treeid == 8000){
@@ -153,15 +144,15 @@ var MatchPanel = React.createClass({
               <MatchResults match={MatchResponse}/>
               <div className="row">
                 <div className="col-md-2">
-                  <RunePanel runetype="player-runes" runes={PlayerPrimaryTree} chosen={MatchResponse.runes.primary.runes}/>
+                  <RunePanel handler={this.handler} runetype="player-runes" runes={PlayerPrimaryTree} chosen={MatchResponse.runes.primary.runes}/>
               </div>
 
               <div className="col-md-2">
-                <RunePanel runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={MatchResponse.runes.secondary.runes}/>
+                <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={MatchResponse.runes.secondary.runes}/>
               </div>
 
               <div className="col-md-4">
-                <RuneInfo />
+                <RuneInfo rune={this.state.rune}/>
               </div>
 
             <div className="col-md-2">
@@ -232,52 +223,11 @@ var MatchPanel = React.createClass({
     }
 });
 
-var MatchResults = React.createClass({
-  render: function() {
-    var WinClass;
-
-    if(this.props.match.win){
-      WinClass = "row profile-sidebar victory";
-    }
-    else{
-      WinClass = "row profile-sidebar defeat";
-    }
-
-    return (
-      <div className={WinClass}>
-        <div className="text-center col-md-2 profile-usertitle-time">
-          {this.props.match.gameDate}
-        </div>
-        <div className="profile-userpic col-md-2">
-          <img src={require(`../img/champion/${this.props.match.champion}.png`)} className="img-responsive" alt="" />
-        </div>
-        <div className="col-md-3 profile-usertitle">
-            <div className="profile-usertitle-name">
-                {this.props.match.championName}
-              </div>
-              <div className="profile-usertitle-job">
-                {this.props.match.lane}
-              </div>
-              <div className="profile-usertitle-kda">
-                {this.props.match.kills}/{this.props.match.deaths}/{this.props.match.assists}
-              </div>
-        </div>
-        <div className="profile-summ-spells col-md-2">
-          <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell1}.png`)} alt="" />
-          <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell2}.png`)} alt="" />
-        </div>
-        <div className="rune-rating col-md-3">
-          Hi! I am Radar
-        </div>
-      </div>
-    )
-  }
-})
-
 var RunePanel = React.createClass({
 
   handleChildClick: function(childData,event) {
-         this.setState({data: childData.childText});
+      this.props.handler(childData);
+      this.setState({data: childData});
   },
 
   isSecondary : function() {
@@ -333,7 +283,6 @@ var Rune = React.createClass({
     console.log(this.props.runeId);
     console.log(this.props.chosen.includes(this.props.runeId));
     if(this.props.chosen.includes(this.props.runeId)){
-
       return "active-rune";
     }
     else{
@@ -343,6 +292,48 @@ var Rune = React.createClass({
   render: function() {
     var ActiveRune = this.getRuneActive();
     return (<td className={ActiveRune}><img id={this.props.runeid} onClick={this.props.onClick} src={require(`../img/perk/${this.props.runeId}.png`)} /></td>);
+  }
+})
+
+var MatchResults = React.createClass({
+  render: function() {
+    var WinClass;
+
+    if(this.props.match.win){
+      WinClass = "row profile-sidebar victory";
+    }
+    else{
+      WinClass = "row profile-sidebar defeat";
+    }
+
+    return (
+      <div className={WinClass}>
+        <div className="text-center col-md-2 profile-usertitle-time">
+          {this.props.match.gameDate}
+        </div>
+        <div className="profile-userpic col-md-2">
+          <img src={require(`../img/champion/${this.props.match.champion}.png`)} className="img-responsive" alt="" />
+        </div>
+        <div className="col-md-3 profile-usertitle">
+            <div className="profile-usertitle-name">
+                {this.props.match.championName}
+              </div>
+              <div className="profile-usertitle-job">
+                {this.props.match.lane}
+              </div>
+              <div className="profile-usertitle-kda">
+                {this.props.match.kills}/{this.props.match.deaths}/{this.props.match.assists}
+              </div>
+        </div>
+        <div className="profile-summ-spells col-md-2">
+          <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell1}.png`)} alt="" />
+          <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell2}.png`)} alt="" />
+        </div>
+        <div className="rune-rating col-md-3">
+          Hi! I am Radar
+        </div>
+      </div>
+    )
   }
 })
 
