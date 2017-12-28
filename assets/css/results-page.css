@@ -111,7 +111,7 @@ header.masthead {
   color: rgba(255, 255, 255, 0.7);
   font-size: 12px;
   font-weight: 600;
-  margin:auto;
+  display: table;
 }
 
 .rune-panel h2 { 
@@ -123,13 +123,14 @@ header.masthead {
   display: none;
 }
 
-.tree-icon thead thead img {
-  height: 60px;
+.tree-icon img {
+  height: 70px;
+  width: 70px;
   vertical-align: middle;
 }
 
 .keystones td img {
-  height: 70px;
+  height: 60px;
   opacity: 0.3;
   cursor: pointer;
 }
@@ -144,7 +145,7 @@ header.masthead {
 }
 
 .rune-row td img {
-  height: 50px;
+  height: 60px;
   margin: 5px;
   opacity: 0.3;
   cursor: pointer;
