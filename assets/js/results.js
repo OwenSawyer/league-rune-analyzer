@@ -404,9 +404,9 @@ var MatchResults = React.createClass({
 
     return (
         <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-4 rune-rating">
                 <div className="profile-usertitle-name">Rune Rating: </div>
-                <Gauge value={this.props.match.runes.rating} width={200} height={120} label="" color={color} valueLabelStyle={ValueStyle}/>
+                <Gauge value={this.props.match.runes.rating} width={200} height={100} label="" color={color} valueLabelStyle={ValueStyle} minMaxLabelStyle={{display: 'none'}}/>
             </div>
             <div className="col-md-8">
                 <div className={WinClass}>

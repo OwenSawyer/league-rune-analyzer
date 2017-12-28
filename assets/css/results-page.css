@@ -274,14 +274,7 @@ header.masthead {
   border-radius: 25px;
 }
 
-.rune-rating {
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 20px;
-  font-weight: 600;
-  margin-top: 50px;
-}
-    
+
 .profile-usermenu {
   margin-top: 30px;
 }
@@ -368,6 +361,8 @@ footer.footer {
   height: 100px;
   width: 200px;
   padding-bottom: 30px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
 }
 
 .slick-dots {
