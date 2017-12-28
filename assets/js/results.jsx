@@ -255,10 +255,10 @@ var MatchPanel = React.createClass({
               console.log("inner optimal rune");
               console.log(this.state.OptimalRunes);
               var OptimalPrimaryTree = this.selectTree(this.state.OptimalRunes.primary.id);
-              OptimalPrimaryTreePanel = (<RunePanel runetype="optimal-runes" runes={OptimalPrimaryTree} chosen={this.state.OptimalRunes.primary.runes}/>);
+              OptimalPrimaryTreePanel = (<RunePanel handler={this.handler} runetype="optimal-runes" runes={OptimalPrimaryTree} chosen={this.state.OptimalRunes.primary.runes}/>);
 
               var OptimalSecondaryTree = this.selectTree(this.state.OptimalRunes.secondary.id);
-              OptimalSecondaryTreePanel = (<RunePanel runetype="optimal-runes secondary-tree" runes={OptimalSecondaryTree} chosen={this.state.OptimalRunes.secondary.runes}/>);
+              OptimalSecondaryTreePanel = (<RunePanel handler={this.handler} runetype="optimal-runes secondary-tree" runes={OptimalSecondaryTree} chosen={this.state.OptimalRunes.secondary.runes}/>);
             }
             else{
               OptimalPrimaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available</h2></div>);
