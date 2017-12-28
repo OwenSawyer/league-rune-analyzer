@@ -102,6 +102,7 @@ def get_rune_info(runeId):
                     rune_info['id'] = rune['id']
                     rune_info['name'] = rune['name']
                     rune_info['desc'] = rune['shortDesc']
+                    rune_info['category'] = category['id']
                     break
 
     all_roles = ['Tank','Fighter','Mage','Assassin','Marksman','Support']

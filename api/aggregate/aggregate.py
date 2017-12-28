@@ -71,9 +71,9 @@ def serialize_match(accountId, matchJson):
         playerInfo['stats']['perk5']
     ]
     rune_info['rating'] = rune.get_rune_page_rating_for_champ(rune_info, serialized['championName'], serialized['lane'].lower())
-    rune_info['championTags'] =  next(v['tags'] for (k,v) in dict(json.loads(open(JSON_FOLDER + 'champions.json').read())['data']).items()
+    serialized['championTags'] =  next(v['tags'] for (k,v) in dict(json.loads(open(JSON_FOLDER + 'champions.json').read())['data']).items()
                                       if k == serialized['championName'])
-    rune_info['championAttributes'] = next(v['attributes'] for (k,v) in dict(json.loads(open(JSON_FOLDER + 'champion_info.json').read())).items()
+    serialized['championAttributes'] = next(v['attributes'] for (k,v) in dict(json.loads(open(JSON_FOLDER + 'champion_info.json').read())).items()
                                       if k == serialized['championName'])
 
     serialized['runes'] = rune_info

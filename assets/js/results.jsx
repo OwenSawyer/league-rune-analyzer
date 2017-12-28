@@ -239,7 +239,6 @@ var MatchPanel = React.createClass({
         this.forceUpdate()
     },
 
-
     render: function () {
 
         var ret = <div></div>
@@ -278,7 +277,7 @@ var MatchPanel = React.createClass({
                       </div>
 
                       <div className="col-md-4">
-                        <RuneInfo rune={this.state.rune}/>
+                        <RuneInfo rune={this.state.rune} championAttributes={this.state.MatchResponse.championAttributes}/>
                       </div>
 
                     <div className="col-md-2">
