@@ -35,7 +35,13 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.12",
+<<<<<<< HEAD
+    "webpack-bundle-tracker": "0.0.93"
+=======
     "webpack-bundle-tracker": "0.0.93",
+    "react-chartjs-2": "2.6.4",
+    "chart.js": "2.7.1",
     "react-slick": "^0.15.0"
+>>>>>>> master
   }
 }

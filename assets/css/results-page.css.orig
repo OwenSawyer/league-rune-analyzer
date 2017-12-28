@@ -262,7 +262,6 @@ header.masthead {
 .profile-summ-spells {
   text-align: center;
   margin-top: 24px;
-  display: inherit;
 }
 
 .profile-summ-spells .spell {
@@ -353,6 +352,13 @@ footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem; }
 
+<<<<<<< HEAD
+  .rune-rating {
+    height: 100px;
+    width: 200px;
+    padding-bottom: 30px;
+  }
+=======
 .rune-img{
     max-height: 100%;
     max-width: 100%;
@@ -362,9 +368,4 @@ footer.footer {
 .slick-next:before {
   color: black;
 }
-
-  .rune-rating {
-    height: 100px;
-    width: 200px;
-    padding-bottom: 30px;
-  }
+>>>>>>> master
