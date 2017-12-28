@@ -261,8 +261,8 @@ var MatchPanel = React.createClass({
               OptimalSecondaryTreePanel = (<RunePanel handler={this.handler} runetype="optimal-runes secondary-tree" runes={OptimalSecondaryTree} chosen={this.state.OptimalRunes.secondary.runes}/>);
             }
             else{
-              OptimalPrimaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available</h2></div>);
-              OptimalSecondaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available</h2></div>);
+              OptimalPrimaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available in this role</h2></div>);
+              OptimalSecondaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available in this role</h2></div>);
             }
 
             ret = (
