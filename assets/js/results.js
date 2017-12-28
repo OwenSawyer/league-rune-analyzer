@@ -2,6 +2,7 @@ var React = require('react')
 var ReactDOM = require('react-dom')
 
 var RuneInfo = require('./runeInfo.js')
+ import './GaugeSet.js'
 
 // TODO: Create Match History Object
 function getAllUrlParams(url) {
@@ -267,7 +268,7 @@ var MatchPanel = React.createClass({
 
         return (
             <div className="row profile match-panel table-responsive">
-              <MatchResults match={MatchResponse}/>
+              <MatchResults rating={MatchResponse.runes.rating} matchId={this.props.matchId} match={MatchResponse}/>
               <div className="row">
                 <div className="col-md-2">
                   <RunePanel handler={this.handler} runetype="player-runes" runes={PlayerPrimaryTree} chosen={MatchResponse.runes.primary.runes}/>
@@ -365,10 +366,13 @@ var Rune = React.createClass({
 })
 
 var MatchResults = React.createClass({
-  
+
+  componentDidMount: function() {
+     setGaugeMeter(this.props.matchId);
+  },
+
   render: function() {
     var WinClass;
-
     if(this.props.match.win == "true"){
       WinClass = "row profile-sidebar victory";
     }
@@ -399,9 +403,8 @@ var MatchResults = React.createClass({
           <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell1}.png`)} alt="" />
           <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell2}.png`)} alt="" />
         </div>
-        <div className="rune-rating col-md-3">
-          Hi! I am Radar
-        </div>
+        <div className="rune-rating col-md-3 GaugeMeter"></div>
+          <canvas id={"gauge_meter_" + this.props.matchId}></canvas>
       </div>
     )
   }
