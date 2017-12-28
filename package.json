@@ -32,6 +32,7 @@
     "webpack": "^1.12.12",
     "webpack-bundle-tracker": "0.0.93",
     "react-chartjs-2": "2.6.4",
-    "chart.js": "2.7.1"
+    "chart.js": "2.7.1",
+    "react-slick": "^0.15.0"
   }
 }

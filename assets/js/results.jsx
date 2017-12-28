@@ -1,5 +1,6 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
+import Slider from 'react-slick';
 
 var RuneInfo = require('./runeInfo.js')
 
@@ -142,32 +143,26 @@ var MatchHistory = React.createClass({
   },
 
   render : function(){
-    var Indicators = this.state.data.map(function(Match, i) {
-        return (<li key={i} data-target="#carouselExampleIndicators" data-slide-to={i} className={(i == 0 ? 'active' : '')}></li>);
-    });
+    var sliderSettings = {
+      dots: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      lazyLoad: true
+    };
 
     var that = this;
+    // var MatchPanels = this.state.data.map(function(Match, i) {
+    //   return <MatchPanel matchId={that.state.data[i].gameId} />;
+    // });
+
     var MatchPanels = this.state.data.map(function(Match, i) {
-      return (<div key={i} className={"carousel-item " + (i == 0 ? 'active' : '')}><MatchPanel matchId={that.state.data[i].gameId} /></div>);
+        return (<div><MatchPanel matchId={that.state.data[i].gameId} /></div>);
     });
-
     return (
-      <div id="carouselExampleIndicators" className="carousel carousel-panel slide text-center" data-ride="carousel">
-          <ol className="carousel-indicators">
-            {Indicators}
-          </ol>
-
-          <div id="carouselInner" className="carousel-inner" role="listbox">
+        <div>
+          <Slider {...sliderSettings}>
             {MatchPanels}
-          </div>
-          <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="sr-only">Previous</span>
-          </a>
-          <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="sr-only">Next</span>
-          </a>
+          </Slider>
         </div>
     )
   }
@@ -177,6 +172,9 @@ var MatchHistory = React.createClass({
 var MatchPanel = React.createClass({
     getInitialState: function() {
         this.state = {}
+        this.state.OptimalRunes = null
+        this.state.MatchResponse = null
+
         this.state.rune = -1
         return this.state
     },
@@ -204,94 +202,98 @@ var MatchPanel = React.createClass({
       }
     },
 
-    getMatchResponse : function(){
-      
-    },
+    componentDidMount: function() {
 
-    render: function () {
-        var MatchResponse;
+        var that = this;
         $.ajax({
             url: '/api/match/',
             type: 'post',
             async: false,
             data: {
                 'region' : Region,
-                'matchId' : this.props.matchId,
+                'matchId' : that.props.matchId,
                 'accountId' : AccountID
             },
             success : function(response){
-              console.log(response);
-              MatchResponse = response;
+              that.state.MatchResponse = response;
             },
             error : function(response){
-              MatchResponse = response;
             }
         })
-        console.log(MatchResponse);
-        var OptimalRunes;
+
         $.ajax({
             url: '/api/rune/opt/',
             type: 'post',
             async: false,
             data: {
-                "champion" : MatchResponse.championName,
-                "role" : MatchResponse.lane.toLowerCase(),
+                "champion" : that.state.MatchResponse.championName,
+                "role" : that.state.MatchResponse.lane.toLowerCase(),
             },
             success : function(response){
-              console.log(response);
-              OptimalRunes = response;
+              that.state.OptimalRunes = response;
             },
             error : function(response){
-              OptimalRunes = response;
             }
         })
-        var PlayerPrimaryTree = this.selectTree(MatchResponse.runes.primary.id);
-        var PlayerSecondaryTree = this.selectTree(MatchResponse.runes.secondary.id);
 
-        var OptimalPrimaryTreePanel;
-        var OptimalSecondaryTreePanel;
-        console.log(OptimalRunes);
-        if(!isEmpty(OptimalRunes)){
-          console.log("inner optimal rune");
-          console.log(OptimalRunes);
-          var OptimalPrimaryTree = this.selectTree(OptimalRunes.primary.id);
-          OptimalPrimaryTreePanel = (<RunePanel runetype="optimal-runes" runes={OptimalPrimaryTree} chosen={OptimalRunes.primary.runes}/>);
+        this.forceUpdate()
+    },
 
-          var OptimalSecondaryTree = this.selectTree(OptimalRunes.secondary.id);
-          OptimalSecondaryTreePanel = (<RunePanel runetype="optimal-runes secondary-tree" runes={OptimalSecondaryTree} chosen={OptimalRunes.secondary.runes}/>);
+
+    render: function () {
+
+        var ret = <div></div>
+
+        if (this.state.MatchResponse && this.state.OptimalRunes) {
+            var PlayerPrimaryTree = this.selectTree(this.state.MatchResponse.runes.primary.id);
+            var PlayerSecondaryTree = this.selectTree(this.state.MatchResponse.runes.secondary.id);
+
+            var OptimalPrimaryTreePanel;
+            var OptimalSecondaryTreePanel;
+            console.log(this.state.OptimalRunes);
+            if(!isEmpty(this.state.OptimalRunes)){
+              console.log("inner optimal rune");
+              console.log(this.state.OptimalRunes);
+              var OptimalPrimaryTree = this.selectTree(this.state.OptimalRunes.primary.id);
+              OptimalPrimaryTreePanel = (<RunePanel runetype="optimal-runes" runes={OptimalPrimaryTree} chosen={this.state.OptimalRunes.primary.runes}/>);
+
+              var OptimalSecondaryTree = this.selectTree(this.state.OptimalRunes.secondary.id);
+              OptimalSecondaryTreePanel = (<RunePanel runetype="optimal-runes secondary-tree" runes={OptimalSecondaryTree} chosen={this.state.OptimalRunes.secondary.runes}/>);
+            }
+            else{
+              OptimalPrimaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available</h2></div>);
+              OptimalSecondaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available</h2></div>);
+            }
+
+            ret = (
+                <div className="row profile match-panel table-responsive">
+                  <MatchResults match={this.state.MatchResponse}/>
+                  <div className="row">
+                    <div className="col-md-2">
+                      <RunePanel handler={this.handler} runetype="player-runes" runes={PlayerPrimaryTree} chosen={this.state.MatchResponse.runes.primary.runes}/>
+                    </div>
+
+                      <div className="col-md-2">
+                        <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={this.state.MatchResponse.runes.secondary.runes}/>
+                      </div>
+
+                      <div className="col-md-4">
+                        <RuneInfo rune={this.state.rune}/>
+                      </div>
+
+                    <div className="col-md-2">
+                      {OptimalPrimaryTreePanel}
+                    </div>
+
+                    <div className="col-md-2">
+                      {OptimalSecondaryTreePanel}
+                    </div>
+
+                </div>
+              </div>
+            );
         }
-        else{
-          OptimalPrimaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available</h2></div>);
-          OptimalSecondaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available</h2></div>);
-        }
-
-        return (
-            <div className="row profile match-panel table-responsive">
-              <MatchResults match={MatchResponse}/>
-              <div className="row">
-                <div className="col-md-2">
-                  <RunePanel handler={this.handler} runetype="player-runes" runes={PlayerPrimaryTree} chosen={MatchResponse.runes.primary.runes}/>
-              </div>
-
-              <div className="col-md-2">
-                <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={MatchResponse.runes.secondary.runes}/>
-              </div>
-
-              <div className="col-md-4">
-                <RuneInfo rune={this.state.rune}/>
-              </div>
-
-            <div className="col-md-2">
-              {OptimalPrimaryTreePanel}
-            </div>
-
-            <div className="col-md-2">
-              {OptimalSecondaryTreePanel}
-            </div>
-
-            </div>
-          </div>
-        );
+        return ret
     }
 });
 
@@ -311,10 +313,12 @@ var RunePanel = React.createClass({
     }
   },
 
+
   render : function(){
-    console.log(this.props.runes.treeIcon);
     var TreeIsSecondary = this.isSecondary();
     return (
+    <div>
+
     <table className={"rune-panel text-center " + this.props.runetype}>
         <thead className="tree-icon text-center">
             <th></th>
@@ -343,6 +347,7 @@ var RunePanel = React.createClass({
           </tr>
         </tbody>
     </table>
+    </div>
     )
   }
 

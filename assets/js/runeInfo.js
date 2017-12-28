@@ -136,7 +136,7 @@ var RuneInfo = React.createClass({
         });
     },
    componentWillReceiveProps(nextProps) {
-        if(this.props != nextProps && nextProps != -1) {
+        if(this.props != nextProps && nextProps.rune !== -1) {
             fetch('/api/rune/info/', {
                     method: 'post',
                     headers: {'Content-Type':'application/json'},
@@ -144,7 +144,6 @@ var RuneInfo = React.createClass({
                 .then((response) => response.json())
                 .then((response) => this.setStateResponse(response));
         }
-
   },
   render() {
     var ret = <div></div>
