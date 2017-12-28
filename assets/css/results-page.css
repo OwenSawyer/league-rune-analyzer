@@ -90,10 +90,18 @@ header.masthead {
 
 .match-panel {
   padding-bottom: 50px;
-  padding-right: 10%;
-  padding-left: 10%;
+  padding-right: 3%;
+  padding-left: 3%;
   width: auto !important;
 }
+.matchHistory {
+  margin: 0 auto;
+  padding: 40px;
+  width: 80%;
+  color: #333;
+  background: #419be0;
+}
+
 /* Rune images */
 .rune-panel {
   border-radius: 25px;
@@ -343,3 +351,13 @@ color: #999;
 footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem; }
+
+.rune-img{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}

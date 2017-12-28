@@ -6,11 +6,7 @@ var barBase = {
   datasets: [
     {
       label: 'Role Distribution',
-      backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
       borderWidth: 1,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
       scaleOverride:true,
       scaleSteps:1,
       scaleStartValue:0,
@@ -20,13 +16,39 @@ var barBase = {
   ]
 };
 
+var categoryColors = {
+    8000: {
+        backgroundColor: 'rgba(190, 126, 7, 0.2)',
+        borderColor: 'rgba(190, 126, 7, 1)'
+    },
+    8100: {
+        backgroundColor: 'rgba(100, 175, 225, 0.2)',
+        borderColor: 'rgba(100, 175, 225, 1)'
+    },
+    8200: {
+        backgroundColor: 'rgba(255,99,132,0.2)',
+        borderColor: 'rgba(255,99,132,1)',
+    },
+    8300: {
+        backgroundColor: 'rgba(28, 122, 216, 0.2)',
+        borderColor: 'rgba(28, 122, 216, 1)',
+    },
+    8400: {
+        backgroundColor: 'rgba(48, 143, 24, 0.2)',
+        borderColor: 'rgba(48, 143, 24, 1)'
+    },
+}
+
 var radarBase = {
   labels: ['Attack', 'Defense', 'Toughness', 'Mobility', 'Utility'],
+  options:{
+        scale: {
+            display: false
+        }
+    },
   datasets: [
     {
       label: 'Rune Average stats',
-      backgroundColor: 'rgba(179,181,198,0.2)',
-      borderColor: 'rgba(179,181,198,1)',
       pointBackgroundColor: 'rgba(179,181,198,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
@@ -56,38 +78,6 @@ var radarBase = {
 
 var BarGraph = require('./chartjs').HorizontalBar
 var RadarGraph = require('./chartjs').Radar
-
-//
-// var Child = React.createClass({
-//   render: function () {
-//     return <button onClick={this.props.onClick}>{this.props.text}</button>;
-//   },
-// });
-//
-// var Parent = React.createClass({
-//   getInitialState: function() {
-//       this.state = {}
-//      this.setState({data : 'Electrocute'});
-//      return {childsData: [
-//          {childText: "Lethal Tempo", childNumber: 1},
-//          {childText: "Magical Footwear", childNumber: 2}
-//      ]};
-//   },
-//   render: function () {
-//     var childrens = this.state.childsData.map(function(childData,childIndex) {
-//         return <Child onClick={this.handleChildClick.bind(null,childData)} text={childData.childText}/>;
-//     }.bind(this));
-//     return(
-//       <div className="row">
-//           <div className="col-md-3">{childrens}</div>
-//           <div className="col-md-6"><RuneInfo rune={this.state.data}/></div>
-//           <div className="col-md-3">{childrens}</div>
-//      </div>)
-//   },
-//   handleChildClick: function(childData,event) {
-//         this.setState({data: childData.childText});
-//   }
-// });
 
 var sample = {
    "id":8229,
@@ -124,10 +114,14 @@ var RuneInfo = React.createClass({
     setStateResponse(response){
         var barBaseCopy = Object.assign({}, barBase);
         barBaseCopy['datasets'][0]['data'] = this.getBarData(response.roles).map(Number)
+        barBaseCopy['datasets'][0]['backgroundColor'] = categoryColors[response.category].backgroundColor
+        barBaseCopy['datasets'][0]['borderColor'] = categoryColors[response.category].borderColor
 
         var radarBaseCopy = Object.assign({}, radarBase);
         radarBaseCopy['datasets'][0]['data'] = this.getRadarData(response.attributes).map(Number)
-        radarBaseCopy['datasets'][1]['data'] = [0,0,0,0,0]
+        radarBaseCopy['datasets'][0]['backgroundColor'] = categoryColors[response.category].backgroundColor
+        radarBaseCopy['datasets'][0]['borderColor'] = categoryColors[response.category].borderColor
+        radarBaseCopy['datasets'][1]['data'] = this.getRadarData(this.props.championAttributes).map(Number)
 
         this.setState({
             data : response,
@@ -136,7 +130,7 @@ var RuneInfo = React.createClass({
         });
     },
    componentWillReceiveProps(nextProps) {
-        if(this.props != nextProps && nextProps != -1) {
+        if(this.props != nextProps && nextProps.rune !== -1) {
             fetch('/api/rune/info/', {
                     method: 'post',
                     headers: {'Content-Type':'application/json'},
@@ -144,7 +138,6 @@ var RuneInfo = React.createClass({
                 .then((response) => response.json())
                 .then((response) => this.setStateResponse(response));
         }
-
   },
   render() {
     var ret = <div></div>
@@ -163,10 +156,10 @@ var RuneInfo = React.createClass({
                 </div>
             </div>
             <div className="row">
-                <div className="col-sm-8">
+                <div className="col-sm-10">
                   <RadarGraph data={this.state.radarData}/>
                 </div>
-                <div className="col-sm-4">
+                <div className="col-sm-2">
                    idk something here
                 </div>
             </div>
