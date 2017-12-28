@@ -26,6 +26,7 @@ BASE_URL = 'http://na.op.gg/champion/{}/statistics/{}/rune'
 CHAMPION_INFO_URL = 'http://leagueoflegends.wikia.com/wiki/List_of_champions/Ratings'
 CHAMPION_IMAGE_URL = 'http://ddragon.leagueoflegends.com/cdn/{}/img/champion/'.format(PATCH_VERSION)
 SUMMONER_IMAGE_URL = 'http://ddragon.leagueoflegends.com/cdn/{}/img/spell/'.format(PATCH_VERSION)
+QUEUES_URL = 'https://developer.riotgames.com/game-constants.html'
 
 def get_opt_runes_for_champion(page):
 
@@ -175,9 +176,27 @@ def scrape_champ_info():
     with open(JSON_FOLDER + 'champion_info.json', 'w') as fp:
         json.dump(champ_dict, fp)
 
+def scrape_queues():
+    queues = []
+    table = BeautifulSoup(requests.get(QUEUES_URL).content, "html.parser").findAll("table")[1].find("tbody")
+    for row in table.findAll("tr", attrs={'class': None}):
+        items = row.findAll("td")
+        queue = {
+            'queueId': int(items[0].getText()),
+            'map': items[1].getText()
+        }
+        if items[2].getText() is not None:
+            queue['gameType'] = items[2].getText().rsplit(' ', 1)[0] #cut off the word "games" at the end of the sentence
+        queues.append(queue)
+
+    with open(JSON_FOLDER + 'queue_types.json', 'w') as fp:
+        json.dump(queues, fp)
+
+    return queues
 
 if __name__=='__main__':
-    scrape_champ_info()
+    scrape_queues()
+    #scrape_champ_info()
     #scrape_champion_images()
     #scrape_summoner_images()
     #print(get_champion_names())
