@@ -1,4 +1,4 @@
-var React = require('react')
+import React, { Component } from 'react';
 var ReactDOM = require('react-dom')
 import Slider from 'react-slick';
 
@@ -144,7 +144,12 @@ var MatchHistory = React.createClass({
   },
 
   render : function(){
+    var that = this;
+
     var sliderSettings = {
+      customPaging: function(i) {
+        return <a><img className="img-fluid" src={require(`../img/champion/${that.state.data[i].champion}.png`)}/></a>
+      },
       dots: true,
       slidesToShow: 1,
       slidesToScroll: 1,
@@ -322,7 +327,7 @@ var RunePanel = React.createClass({
     <table className={"rune-panel text-center " + this.props.runetype}>
         <thead className="tree-icon text-center">
             <th></th>
-            <th><img src={require(`../img/perkStyle/${this.props.runes.treeIcon}.png`)}/></th>
+            <th><img className="img-responsive img-fluid" src={require(`../img/perkStyle/${this.props.runes.treeIcon}.png`)}/></th>
         </thead>
         <tbody>
           <tr className="keystones">
@@ -365,7 +370,7 @@ var Rune = React.createClass({
   },
   render: function() {
     var ActiveRune = this.getRuneActive();
-    return (<td className={ActiveRune}><img id={this.props.runeid} onClick={this.props.onClick} src={require(`../img/perk/${this.props.runeId}.png`)} /></td>);
+    return (<td className={ActiveRune}><img className="img-responsive img-fluid" id={this.props.runeid} onClick={this.props.onClick} src={require(`../img/perk/${this.props.runeId}.png`)} /></td>);
   }
 })
 
