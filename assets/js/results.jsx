@@ -375,10 +375,10 @@ var MatchResults = React.createClass({
 
      // Gauge options
      var color;
-     if(this.props.rating >= 0 && this.props.rating < 33){
+     if(this.props.match.runes.rating >= 0 && this.props.match.runes.rating < 33){
         color = "Red";
      }
-     else if(this.props.rating >= 33 && this.props.rating < 66){
+     else if(this.props.match.runes.rating >= 33 && this.props.match.runes.rating < 66){
       color = "Orange";
      }
      else{
@@ -391,6 +391,8 @@ var MatchResults = React.createClass({
     else{
       WinClass = "row profile-sidebar defeat";
     }
+    
+    const ValueStyle = {color: color};
 
     return (
       <div className={WinClass}>
@@ -415,7 +417,10 @@ var MatchResults = React.createClass({
           <img className="spell img-fluid" src={require(`../img/summoner/${this.props.match.spell1}.png`)} alt="" />
           <img className="spell img-fluid" src={require(`../img/summoner/${this.props.match.spell2}.png`)} alt="" />
         </div>
-        <div className="col-md-3"><Gauge value={this.props.rating} width={200} height={120} label="" color={color} /></div>
+        <div className="col-md-3">
+        <div className="profile-usertitle-name">Rune Rating: </div>
+        <Gauge value={this.props.match.runes.rating} width={200} height={120} label="" color={color} valueLabelStyle={ValueStyle}/>
+        </div>
       </div>
     )
   }
