@@ -2,7 +2,7 @@ var React = require('react')
 var ReactDOM = require('react-dom')
 
 var RuneInfo = require('./runeInfo.js')
- import './GaugeSet.js'
+import Gauge from 'react-svg-gauge';
 
 // TODO: Create Match History Object
 function getAllUrlParams(url) {
@@ -366,13 +366,21 @@ var Rune = React.createClass({
 })
 
 var MatchResults = React.createClass({
-
-  componentDidMount: function() {
-     setGaugeMeter(this.props.matchId);
-  },
-
   render: function() {
     var WinClass;
+
+     // Gauge options
+     var color;
+     if(this.props.rating >= 0 && this.props.rating < 33){
+        color = "Red";
+     }
+     else if(this.props.rating >= 33 && this.props.rating < 66){
+      color = "Orange";
+     }
+     else{
+      color = "LawnGreen";
+     }
+
     if(this.props.match.win == "true"){
       WinClass = "row profile-sidebar victory";
     }
@@ -403,12 +411,12 @@ var MatchResults = React.createClass({
           <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell1}.png`)} alt="" />
           <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell2}.png`)} alt="" />
         </div>
-        <div className="rune-rating col-md-3 GaugeMeter"></div>
-          <canvas id={"gauge_meter_" + this.props.matchId}></canvas>
+        <div className="col-md-3"><Gauge value={this.props.rating} width={400} height={320} label="Rune Rating" color={color} /></div>
       </div>
     )
   }
 })
+
 
 ReactDOM.render(<h1>{SummonerName}</h1>, document.getElementById('summonerNameHeading'));
 ReactDOM.render(<MatchHistory />, document.getElementById('matchHistory'));
