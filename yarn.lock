@@ -2358,7 +2358,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.8:
+prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -2468,6 +2468,10 @@ react-slick@^0.15.0:
     json2mq "^0.2.0"
     object-assign "^4.1.0"
     slick-carousel "^1.6.0"
+
+react-svg-gauge@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-svg-gauge/-/react-svg-gauge-1.0.6.tgz#31f4a3a9ac175018ba1cc45e26dbdf4775af6d9e"
 
 react@^0.14.7:
   version "0.14.8"
@@ -2688,7 +2692,7 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slick-carousel@^1.6.0, slick-carousel@^1.8.0:
+slick-carousel@^1.6.0:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/slick-carousel/-/slick-carousel-1.8.1.tgz#a4bfb29014887bb66ce528b90bd0cda262cc8f8d"
 

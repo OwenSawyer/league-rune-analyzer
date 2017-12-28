@@ -364,8 +364,17 @@ footer.footer {
   color: black;
 }
 
-  .rune-rating {
-    height: 100px;
-    width: 200px;
-    padding-bottom: 30px;
-  }
+.rune-rating {
+  height: 100px;
+  width: 200px;
+  padding-bottom: 30px;
+}
+
+.slick-dots {
+  bottom: -25px;
+  width: 100%;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+  /*top: -75px;*/
+}

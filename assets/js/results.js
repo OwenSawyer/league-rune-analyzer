@@ -157,10 +157,6 @@ var MatchHistory = React.createClass({
     };
 
     var that = this;
-    // var MatchPanels = this.state.data.map(function(Match, i) {
-    //   return <MatchPanel matchId={that.state.data[i].gameId} />;
-    // });
-
     var MatchPanels = this.state.data.map(function(Match, i) {
         return (<div><MatchPanel matchId={that.state.data[i].gameId} /></div>);
     });
@@ -274,26 +270,33 @@ var MatchPanel = React.createClass({
                 <div className="row profile match-panel table-responsive">
                   <MatchResults match={this.state.MatchResponse}/>
                   <div className="row">
-                    <div className="col-md-2">
-                      <RunePanel handler={this.handler} runetype="player-runes" runes={PlayerPrimaryTree} chosen={this.state.MatchResponse.runes.primary.runes}/>
-                    </div>
+                     <div className="col-md-4">
+			            <div className="row">
+                            <div className="col-md-6">
+                              <RunePanel handler={this.handler} runetype="player-runes" runes={PlayerPrimaryTree} chosen={this.state.MatchResponse.runes.primary.runes}/>
+                            </div>
 
-                      <div className="col-md-2">
-                        <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={this.state.MatchResponse.runes.secondary.runes}/>
-                      </div>
+                              <div className="col-md-6">
+                                <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={this.state.MatchResponse.runes.secondary.runes}/>
+                              </div>
+                        </div>
+                     </div>
 
-                      <div className="col-md-4">
+                    <div className="col-md-4">
                         <RuneInfo rune={this.state.rune} championAttributes={this.state.MatchResponse.championAttributes}/>
-                      </div>
-
-                    <div className="col-md-2">
-                      {OptimalPrimaryTreePanel}
                     </div>
 
-                    <div className="col-md-2">
-                      {OptimalSecondaryTreePanel}
-                    </div>
+                     <div className="col-md-4">
+			            <div className="row">
+                            <div className="col-md-6">
+                                {OptimalPrimaryTreePanel}
+                            </div>
 
+                            <div className="col-md-6">
+                              {OptimalSecondaryTreePanel}
+                            </div>
+                        </div>
+                     </div>
                 </div>
               </div>
             );
@@ -400,33 +403,57 @@ var MatchResults = React.createClass({
     const ValueStyle = {color: color};
 
     return (
-      <div className={WinClass}>
-        <div className="text-center col-md-2 profile-usertitle-time">
-          {this.props.match.gameDate}
+        <div className="row">
+            <div className="col-md-4">
+                <div className="profile-usertitle-name">Rune Rating: </div>
+                <Gauge value={this.props.match.runes.rating} width={200} height={120} label="" color={color} valueLabelStyle={ValueStyle}/>
+            </div>
+            <div className="col-md-8">
+                <div className={WinClass}>
+                    <div className="col-md-2">
+                        <div className="text-center profile-usertitle-time">
+                          {this.props.match.gameDate}
+                        </div>
+                        <div>
+                            Game mode
+                        </div>
+                        <div>
+                            Game time length
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <div className="row">
+                            <div className="col-md-8">
+                                <div className="row">
+                                    <div className="col-md-6 profile-userpic ">
+                                      <img src={require(`../img/champion/${this.props.match.champion}.png`)} className="img-responsive" alt="" />
+                                    </div>
+                                    <div className="col-md-6 profile-usertitle">
+                                        <div className="profile-usertitle-name">
+                                            {this.props.match.championName}
+                                          </div>
+                                          <div className="profile-usertitle-job">
+                                            {this.props.match.lane}
+                                          </div>
+                                          <div className="profile-usertitle-kda">
+                                            {this.props.match.kills}/{this.props.match.deaths}/{this.props.match.assists}
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-4 profile-summ-spells ">
+                              <img className="spell img-fluid" src={require(`../img/summoner/${this.props.match.spell1}.png`)} alt="" />
+                              <img className="spell img-fluid" src={require(`../img/summoner/${this.props.match.spell2}.png`)} alt="" />
+				            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-4">
+                        Other Players (2x5 table)
+                    </div>
+
+                  </div>
+            </div>
         </div>
-        <div className="profile-userpic col-md-2">
-          <img src={require(`../img/champion/${this.props.match.champion}.png`)} className="img-responsive" alt="" />
-        </div>
-        <div className="col-md-3 profile-usertitle">
-            <div className="profile-usertitle-name">
-                {this.props.match.championName}
-              </div>
-              <div className="profile-usertitle-job">
-                {this.props.match.lane}
-              </div>
-              <div className="profile-usertitle-kda">
-                {this.props.match.kills}/{this.props.match.deaths}/{this.props.match.assists}
-              </div>
-        </div>
-        <div className="profile-summ-spells col-md-2">
-          <img className="spell img-fluid" src={require(`../img/summoner/${this.props.match.spell1}.png`)} alt="" />
-          <img className="spell img-fluid" src={require(`../img/summoner/${this.props.match.spell2}.png`)} alt="" />
-        </div>
-        <div className="col-md-3">
-        <div className="profile-usertitle-name">Rune Rating: </div>
-        <Gauge value={this.props.match.runes.rating} width={200} height={120} label="" color={color} valueLabelStyle={ValueStyle}/>
-        </div>
-      </div>
     )
   }
 })
