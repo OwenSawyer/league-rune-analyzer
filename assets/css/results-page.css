@@ -236,7 +236,20 @@ header.masthead {
   color: rgba(255, 255, 255, 0.5);
   font-size: 20px;
   font-weight: 600;
-  margin-top: 50px;
+  margin-top: 20px;
+}
+
+.profile-usertitle-mode {
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  font-weight: 600;
+}
+.profile-usertitle-duration {
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .profile-usertitle-name {
@@ -358,7 +371,7 @@ footer.footer {
 }
 
 .rune-rating {
-  height: 100px;
+  height: 120px;
   width: 200px;
   padding-bottom: 30px;
   background-color: rgba(0, 0, 0, 0.1);

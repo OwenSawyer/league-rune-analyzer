@@ -414,11 +414,11 @@ var MatchResults = React.createClass({
                         <div className="text-center profile-usertitle-time">
                           {this.props.match.gameDate}
                         </div>
-                        <div>
-                            Game mode
+                        <div className="text-center profile-usertitle-mode">
+                            {this.props.match.gameMode}
                         </div>
-                        <div>
-                            Game time length
+                        <div className="text-center profile-usertitle-duration">
+                            {this.props.match.gameDuration}
                         </div>
                     </div>
                     <div className="col-md-6">
