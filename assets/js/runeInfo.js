@@ -17,26 +17,26 @@ var barBase = {
 };
 
 var categoryColors = {
-    8000: {
+    8000: { // Precision
         backgroundColor: 'rgba(190, 126, 7, 0.2)',
         borderColor: 'rgba(190, 126, 7, 1)'
     },
-    8100: {
-        backgroundColor: 'rgba(100, 175, 225, 0.2)',
-        borderColor: 'rgba(100, 175, 225, 1)'
-    },
-    8200: {
+    8100: { // Domination
         backgroundColor: 'rgba(255,99,132,0.2)',
         borderColor: 'rgba(255,99,132,1)',
     },
-    8300: {
+    8200: { // Sorcery
+        backgroundColor: 'rgba(100, 175, 225, 0.2)',
+        borderColor: 'rgba(100, 175, 225, 1)'
+    },
+    8300: { // Inspiration
         backgroundColor: 'rgba(28, 122, 216, 0.2)',
         borderColor: 'rgba(28, 122, 216, 1)',
     },
-    8400: {
+    8400: { // Resolve
         backgroundColor: 'rgba(48, 143, 24, 0.2)',
         borderColor: 'rgba(48, 143, 24, 1)'
-    },
+    }
 }
 
 var radarBase = {
@@ -54,27 +54,38 @@ var radarBase = {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(179,181,198,1)',
       scaleOverride:true,
-      scaleSteps:3,
+      scaleSteps:2,
       scaleStartValue:0,
       scaleStepWidth:1,
       data: []
     },
     {
       label: 'Champion Stats',
-      backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
-      pointBackgroundColor: 'rgba(255,99,132,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(255,99,132,1)',
+      backgroundColor: 'rgba(0, 0, 0, 0.2)',
+      borderColor: 'rgba(0, 0, 0, 1)',
+      pointBorderColor: '#000000',
       scaleOverride:true,
-      scaleSteps:3,
+      scaleSteps:2,
       scaleStartValue:0,
       scaleStepWidth:1,
       data: []
     }
   ]
 };
+
+var radarOptions = {
+    scale: {
+       ticks: {
+        display: false,
+        suggestedMin: 0,
+        suggestedMax: 3,
+        maxTicksLimit: 4
+       }
+    },
+    tooltips: {
+        enabled: false
+    }
+}
 
 var BarGraph = require('./chartjs').HorizontalBar
 var RadarGraph = require('./chartjs').Radar
@@ -144,7 +155,7 @@ var RuneInfo = React.createClass({
 
     if (this.state) {
         ret = (
-        <div>
+        <div style={{backgroundImage: `url(../img/sorcery.png)`}}>
             <div className="row">
                 <div className="col-sm-8">
                     <h2>{this.state.data.name}</h2>
@@ -156,12 +167,7 @@ var RuneInfo = React.createClass({
                 </div>
             </div>
             <div className="row">
-                <div className="col-sm-10">
-                  <RadarGraph data={this.state.radarData}/>
-                </div>
-                <div className="col-sm-2">
-                   idk something here
-                </div>
+                <RadarGraph data={this.state.radarData} options={radarOptions}/>
             </div>
             <div className="row">
                 <BarGraph data={this.state.barData}/>

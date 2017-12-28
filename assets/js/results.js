@@ -1,4 +1,4 @@
-var React = require('react')
+import React, { Component } from 'react';
 var ReactDOM = require('react-dom')
 import Slider from 'react-slick';
 
@@ -81,7 +81,7 @@ const Precision = {
   "keystones" : [8005, 8008, 8021],
   "r1" : [9101, 9111, 8009],
   "r2" : [9104, 9105, 9103],
-  "r3" : [8014, 8017, 8229]
+  "r3" : [8014, 8017, 8299]
 };
 
 const Domination = {
@@ -144,7 +144,12 @@ var MatchHistory = React.createClass({
   },
 
   render : function(){
+    var that = this;
+
     var sliderSettings = {
+      customPaging: function(i) {
+        return <a><img className="img-fluid" src={require(`../img/champion/${that.state.data[i].champion}.png`)}/></a>
+      },
       dots: true,
       slidesToShow: 1,
       slidesToScroll: 1,
@@ -152,10 +157,6 @@ var MatchHistory = React.createClass({
     };
 
     var that = this;
-    // var MatchPanels = this.state.data.map(function(Match, i) {
-    //   return <MatchPanel matchId={that.state.data[i].gameId} />;
-    // });
-
     var MatchPanels = this.state.data.map(function(Match, i) {
         return (<div><MatchPanel matchId={that.state.data[i].gameId} /></div>);
     });
@@ -237,18 +238,8 @@ var MatchPanel = React.createClass({
             }
         })
 
-<<<<<<< HEAD:assets/js/results.js
-        return (
-            <div className="row profile match-panel table-responsive">
-              <MatchResults rating={MatchResponse.runes.rating} matchId={this.props.matchId} match={MatchResponse}/>
-              <div className="row">
-                <div className="col-md-2">
-                  <RunePanel handler={this.handler} runetype="player-runes" runes={PlayerPrimaryTree} chosen={MatchResponse.runes.primary.runes}/>
-              </div>
-=======
         this.forceUpdate()
     },
->>>>>>> master:assets/js/results.jsx
 
     render: function () {
 
@@ -265,40 +256,47 @@ var MatchPanel = React.createClass({
               console.log("inner optimal rune");
               console.log(this.state.OptimalRunes);
               var OptimalPrimaryTree = this.selectTree(this.state.OptimalRunes.primary.id);
-              OptimalPrimaryTreePanel = (<RunePanel runetype="optimal-runes" runes={OptimalPrimaryTree} chosen={this.state.OptimalRunes.primary.runes}/>);
+              OptimalPrimaryTreePanel = (<RunePanel handler={this.handler} runetype="optimal-runes" runes={OptimalPrimaryTree} chosen={this.state.OptimalRunes.primary.runes}/>);
 
               var OptimalSecondaryTree = this.selectTree(this.state.OptimalRunes.secondary.id);
-              OptimalSecondaryTreePanel = (<RunePanel runetype="optimal-runes secondary-tree" runes={OptimalSecondaryTree} chosen={this.state.OptimalRunes.secondary.runes}/>);
+              OptimalSecondaryTreePanel = (<RunePanel handler={this.handler} runetype="optimal-runes secondary-tree" runes={OptimalSecondaryTree} chosen={this.state.OptimalRunes.secondary.runes}/>);
             }
             else{
-              OptimalPrimaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available</h2></div>);
-              OptimalSecondaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available</h2></div>);
+              OptimalPrimaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available in this role</h2></div>);
+              OptimalSecondaryTreePanel = (<div className="rune-panel text-center"><h2>No optimal runes available in this role</h2></div>);
             }
 
             ret = (
                 <div className="row profile match-panel table-responsive">
                   <MatchResults match={this.state.MatchResponse}/>
                   <div className="row">
-                    <div className="col-md-2">
-                      <RunePanel handler={this.handler} runetype="player-runes" runes={PlayerPrimaryTree} chosen={this.state.MatchResponse.runes.primary.runes}/>
-                    </div>
+                     <div className="col-md-4">
+			            <div className="row">
+                            <div className="col-md-6">
+                              <RunePanel handler={this.handler} runetype="player-runes" runes={PlayerPrimaryTree} chosen={this.state.MatchResponse.runes.primary.runes}/>
+                            </div>
 
-                      <div className="col-md-2">
-                        <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={this.state.MatchResponse.runes.secondary.runes}/>
-                      </div>
+                              <div className="col-md-6">
+                                <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={this.state.MatchResponse.runes.secondary.runes}/>
+                              </div>
+                        </div>
+                     </div>
 
-                      <div className="col-md-4">
+                    <div className="col-md-4">
                         <RuneInfo rune={this.state.rune} championAttributes={this.state.MatchResponse.championAttributes}/>
-                      </div>
-
-                    <div className="col-md-2">
-                      {OptimalPrimaryTreePanel}
                     </div>
 
-                    <div className="col-md-2">
-                      {OptimalSecondaryTreePanel}
-                    </div>
+                     <div className="col-md-4">
+			            <div className="row">
+                            <div className="col-md-6">
+                                {OptimalPrimaryTreePanel}
+                            </div>
 
+                            <div className="col-md-6">
+                              {OptimalSecondaryTreePanel}
+                            </div>
+                        </div>
+                     </div>
                 </div>
               </div>
             );
@@ -332,7 +330,7 @@ var RunePanel = React.createClass({
     <table className={"rune-panel text-center " + this.props.runetype}>
         <thead className="tree-icon text-center">
             <th></th>
-            <th><img src={require(`../img/perkStyle/${this.props.runes.treeIcon}.png`)}/></th>
+            <th><img className="img-responsive img-fluid" src={require(`../img/perkStyle/${this.props.runes.treeIcon}.png`)}/></th>
         </thead>
         <tbody>
           <tr className="keystones">
@@ -375,7 +373,7 @@ var Rune = React.createClass({
   },
   render: function() {
     var ActiveRune = this.getRuneActive();
-    return (<td className={ActiveRune}><img id={this.props.runeid} onClick={this.props.onClick} src={require(`../img/perk/${this.props.runeId}.png`)} /></td>);
+    return (<td className={ActiveRune}><img className="img-responsive img-fluid" id={this.props.runeid} onClick={this.props.onClick} src={require(`../img/perk/${this.props.runeId}.png`)} /></td>);
   }
 })
 
@@ -385,10 +383,10 @@ var MatchResults = React.createClass({
 
      // Gauge options
      var color;
-     if(this.props.rating >= 0 && this.props.rating < 33){
+     if(this.props.match.runes.rating >= 0 && this.props.match.runes.rating < 33){
         color = "Red";
      }
-     else if(this.props.rating >= 33 && this.props.rating < 66){
+     else if(this.props.match.runes.rating >= 33 && this.props.match.runes.rating < 66){
       color = "Orange";
      }
      else{
@@ -401,32 +399,61 @@ var MatchResults = React.createClass({
     else{
       WinClass = "row profile-sidebar defeat";
     }
+    
+    const ValueStyle = {color: color};
 
     return (
-      <div className={WinClass}>
-        <div className="text-center col-md-2 profile-usertitle-time">
-          {this.props.match.gameDate}
+        <div className="row">
+            <div className="col-md-4">
+                <div className="profile-usertitle-name">Rune Rating: </div>
+                <Gauge value={this.props.match.runes.rating} width={200} height={120} label="" color={color} valueLabelStyle={ValueStyle}/>
+            </div>
+            <div className="col-md-8">
+                <div className={WinClass}>
+                    <div className="col-md-2">
+                        <div className="text-center profile-usertitle-time">
+                          {this.props.match.gameDate}
+                        </div>
+                        <div>
+                            Game mode
+                        </div>
+                        <div>
+                            Game time length
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <div className="row">
+                            <div className="col-md-8">
+                                <div className="row">
+                                    <div className="col-md-6 profile-userpic ">
+                                      <img src={require(`../img/champion/${this.props.match.champion}.png`)} className="img-responsive" alt="" />
+                                    </div>
+                                    <div className="col-md-6 profile-usertitle">
+                                        <div className="profile-usertitle-name">
+                                            {this.props.match.championName}
+                                          </div>
+                                          <div className="profile-usertitle-job">
+                                            {this.props.match.lane}
+                                          </div>
+                                          <div className="profile-usertitle-kda">
+                                            {this.props.match.kills}/{this.props.match.deaths}/{this.props.match.assists}
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-4 profile-summ-spells ">
+                              <img className="spell img-fluid" src={require(`../img/summoner/${this.props.match.spell1}.png`)} alt="" />
+                              <img className="spell img-fluid" src={require(`../img/summoner/${this.props.match.spell2}.png`)} alt="" />
+				            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-4">
+                        Other Players (2x5 table)
+                    </div>
+
+                  </div>
+            </div>
         </div>
-        <div className="profile-userpic col-md-2">
-          <img src={require(`../img/champion/${this.props.match.champion}.png`)} className="img-responsive" alt="" />
-        </div>
-        <div className="col-md-3 profile-usertitle">
-            <div className="profile-usertitle-name">
-                {this.props.match.championName}
-              </div>
-              <div className="profile-usertitle-job">
-                {this.props.match.lane}
-              </div>
-              <div className="profile-usertitle-kda">
-                {this.props.match.kills}/{this.props.match.deaths}/{this.props.match.assists}
-              </div>
-        </div>
-        <div className="profile-summ-spells col-md-2">
-          <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell1}.png`)} alt="" />
-          <img className="spell img-responsive" src={require(`../img/summoner/${this.props.match.spell2}.png`)} alt="" />
-        </div>
-        <div className="col-md-3"><Gauge value={this.props.rating} width={400} height={320} label="Rune Rating" color={color} /></div>
-      </div>
     )
   }
 })
