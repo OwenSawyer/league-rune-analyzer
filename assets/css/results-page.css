@@ -99,7 +99,7 @@ header.masthead {
 #matchHistory {
   margin: 0 auto;
   padding: 40px;
-  background: rgba(0, 0, 0, 0.76);
+  /*background: rgba(0, 0, 0, 0.76);*/
   position: relative;
   z-index: 100;
   margin-top: 3%;
