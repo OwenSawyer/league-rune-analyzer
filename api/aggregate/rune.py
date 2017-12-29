@@ -132,5 +132,5 @@ if __name__=='__main__':
     # print(rune_number_to_name(8124))
     # print(rune_name_to_number("Predator"))
     #print(rune_usage_analysis())
-    print(get_popular_runes_for_champ('Illaoi','support'))
+    #print(get_popular_runes_for_champ('Illaoi','support'))
     #print(get_rune_page_rating_for_champ(get_popular_runes_for_champ('Jhin','adc'), 'Bard','support'))
