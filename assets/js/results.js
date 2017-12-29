@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom')
 import Slider from 'react-slick';
 
 var RuneInfo = require('./runeInfo.js')
-import Gauge from 'react-svg-gauge';
+var ArcGauge = require('./gauge.js');
 
 // TODO: Create Match History Object
 function getAllUrlParams(url) {
@@ -280,14 +280,17 @@ var MatchPanel = React.createClass({
                   <MatchResults match={this.state.MatchResponse}/>
                   <div className="row">
                      <div className="col-md-4 text-center">
+                         <div className="row">
+                             <div className="col-md-12 text-center">
+                                <h2 className="runeHeading">Player Runes</h2>
+                             </div>
+                         </div>
 			            <div className="row">
                             <div className="col-md-6 text-center centerItem">
-                              <h2 className="runeHeading">Player Primary Runes</h2>
                               <RunePanel handler={this.handler} runetype="player-runes" runes={PlayerPrimaryTree} chosen={this.state.MatchResponse.runes.primary.runes}/>
                             </div>
 
                               <div className="col-md-6 text-center centerItem">
-                                <h2 className="runeHeading">Player Secondary Runes</h2>
                                 <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={this.state.MatchResponse.runes.secondary.runes}/>
                             </div>
                         </div>
@@ -298,14 +301,17 @@ var MatchPanel = React.createClass({
                     </div>
 
                      <div className="col-md-4 text-center">
+                         <div className="row">
+                             <div className="col-md-12 text-center">
+                                <h2 className="runeHeading">Optimal Runes</h2>
+                             </div>
+                         </div>
 			            <div className="row">
                             <div className="col-md-6 text-center centerItem">
-                                <h2 className="runeHeading">Optimal Primary Runes</h2>
                                 {OptimalPrimaryTreePanel}
                             </div>
 
                             <div className="col-md-6 text-center centerItem">
-                              <h2 className="runeHeading">Optimal Secondary Runes</h2>
                               {OptimalSecondaryTreePanel}
                             </div>
                         </div>
@@ -413,14 +419,24 @@ var MatchResults = React.createClass({
     else{
       WinClass = "row profile-sidebar defeat";
     }
-    
+
     const ValueStyle = {color: color};
 
     return (
         <div className="row">
             <div className="col-md-4 rune-rating">
                 <div className="profile-usertitle-name">Rune Rating: </div>
-                <Gauge value={this.props.match.runes.rating} width={200} height={100} label="" color={color} valueLabelStyle={ValueStyle} minMaxLabelStyle={{display: 'none'}}/>
+
+                <section className={'gauge mx-auto'}>
+                  <ArcGauge value={this.props.match.runes.rating}
+                            size={15}
+                            width={160}
+                            radius={80}
+                            sections={["#e84528", "#e84528", "#e84528", "#ffb74d", "#8cc152", "#8cc152"]}
+                            arrow={{height: 75, width: 6, color: "#000"}}
+                            label={" "}
+                            legend={[' ', ' ', ' ', ' ', ' ', ' ']}/>
+                </section>
             </div>
             <div className="col-md-8">
                 <div className={WinClass}>
@@ -440,7 +456,7 @@ var MatchResults = React.createClass({
                             <div className="col-md-8">
                                 <div className="row">
                                     <div className="col-md-6 profile-userpic ">
-                                      <img src={require(`../img/champion/${this.props.match.champion}.png`)} className="img-responsive" alt="" />
+                                      <img src={require(`../img/champion/${this.props.match.champion}.png`)} className="img-responsive img-fluid" alt="" />
                                     </div>
                                     <div className="col-md-6 profile-usertitle">
                                         <div className="profile-usertitle-name">
@@ -475,46 +491,46 @@ var MatchResults = React.createClass({
 var MatchPlayers = React.createClass({
   render : function(){
     return (
-    <table class="other-players table-responsive">
+    <table className="other-players table-responsive">
         <tbody>
           <tr>
             <td className={this.props.match.team1[0].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team1[0].accountId +  "&name=" + this.props.match.team1[0].summonerName + "&region=" + this.props.match.team1[0].platformId}>
               {this.props.match.team1[0].summonerName}</a>
             </td>
-            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[0].championId}.png`)} className="img-responsive" alt="" /></td>
-            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[0].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td ><img src={require(`../img/champion/${this.props.match.team1[0].championId}.png`)} className="img-responsive img-fluid player-images" alt="" /></td>
+            <td ><img src={require(`../img/champion/${this.props.match.team2[0].championId}.png`)} className="img-responsive img-fluid player-images" alt="" /></td>
             <td className={this.props.match.team2[0].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team2[0].accountId +  "&name=" + this.props.match.team2[0].summonerName + "&region=" + this.props.match.team2[0].platformId}>
               {this.props.match.team2[0].summonerName}</a></td>
           </tr>
           <tr>
             <td className={this.props.match.team1[1].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team1[1].accountId +  "&name=" + this.props.match.team1[1].summonerName + "&region=" + this.props.match.team1[1].platformId}>
               {this.props.match.team1[1].summonerName}</a></td>
-            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[1].championId}.png`)} className="img-responsive" alt="" /></td>
-            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[1].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td ><img src={require(`../img/champion/${this.props.match.team1[1].championId}.png`)} className="img-responsive img-fluid player-images" alt="" /></td>
+            <td ><img src={require(`../img/champion/${this.props.match.team2[1].championId}.png`)} className="img-responsive img-fluid player-images" alt="" /></td>
             <td className={this.props.match.team2[1].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team2[1].accountId +  "&name=" + this.props.match.team2[1].summonerName + "&region=" + this.props.match.team2[1].platformId}>
               {this.props.match.team2[1].summonerName}</a></td>
           </tr>
           <tr>
             <td className={this.props.match.team1[2].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team1[2].accountId +  "&name=" + this.props.match.team1[2].summonerName + "&region=" + this.props.match.team1[2].platformId}>
               {this.props.match.team1[2].summonerName}</a></td>
-            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[2].championId}.png`)} className="img-responsive" alt="" /></td>
-            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[2].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td ><img src={require(`../img/champion/${this.props.match.team1[2].championId}.png`)} className="img-responsive img-fluid player-images" alt="" /></td>
+            <td ><img src={require(`../img/champion/${this.props.match.team2[2].championId}.png`)} className="img-responsive img-fluid player-images" alt="" /></td>
             <td className={this.props.match.team2[2].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team2[2].accountId +  "&name=" + this.props.match.team2[2].summonerName + "&region=" + this.props.match.team2[2].platformId}>
               {this.props.match.team2[2].summonerName}</a></td>
           </tr>
           <tr>
             <td className={this.props.match.team1[3].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team1[3].accountId +  "&name=" + this.props.match.team1[3].summonerName + "&region=" + this.props.match.team1[3].platformId}>
               {this.props.match.team1[3].summonerName}</a></td>
-            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[3].championId}.png`)} className="img-responsive" alt="" /></td>
-            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[3].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td ><img src={require(`../img/champion/${this.props.match.team1[3].championId}.png`)} className="img-responsive img-fluid player-images" alt="" /></td>
+            <td ><img src={require(`../img/champion/${this.props.match.team2[3].championId}.png`)} className="img-responsive img-fluid player-images" alt="" /></td>
             <td className={this.props.match.team2[3].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team2[3].accountId +  "&name=" + this.props.match.team2[3].summonerName + "&region=" + this.props.match.team2[3].platformId}>
               {this.props.match.team2[3].summonerName}</a></td>
           </tr>
           <tr>
             <td className={this.props.match.team1[4].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team1[4].accountId +  "&name=" + this.props.match.team1[4].summonerName + "&region=" + this.props.match.team1[4].platformId}>
               {this.props.match.team1[4].summonerName}</a></td>
-            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[4].championId}.png`)} className="img-responsive" alt="" /></td>
-            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[4].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td ><img src={require(`../img/champion/${this.props.match.team1[4].championId}.png`)} className="img-responsive img-fluid player-images" alt="" /></td>
+            <td ><img src={require(`../img/champion/${this.props.match.team2[4].championId}.png`)} className="img-responsive img-fluid player-images" alt="" /></td>
             <td className={this.props.match.team2[4].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team2[4].accountId +  "&name=" + this.props.match.team2[4].summonerName + "&region=" + this.props.match.team2[4].platformId}>
               {this.props.match.team2[4].summonerName}</a></td>
           </tr>

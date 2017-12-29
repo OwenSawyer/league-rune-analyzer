@@ -31,11 +31,11 @@
     "react-bootstrap": "^0.30.7",
     "react-chartjs-2": "2.6.4",
     "react-dom": "^0.14.7",
-    "react-svg-gauge": "^1.0.6",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.12",
     "webpack-bundle-tracker": "0.0.93",
-    "react-slick": "^0.15.0"
+    "react-slick": "^0.15.0",
+    "d3": "^3.5.6"
   }
 }

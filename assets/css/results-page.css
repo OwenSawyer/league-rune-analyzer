@@ -298,7 +298,6 @@ header.masthead {
   border-radius: 25px;
 }
 
-
 .profile-usermenu {
   margin-top: 30px;
 }
@@ -382,11 +381,12 @@ footer.footer {
 }
 
 .rune-rating {
-  height: 120px;
-  width: 200px;
-  padding-bottom: 30px;
+  /*height: 100px;*/
+  /*width: 200px;*/
+  padding-bottom: 40px;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 25px;
+  margin-bottom: 40px;
 }
 
 .slick-dots {
@@ -412,7 +412,7 @@ footer.footer {
 }
 
 
-.player-images img{
+.player-images {
   height: 25px;
   border-radius: 50% !important;
   padding: 2px;
@@ -435,8 +435,7 @@ footer.footer {
   color: inherit;
   white-space: pre-wrap; /* css-3 */    
   white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-  white-space: -pre-wrap; /* Opera 4-6 */    
-  white-space: -o-pre-wrap; /* Opera 7 */    
+  white-space: -o-pre-wrap; /* Opera 7 */
   word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
@@ -456,7 +455,7 @@ footer.footer {
 .runeHeading{
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -465,3 +464,31 @@ footer.footer {
   margin: 0 auto;
 }
 
+.gauge {
+	position: relative;
+	top: 5px;
+	padding: 0;
+	margin: 0;
+}
+
+.gauge-label {
+	position: relative;
+	top: 12px;
+	padding: 0 10px 0 0;
+	font: 400 20px/1 Roboto;
+	text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.gauge-el svg {
+	overflow: visible !important;
+}
+
+.gauge-path {
+	position: relative;
+}
+
+.gauge-text {
+	font: 400 10px Roboto;
+	letter-spacing: 3px;
+}
