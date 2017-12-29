@@ -26,12 +26,12 @@ var categoryColors = {
         borderColor: 'rgba(255,99,132,1)',
     },
     8200: { // Sorcery
-        backgroundColor: 'rgba(100, 175, 225, 0.2)',
-        borderColor: 'rgba(100, 175, 225, 1)'
+        backgroundColor: 'rgba(28, 122, 216, 0.2)',
+        borderColor: 'rgba(28, 122, 216, 1)'
     },
     8300: { // Inspiration
-        backgroundColor: 'rgba(28, 122, 216, 0.2)',
-        borderColor: 'rgba(28, 122, 216, 1)',
+        backgroundColor: 'rgba(61, 170, 151, 0.2)',
+        borderColor: 'rgba(61, 170, 151, 1)',
     },
     8400: { // Resolve
         backgroundColor: 'rgba(48, 143, 24, 0.2)',

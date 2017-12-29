@@ -117,10 +117,10 @@ let ArcGauge = React.createClass({
       let text = meter.append("text")
           .attr("class", "gauge-label")
           .attr("text-anchor", "middle")
-          .attr("dy", "1.8em")
+          .attr("dy", "1.9em")
           .attr("fill", "#ffffff");
 
-      text.text(value + '%');
+      text.text(value);
     }
 
     // Draw and animate arrow with default or provided styles
