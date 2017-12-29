@@ -336,7 +336,7 @@ var RunePanel = React.createClass({
     return (
     <div>
 
-    <table className={"rune-panel text-center " + this.props.runetype}>
+    <table className={"rune-panel text-center mx-auto" + this.props.runetype}>
         <thead className="tree-icon text-center">
             <th></th>
             <th><img className="img-responsive img-fluid" src={require(`../img/perkStyle/${this.props.runes.treeIcon}.png`)}/></th>
@@ -458,12 +458,64 @@ var MatchResults = React.createClass({
                         </div>
                     </div>
                     <div className="col-md-4">
-                        Other Players (2x5 table)
+                      <MatchPlayers match={this.props.match.players} />
                     </div>
 
                   </div>
             </div>
         </div>
+    )
+  }
+})
+
+var MatchPlayers = React.createClass({
+  render : function(){
+    return (
+    <table class="other-players table-responsive">
+        <tbody>
+          <tr>
+            <td className="player-name my-team"><a href={"/results/?accountId=" + this.props.match.team1[0].accountId +  "&name=" + this.props.match.team1[0].summonerName + "&region=" + this.props.match.team1[0].platformId}>
+              {this.props.match.team1[0].summonerName}</a>
+            </td>
+            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[0].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[0].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td className="player-name other-team"><a href={"/results/?accountId=" + this.props.match.team2[0].accountId +  "&name=" + this.props.match.team2[0].summonerName + "&region=" + this.props.match.team2[0].platformId}>
+              {this.props.match.team2[0].summonerName}</a></td>
+          </tr>
+          <tr>
+            <td className="player-name my-team"><a href={"/results/?accountId=" + this.props.match.team1[1].accountId +  "&name=" + this.props.match.team1[1].summonerName + "&region=" + this.props.match.team1[1].platformId}>
+              {this.props.match.team1[1].summonerName}</a></td>
+            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[1].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[1].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td className="player-name other-team"><a href={"/results/?accountId=" + this.props.match.team2[1].accountId +  "&name=" + this.props.match.team2[1].summonerName + "&region=" + this.props.match.team2[1].platformId}>
+              {this.props.match.team2[1].summonerName}</a></td>
+          </tr>
+          <tr>
+            <td className="player-name my-team"><a href={"/results/?accountId=" + this.props.match.team1[2].accountId +  "&name=" + this.props.match.team1[2].summonerName + "&region=" + this.props.match.team1[2].platformId}>
+              {this.props.match.team1[2].summonerName}</a></td>
+            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[2].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[2].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td className="player-name other-team"><a href={"/results/?accountId=" + this.props.match.team2[2].accountId +  "&name=" + this.props.match.team2[2].summonerName + "&region=" + this.props.match.team2[2].platformId}>
+              {this.props.match.team2[2].summonerName}</a></td>
+          </tr>
+          <tr>
+            <td className="player-name my-team"><a href={"/results/?accountId=" + this.props.match.team1[3].accountId +  "&name=" + this.props.match.team1[3].summonerName + "&region=" + this.props.match.team1[3].platformId}>
+              {this.props.match.team1[3].summonerName}</a></td>
+            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[3].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[3].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td className="player-name other-team"><a href={"/results/?accountId=" + this.props.match.team2[3].accountId +  "&name=" + this.props.match.team2[3].summonerName + "&region=" + this.props.match.team2[3].platformId}>
+              {this.props.match.team2[3].summonerName}</a></td>
+          </tr>
+          <tr>
+            <td className="player-name my-team"><a href={"/results/?accountId=" + this.props.match.team1[4].accountId +  "&name=" + this.props.match.team1[4].summonerName + "&region=" + this.props.match.team1[4].platformId}>
+              {this.props.match.team1[4].summonerName}</a></td>
+            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[4].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[4].championId}.png`)} className="img-responsive" alt="" /></td>
+            <td className="player-name other-team"><a href={"/results/?accountId=" + this.props.match.team2[4].accountId +  "&name=" + this.props.match.team2[4].summonerName + "&region=" + this.props.match.team2[4].platformId}>
+              {this.props.match.team2[4].summonerName}</a></td>
+          </tr>
+        </tbody>
+    </table>
     )
   }
 })
