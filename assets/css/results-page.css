@@ -418,15 +418,19 @@ footer.footer {
   cursor: pointer;
 }
 
+.this-player { 
+  color: rgba(255, 255, 0, 0.5) !important; 
+}
+
 .player-name a {
   color: inherit;
 }
 
-.my-team{
+.team1{
   text-align: left !important;
 }
 
-.other-team{
+.team2{
   text-align: right !important;
 }
 

@@ -474,44 +474,44 @@ var MatchPlayers = React.createClass({
     <table class="other-players table-responsive">
         <tbody>
           <tr>
-            <td className="player-name my-team"><a href={"/results/?accountId=" + this.props.match.team1[0].accountId +  "&name=" + this.props.match.team1[0].summonerName + "&region=" + this.props.match.team1[0].platformId}>
+            <td className={this.props.match.team1[0].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team1[0].accountId +  "&name=" + this.props.match.team1[0].summonerName + "&region=" + this.props.match.team1[0].platformId}>
               {this.props.match.team1[0].summonerName}</a>
             </td>
             <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[0].championId}.png`)} className="img-responsive" alt="" /></td>
             <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[0].championId}.png`)} className="img-responsive" alt="" /></td>
-            <td className="player-name other-team"><a href={"/results/?accountId=" + this.props.match.team2[0].accountId +  "&name=" + this.props.match.team2[0].summonerName + "&region=" + this.props.match.team2[0].platformId}>
+            <td className={this.props.match.team2[0].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team2[0].accountId +  "&name=" + this.props.match.team2[0].summonerName + "&region=" + this.props.match.team2[0].platformId}>
               {this.props.match.team2[0].summonerName}</a></td>
           </tr>
           <tr>
-            <td className="player-name my-team"><a href={"/results/?accountId=" + this.props.match.team1[1].accountId +  "&name=" + this.props.match.team1[1].summonerName + "&region=" + this.props.match.team1[1].platformId}>
+            <td className={this.props.match.team1[1].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team1[1].accountId +  "&name=" + this.props.match.team1[1].summonerName + "&region=" + this.props.match.team1[1].platformId}>
               {this.props.match.team1[1].summonerName}</a></td>
             <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[1].championId}.png`)} className="img-responsive" alt="" /></td>
             <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[1].championId}.png`)} className="img-responsive" alt="" /></td>
-            <td className="player-name other-team"><a href={"/results/?accountId=" + this.props.match.team2[1].accountId +  "&name=" + this.props.match.team2[1].summonerName + "&region=" + this.props.match.team2[1].platformId}>
+            <td className={this.props.match.team2[1].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team2[1].accountId +  "&name=" + this.props.match.team2[1].summonerName + "&region=" + this.props.match.team2[1].platformId}>
               {this.props.match.team2[1].summonerName}</a></td>
           </tr>
           <tr>
-            <td className="player-name my-team"><a href={"/results/?accountId=" + this.props.match.team1[2].accountId +  "&name=" + this.props.match.team1[2].summonerName + "&region=" + this.props.match.team1[2].platformId}>
+            <td className={this.props.match.team1[2].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team1[2].accountId +  "&name=" + this.props.match.team1[2].summonerName + "&region=" + this.props.match.team1[2].platformId}>
               {this.props.match.team1[2].summonerName}</a></td>
             <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[2].championId}.png`)} className="img-responsive" alt="" /></td>
             <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[2].championId}.png`)} className="img-responsive" alt="" /></td>
-            <td className="player-name other-team"><a href={"/results/?accountId=" + this.props.match.team2[2].accountId +  "&name=" + this.props.match.team2[2].summonerName + "&region=" + this.props.match.team2[2].platformId}>
+            <td className={this.props.match.team2[2].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team2[2].accountId +  "&name=" + this.props.match.team2[2].summonerName + "&region=" + this.props.match.team2[2].platformId}>
               {this.props.match.team2[2].summonerName}</a></td>
           </tr>
           <tr>
-            <td className="player-name my-team"><a href={"/results/?accountId=" + this.props.match.team1[3].accountId +  "&name=" + this.props.match.team1[3].summonerName + "&region=" + this.props.match.team1[3].platformId}>
+            <td className={this.props.match.team1[3].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team1[3].accountId +  "&name=" + this.props.match.team1[3].summonerName + "&region=" + this.props.match.team1[3].platformId}>
               {this.props.match.team1[3].summonerName}</a></td>
             <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[3].championId}.png`)} className="img-responsive" alt="" /></td>
             <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[3].championId}.png`)} className="img-responsive" alt="" /></td>
-            <td className="player-name other-team"><a href={"/results/?accountId=" + this.props.match.team2[3].accountId +  "&name=" + this.props.match.team2[3].summonerName + "&region=" + this.props.match.team2[3].platformId}>
+            <td className={this.props.match.team2[3].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team2[3].accountId +  "&name=" + this.props.match.team2[3].summonerName + "&region=" + this.props.match.team2[3].platformId}>
               {this.props.match.team2[3].summonerName}</a></td>
           </tr>
           <tr>
-            <td className="player-name my-team"><a href={"/results/?accountId=" + this.props.match.team1[4].accountId +  "&name=" + this.props.match.team1[4].summonerName + "&region=" + this.props.match.team1[4].platformId}>
+            <td className={this.props.match.team1[4].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team1[4].accountId +  "&name=" + this.props.match.team1[4].summonerName + "&region=" + this.props.match.team1[4].platformId}>
               {this.props.match.team1[4].summonerName}</a></td>
             <td className="player-images"><img src={require(`../img/champion/${this.props.match.team1[4].championId}.png`)} className="img-responsive" alt="" /></td>
             <td className="player-images"><img src={require(`../img/champion/${this.props.match.team2[4].championId}.png`)} className="img-responsive" alt="" /></td>
-            <td className="player-name other-team"><a href={"/results/?accountId=" + this.props.match.team2[4].accountId +  "&name=" + this.props.match.team2[4].summonerName + "&region=" + this.props.match.team2[4].platformId}>
+            <td className={this.props.match.team2[4].summonerName == SummonerName ? "player-name team1 this-player" : "player-name team1"}><a href={"/results/?accountId=" + this.props.match.team2[4].accountId +  "&name=" + this.props.match.team2[4].summonerName + "&region=" + this.props.match.team2[4].platformId}>
               {this.props.match.team2[4].summonerName}</a></td>
           </tr>
         </tbody>
