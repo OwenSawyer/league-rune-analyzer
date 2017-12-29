@@ -99,9 +99,10 @@ header.masthead {
 #matchHistory {
   margin: 0 auto;
   padding: 40px;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.76);
   position: relative;
   z-index: 100;
+  margin-top: 3%;
 }
 
 /* Rune images */
@@ -114,6 +115,15 @@ header.masthead {
   font-size: 12px;
   font-weight: 600;
   display: table;
+}
+
+.rune-info {
+  border-radius: 25px;
+  background-color: rgba(0, 0, 0, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+  display: table;
+  font-weight: 600;
+  padding: 20px;
 }
 
 .rune-panel h2 { 
@@ -224,8 +234,7 @@ header.masthead {
   -webkit-border-radius: 50% !important;
   -moz-border-radius: 50% !important;
   border-radius: 50% !important;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  margin-top: 4%;
 }
 
 .profile-usertitle {
@@ -386,7 +395,7 @@ footer.footer {
   margin: 0;
   list-style: none;
   text-align: center;
-  top: -75px;
+  top: -85px;
 }
 
 .slick-list {
@@ -402,6 +411,42 @@ footer.footer {
   width: 2%;
 }
 
+
+.player-images img{
+  height: 25px;
+  border-radius: 50% !important;
+  padding: 2px;
+}
+
+.player-name{
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 1px;
+  cursor: pointer;
+}
+
+.this-player { 
+  color: rgba(255, 255, 0, 0.5) !important; 
+}
+
+.player-name a {
+  color: inherit;
+}
+
+.team1{
+  text-align: left !important;
+}
+
+.team2{
+  text-align: right !important;
+}
+
+.other-players{
+  padding: 5px;
+  margin: 5px;
+}
+
 .runeHeading{
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
@@ -413,3 +458,4 @@ footer.footer {
   float: none;
   margin: 0 auto;
 }
+

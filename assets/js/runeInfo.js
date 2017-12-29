@@ -155,7 +155,7 @@ var RuneInfo = React.createClass({
 
     if (this.state) {
         ret = (
-        <div style={{backgroundImage: `url(../img/sorcery.png)`}}>
+        <div className="rune-info">
             <div className="row">
                 <div className="col-sm-8">
                     <span style={{display: 'inline-block', verticalAlign: 'middle'}}>
