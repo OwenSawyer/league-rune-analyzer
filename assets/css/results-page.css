@@ -386,3 +386,15 @@ footer.footer {
   text-align: center;
   /*top: -75px;*/
 }
+
+.runeHeading{
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.centerItem{
+  float: none;
+  margin: 0 auto;
+}

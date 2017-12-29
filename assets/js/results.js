@@ -270,13 +270,15 @@ var MatchPanel = React.createClass({
                 <div className="row profile match-panel table-responsive">
                   <MatchResults match={this.state.MatchResponse}/>
                   <div className="row">
-                     <div className="col-md-4">
+                     <div className="col-md-4 text-center">
 			            <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-center centerItem">
+                              <h2 className="runeHeading">Player Primary Runes</h2>
                               <RunePanel handler={this.handler} runetype="player-runes" runes={PlayerPrimaryTree} chosen={this.state.MatchResponse.runes.primary.runes}/>
                             </div>
 
-                              <div className="col-md-6">
+                              <div className="col-md-6 text-center centerItem">
+                                <h2 className="runeHeading">Player Secondary Runes</h2>
                                 <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={this.state.MatchResponse.runes.secondary.runes}/>
                               </div>
                         </div>
@@ -286,13 +288,15 @@ var MatchPanel = React.createClass({
                         <RuneInfo rune={this.state.rune} championAttributes={this.state.MatchResponse.championAttributes}/>
                     </div>
 
-                     <div className="col-md-4">
+                     <div className="col-md-4 text-center">
 			            <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-center centerItem">
+                                <h2 className="runeHeading">Optimal Primary Runes</h2>
                                 {OptimalPrimaryTreePanel}
                             </div>
 
-                            <div className="col-md-6">
+                            <div className="col-md-6 text-center centerItem">
+                              <h2 className="runeHeading">Optimal Secondary Runes</h2>
                               {OptimalSecondaryTreePanel}
                             </div>
                         </div>
