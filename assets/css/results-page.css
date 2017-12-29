@@ -424,6 +424,7 @@ footer.footer {
   font-weight: 600;
   padding: 1px;
   cursor: pointer;
+  text-overflow: ellipsis;
 }
 
 .this-player { 
@@ -450,7 +451,7 @@ footer.footer {
 .runeHeading{
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
 }
 
