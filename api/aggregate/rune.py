@@ -102,7 +102,7 @@ def get_rune_info(runeId):
                 if rune['id'] == int(runeId):
                     rune_info['id'] = rune['id']
                     rune_info['name'] = rune['name']
-                    rune_info['desc'] = rune['shortDesc']
+                    rune_info['desc'] = rune['desc']
                     rune_info['category'] = category['id']
                     break
 

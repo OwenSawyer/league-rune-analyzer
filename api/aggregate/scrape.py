@@ -194,8 +194,25 @@ def scrape_queues():
 
     return queues
 
+def re_descr():
+    new_desc = list(json.loads(open(JSON_FOLDER + 'runes_json_2.json').read()))
+    runes = list(json.loads(open(JSON_FOLDER + 'runes_reforged.json').read()))
+
+    for category in runes:
+        for tier in category['slots']:
+            for rune in tier['runes']:
+                print(rune['name'])
+                desc = next(v['description'] for v in new_desc if rune['name'] == v['name'])
+                desc = ". ".join(i.capitalize() for i in desc.split('. '))
+                rune['desc'] = desc
+
+
+    with open(JSON_FOLDER + 'runes_reforged.json', 'w') as fp:
+        json.dump(runes, fp)
+
 if __name__=='__main__':
-    scrape_queues()
+    re_descr()
+    #scrape_queues()
     #scrape_champ_info()
     #scrape_champion_images()
     #scrape_summoner_images()
