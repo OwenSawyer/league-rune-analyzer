@@ -86,6 +86,8 @@ header.masthead {
 #summonerNameHeading{
   padding-top: 20px;
   color: rgba(0, 0, 0, 0.6);
+  position: relative;
+  z-index: 1;
 }
 
 .match-panel {
@@ -94,12 +96,12 @@ header.masthead {
   padding-left: 3%;
   width: auto !important;
 }
-.matchHistory {
+#matchHistory {
   margin: 0 auto;
   padding: 40px;
-  width: 80%;
-  color: #333;
-  background: #419be0;
+  background: rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 100;
 }
 
 /* Rune images */
@@ -379,12 +381,25 @@ footer.footer {
 }
 
 .slick-dots {
-  bottom: -25px;
+  /*bottom: -25px;*/
   width: 100%;
   margin: 0;
   list-style: none;
   text-align: center;
-  /*top: -75px;*/
+  top: -75px;
+}
+
+.slick-list {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 100;
+}
+
+.slick-dots .slick-active {
+  height: 2%;
+  width: 2%;
 }
 
 .runeHeading{

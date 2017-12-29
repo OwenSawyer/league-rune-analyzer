@@ -118,6 +118,9 @@ const Resolve = {
 
 var MatchHistory = React.createClass({
   getInitialState: function(){
+    this.next = this.next.bind(this)
+    this.previous = this.previous.bind(this)
+
     var MatchHistoryList;
     $.ajax({
       url: '/api/matchlist/',
@@ -142,6 +145,12 @@ var MatchHistory = React.createClass({
       data : MatchHistoryList
     }
   },
+  next() {
+    this.slider.slickNext()
+  },
+  previous() {
+    this.slider.slickPrev()
+  },
 
   render : function(){
     var that = this;
@@ -162,7 +171,7 @@ var MatchHistory = React.createClass({
     });
     return (
         <div>
-          <Slider {...sliderSettings}>
+          <Slider ref={c => this.slider = c } {...sliderSettings}>
             {MatchPanels}
           </Slider>
         </div>
@@ -280,7 +289,7 @@ var MatchPanel = React.createClass({
                               <div className="col-md-6 text-center centerItem">
                                 <h2 className="runeHeading">Player Secondary Runes</h2>
                                 <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={this.state.MatchResponse.runes.secondary.runes}/>
-                              </div>
+                            </div>
                         </div>
                      </div>
 
@@ -335,6 +344,7 @@ var RunePanel = React.createClass({
         <thead className="tree-icon text-center">
             <th></th>
             <th><img className="img-responsive img-fluid" src={require(`../img/perkStyle/${this.props.runes.treeIcon}.png`)}/></th>
+            <th></th>
         </thead>
         <tbody>
           <tr className="keystones">

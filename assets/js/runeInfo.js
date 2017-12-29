@@ -158,13 +158,17 @@ var RuneInfo = React.createClass({
         <div style={{backgroundImage: `url(../img/sorcery.png)`}}>
             <div className="row">
                 <div className="col-sm-8">
-                    <h2>{this.state.data.name}</h2>
-                    <p><strong>{this.state.data.desc}</strong></p>
+                    <span style={{display: 'inline-block', verticalAlign: 'middle'}}>
+                        <h2>{this.state.data.name}</h2>
+                    </span>
                 </div>
                 <div className="col-sm-4">
                         <img src={require(`../img/perk/${this.state.data.id}.png`)}
                           alt="" className="img-circle img-responsive rune-img"/>
                 </div>
+            </div>
+            <div className="row">
+                 <p><strong>{this.state.data.desc}</strong></p>
             </div>
             <div className="row">
                 <RadarGraph data={this.state.radarData} options={radarOptions}/>

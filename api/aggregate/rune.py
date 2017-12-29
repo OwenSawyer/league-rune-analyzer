@@ -27,7 +27,8 @@ def rune_class_type(name):
 def get_popular_runes_for_champ(champ, role):
     runes_json = dict(json.loads(open(JSON_FOLDER + 'champ_role_popular_runes.json').read()))[champ][role]
     if not runes_json:
-        return {}
+        runes_json = dict(json.loads(open(JSON_FOLDER + 'champ_role_popular_runes.json').read()))[champ]
+        runes_json = next(v for (k,v) in runes_json.items() if v)
     id_mappings = [rune_name_to_number(i) for i in runes_json]
     rune_info = {"primary": {}, "secondary": {}}
     rune_info['primary']['id'] = rune_class_type(runes_json[0])
@@ -101,7 +102,7 @@ def get_rune_info(runeId):
                 if rune['id'] == int(runeId):
                     rune_info['id'] = rune['id']
                     rune_info['name'] = rune['name']
-                    rune_info['desc'] = rune['shortDesc']
+                    rune_info['desc'] = rune['desc']
                     rune_info['category'] = category['id']
                     break
 
@@ -131,5 +132,5 @@ if __name__=='__main__':
     # print(rune_number_to_name(8124))
     # print(rune_name_to_number("Predator"))
     #print(rune_usage_analysis())
-    #print(get_popular_runes_for_champ('Sona','support'))
+    print(get_popular_runes_for_champ('Illaoi','support'))
     #print(get_rune_page_rating_for_champ(get_popular_runes_for_champ('Jhin','adc'), 'Bard','support'))
