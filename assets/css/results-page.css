@@ -123,7 +123,7 @@ header.masthead {
   color: rgba(255, 255, 255, 0.7);
   display: table;
   font-weight: 600;
-  padding: 10px;
+  padding: 20px;
 }
 
 .rune-panel h2 { 
@@ -234,8 +234,7 @@ header.masthead {
   -webkit-border-radius: 50% !important;
   -moz-border-radius: 50% !important;
   border-radius: 50% !important;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  margin-top: 4%;
 }
 
 .profile-usertitle {

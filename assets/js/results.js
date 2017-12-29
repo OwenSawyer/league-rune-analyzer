@@ -336,7 +336,7 @@ var RunePanel = React.createClass({
     return (
     <div>
 
-    <table className={"rune-panel text-center mx-auto" + this.props.runetype}>
+    <table className={"rune-panel text-center mx-auto " + this.props.runetype}>
         <thead className="tree-icon text-center">
             <th></th>
             <th><img className="img-responsive img-fluid" src={require(`../img/perkStyle/${this.props.runes.treeIcon}.png`)}/></th>
