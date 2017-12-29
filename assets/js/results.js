@@ -72,9 +72,9 @@ function isEmpty(obj) {
     return true;
 }
 
-const SummonerName = getAllUrlParams().name;
-const AccountID = getAllUrlParams().accountId;
-const Region = getAllUrlParams().region;
+const SummonerName = decodeURIComponent(getAllUrlParams().name);
+const AccountID = decodeURIComponent(getAllUrlParams().accountId);
+const Region = decodeURIComponent(getAllUrlParams().region);
 
 const Precision = {
   "treeIcon" : 8000,
