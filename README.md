@@ -12,7 +12,7 @@ For more information about any rune, all rune icons on the page are click-able, 
 
 In addition, we've also added a few conveniance features, such as displaying basic match information, and links to other players in each match, with a green banner for game victories, and red in defeats.
 
-![Champions Reforged](assets/img/Logo.png?raw=true "Champions Reforged")
+![Champions Reforged](assets/img/screenshot.PNG?raw=true "Champions Reforged")
 
 ### Synopsis
 
