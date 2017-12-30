@@ -1,17 +1,3 @@
-Todo
-1) High priority
-    * get prod api key / apply to contest
-    * improve match history (add players to Backend)
-    * fix bad role readings -> default to a popular page for another role if no info available
-    * title the your rune / popular rune panels
-    * write DOCUMENTATION!
-
-2) Low Priority
-    * dynamic slides (filter matches by current champ)
-    * better rune descriptions (scrape / copy from opgg)
-    * Cleanup css for primary/secondary pages (merge into 1 panel)?
-    * New page -> view popular runes for a champion from some champion list..
-
 # Champions Reforged
 
 ### (Submission for Riot Games API Challenge 2017 - Educate Category)
