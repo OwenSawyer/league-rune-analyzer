@@ -4,6 +4,8 @@ import Slider from 'react-slick';
 
 var RuneInfo = require('./runeInfo.js')
 var ArcGauge = require('./gauge.js');
+var Donut = require('./chartjs').Doughnut
+
 
 // TODO: Create Match History Object
 function getAllUrlParams(url) {
@@ -294,6 +296,11 @@ var MatchPanel = React.createClass({
                                 <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={this.state.MatchResponse.runes.secondary.runes}/>
                             </div>
                         </div>
+                         <div className="row">
+                             <div className="col-md-12 text-center">
+                                <RunePanelInfo spell={this.state.MatchResponse.runes.spellStyle} damage={this.state.MatchResponse.runes.damageStyle}/>
+                             </div>
+                         </div>
                      </div>
 
                     <div className="col-md-4">
@@ -315,6 +322,11 @@ var MatchPanel = React.createClass({
                               {OptimalSecondaryTreePanel}
                             </div>
                         </div>
+                         <div className="row">
+                             <div className="col-md-12 text-center">
+                                <RunePanelInfo spell={this.state.OptimalRunes.spellStyle} damage={this.state.OptimalRunes.damageStyle}/>
+                             </div>
+                         </div>
                      </div>
                 </div>
               </div>
@@ -322,6 +334,51 @@ var MatchPanel = React.createClass({
         }
         return ret
     }
+});
+
+var donutBaseData = {
+    labels: [],
+    datasets: [{
+        data: [],
+        backgroundColor: [
+        'rgba(255,99,132,1)',
+        'rgba(28, 122, 216, 1)'
+        ],
+        hoverBackgroundColor: [
+        'rgba(255,99,132,1)',
+        'rgba(28, 122, 216, 1)'
+        ]
+    }]
+}
+
+var RunePanelInfo = React.createClass({
+
+  render : function(){
+    var spellData = Object.assign({}, donutBaseData);
+    spellData['datasets'][0]['data'] = [(this.props.spell.toFixed(0)), (100 - this.props.spell.toFixed(0))]
+    spellData['labels'] = ['Spells', 'Auto Attacks']
+
+    var damageData = Object.assign({}, donutBaseData);
+    damageData['datasets'][0]['data'] = [(this.props.damage.toFixed(0)), (100 - this.props.damage.toFixed(0))]
+    damageData['labels'] = ['Magic Damage', 'Physical Damage']
+
+    return (
+    <div>
+        <div className="row">
+            <div className="col-md-6">
+                <h2>Page Spell Style</h2>
+                <Donut data={spellData} />
+            </div>
+
+            <div className="col-md-6">
+                <h2>Page Damage Style</h2>
+                <Donut data={damageData} />
+            </div>
+        </div>
+    </div>
+    )
+  }
+
 });
 
 var RunePanel = React.createClass({

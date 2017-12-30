@@ -75,6 +75,9 @@ def serialize_match(accountId, matchJson):
         playerInfo['stats']['perk5']
     ]
     rune_info['rating'] = rune.get_rune_page_rating_for_champ(rune_info, serialized['championName'], serialized['lane'].lower())
+    aggr_styles = rune.rune_page_style_analytics(rune_info)
+    rune_info['spellStyle'] = aggr_styles[0]
+    rune_info['damageStyle'] = aggr_styles[1]
     serialized['runes'] = rune_info
 
     serialized['championTags'] =  next(v['tags'] for (k,v) in dict(json.loads(open(JSON_FOLDER + 'champions.json').read())['data']).items()
@@ -107,8 +110,8 @@ if __name__=='__main__':
     # for i in json.dumps(champs):
     #     print(i)
     #print(get_champions())
-    print(get_summoner('na1', 'chowdog'))
-    print(get_matchlist('na1', '226913554'))
+    print(get_summoner('na1', 'Shimmerstar244'))
+    #print(get_matchlist('na1', '226913554'))
     print(serialize_match('226913554', get_match('na1', '2682393766')))
     #print(get_match('na1', '2674267941'))
     #start = time.time()

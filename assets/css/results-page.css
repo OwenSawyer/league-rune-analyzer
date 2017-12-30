@@ -85,8 +85,8 @@ header.masthead {
 
 #summonerNameHeading{
   padding-top: 5px;
-  color: #ffffff;
-  background-color: rgba(25, 30, 31, 0.5);
+  color: rgba(0,0,0,0.75);
+  background-color: white;
   position: relative;
   z-index: 1;
   padding-bottom: 50px;
