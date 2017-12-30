@@ -36,7 +36,9 @@ def get_popular_runes_for_champ(champ, role):
 
     rune_info['primary']['runes'] = id_mappings[:4]
     rune_info['secondary']['runes'] = id_mappings[4:]
-
+    aggr_styles = rune_page_style_analytics(rune_info)
+    rune_info['spellStyle'] = aggr_styles[0]
+    rune_info['damageStyle'] = aggr_styles[1]
     return rune_info
 
 def get_rune_page_rating_for_champ(runes, champ, role):
@@ -126,11 +128,39 @@ def get_rune_info(runeId):
 
     return rune_info
 
+def rune_page_style_analytics(rune_page):
+    runes_list = rune_page['primary']['runes'] + rune_page['secondary']['runes']
+    page_spell_style = []
+    page_damage_style = []
+
+    #TODO: please change all name references to ids when I get time (this is my greatest regret of this project)
+    hacky_dict = {
+        'Chogath':'ChoGath',
+        'Khazix':'KhaZix',
+        'Velkoz':'VelKoz',
+        'Leblanc':'LeBlanc'
+    }
+
+    rune_users = dict(json.loads(open(JSON_FOLDER + 'runes_with_champs.json').read()))
+    champ_info = dict(json.loads(open(JSON_FOLDER + 'champion_info.json').read()))
+    for rune in runes_list:
+        users = rune_users[rune_number_to_name(rune)]
+        for i in users:
+            name = i
+            if i in hacky_dict:
+                name = hacky_dict[i]
+            page_spell_style.append(champ_info[name]['championStyle'])
+            page_damage_style.append(champ_info[name]['championDamage'])
+
+    aggr_spell_style = sum(page_spell_style) / float(len(page_spell_style))
+    aggr_damage_Style = Counter(page_damage_style)['Magic'] / len(page_damage_style) * 100
+    return (aggr_spell_style, aggr_damage_Style)
+
 if __name__=='__main__':
-    print(get_rune_info('8014'))
+    #print(get_rune_info('8014'))
     # print(scrape.champ_tag_lookup())
     # print(rune_number_to_name(8124))
     # print(rune_name_to_number("Predator"))
     #print(rune_usage_analysis())
-    #print(get_popular_runes_for_champ('Illaoi','support'))
+    print(rune_page_style_analytics(get_popular_runes_for_champ('Lux','middle')))
     #print(get_rune_page_rating_for_champ(get_popular_runes_for_champ('Jhin','adc'), 'Bard','support'))

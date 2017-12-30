@@ -106,27 +106,6 @@ var radarOptions = {
 var BarGraph = require('./chartjs').HorizontalBar
 var RadarGraph = require('./chartjs').Radar
 
-var sample = {
-   "id":8229,
-   "name":"Arcane Comet",
-   "desc":"Damaging a champion with an ability hurls a damaging comet at their location.",
-   "roles":{
-      "Marksman":"0.127",
-      "Mage":"0.404",
-      "Assassin":"0.085",
-      "Fighter":"0.127",
-      "Support":"0.170",
-      "Tank":"0.085"
-   },
-   "attributes":{
-      "attack":"2.75",
-      "defense":"0.785",
-      "toughness":"2.214",
-      "mobility":"0.857",
-      "utility":"0.75"
-   }
-}
-
 var RuneInfo = React.createClass({
     getBarData(data){
         return [
