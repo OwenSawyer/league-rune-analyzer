@@ -29,6 +29,7 @@ To run this project locally, clone this repository and follow the installation s
 
 ### Installing
 
+Start by setting a system environment variable `RIOT_API_KEY` with your Riot Developer API key as the value. Then run the following commands in the root folder of your cloned repository:
 
 * `npm install`
 * `npm run webpack`
