@@ -445,7 +445,7 @@ var MatchResults = React.createClass({
                           {this.props.match.gameDate}
                         </div>
                         <div className="text-center profile-usertitle-mode">
-                            {this.props.match.gameMode}
+                            {this.props.match.gameType}
                         </div>
                         <div className="text-center profile-usertitle-duration">
                             {this.props.match.gameDuration}
@@ -463,7 +463,7 @@ var MatchResults = React.createClass({
                                             {this.props.match.championName}
                                           </div>
                                           <div className="profile-usertitle-job">
-                                            {this.props.match.lane}
+                                            {(this.props.match.map == "Summoner's Rift") ? this.props.match.lane : ''}
                                           </div>
                                           <div className="profile-usertitle-kda">
                                             {this.props.match.kills}/{this.props.match.deaths}/{this.props.match.assists}
