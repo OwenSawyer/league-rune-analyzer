@@ -470,14 +470,7 @@ Open a browser and connect to `localhost:8000` and the application should be run
 **Request body**
 ``` json
 {
-   "rune":8112,
-   "championAttributes":{
-      "toughness":2,
-      "mobility":3,
-      "attack":3,
-      "defense":2,
-      "utility":1
-   }
+   "rune":8112
 }
 ```
 

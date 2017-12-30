@@ -37,6 +37,16 @@ def get_rune_info(request):
     rune_info = rune.get_rune_info(request.data['rune'])
     return response_handler(rune_info)
 
+@api_view(['POST'])
+def get_all_runes_for_champion(request):
+    response = rune.get_all_runes_for_champ(request.data['champion'])
+    return response_handler(response)
+
+@api_view(['GET'])
+def get_champions(request):
+    response = aggregate.get_sorted_champion_ids()
+    return response_handler(response)
+
 def response_handler(response):
     if 'status' in response:
         return HttpResponse(reason=response['status'], status=response['status']['status_code'])

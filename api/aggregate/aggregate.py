@@ -36,8 +36,9 @@ def serialize_match(accountId, matchJson):
     serialized['champion'] = playerInfo['championId']
 
     champion_json = dict(json.loads(open(JSON_FOLDER + 'champions.json').read())['data'])
-    champions = [(val['key'], val['id']) for val in champion_json.values()]
+    champions = [(val['key'], val['id'], val['name']) for val in champion_json.values()]
     serialized['championName'] = next(i for i in champions if i[1] == serialized['champion'])[0]
+    serialized['displayName'] = next(i for i in champions if i[1] == serialized['champion'])[2]
     if playerInfo['timeline']['lane'] == 'BOTTOM':
         if playerInfo['timeline']['role'] == 'DUO_CARRY':
             serialized['lane'] = 'BOTTOM'
@@ -104,15 +105,25 @@ def serialize_match(accountId, matchJson):
 
     return serialized
 
+def get_sorted_champion_ids():
+    res = []
+    champion_json = dict(json.loads(open(JSON_FOLDER + 'champions.json').read())['data'])
+    for key, value in sorted(champion_json.items()):
+        res.append({'id':value['id'],
+                    'key':value['key'],
+                    'name':value['name']})
+    return {'champions': sorted(res, key=lambda x: x['key'])}
+
 if __name__=='__main__':
-    # champs = get_champions()
+    print(get_sorted_champion_ids())
+    #champs = get_champions()
     # print(json.dumps(champs))
     # for i in json.dumps(champs):
     #     print(i)
     #print(get_champions())
-    print(get_summoner('na1', 'Shimmerstar244'))
+    #print(get_summoner('na1', 'Shimmerstar244'))
     #print(get_matchlist('na1', '226913554'))
-    print(serialize_match('226913554', get_match('na1', '2682393766')))
+    #print(serialize_match('226913554', get_match('na1', '2682393766')))
     #print(get_match('na1', '2674267941'))
     #start = time.time()
     #print(get_summoner('na1', 'owen3times'))
