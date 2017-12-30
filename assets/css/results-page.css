@@ -84,10 +84,13 @@ header.masthead {
 }
 
 #summonerNameHeading{
-  padding-top: 20px;
-  color: rgba(0, 0, 0, 0.6);
+  padding-top: 5px;
+  color: #ffffff;
+  background-color: rgba(25, 30, 31, 0.5);
   position: relative;
   z-index: 1;
+  padding-bottom: 50px;
+  margin: 0 -99999px;
 }
 
 .match-panel {
@@ -102,7 +105,6 @@ header.masthead {
   /*background: rgba(0, 0, 0, 0.76);*/
   position: relative;
   z-index: 100;
-  margin-top: 3%;
 }
 
 /* Rune images */
@@ -432,11 +434,14 @@ footer.footer {
 }
 
 .player-name a {
+  display: inline-block;
+  width: 100%;
   color: inherit;
-  white-space: pre-wrap; /* css-3 */    
-  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-  white-space: -o-pre-wrap; /* Opera 7 */
-  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  overflow: hidden;
+  white-space: no-wrap;
+  white-space: -moz-no-wrap;
+  white-space: -o-no-wrap;
+  text-overflow: ellipsis;
 }
 
 .team1{

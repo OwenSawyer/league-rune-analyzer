@@ -41,11 +41,6 @@ var categoryColors = {
 
 var radarBase = {
   labels: ['Attack', 'Defense', 'Toughness', 'Mobility', 'Utility'],
-  options:{
-        scale: {
-            display: false
-        }
-    },
   datasets: [
     {
       label: 'Rune Average stats',
@@ -63,7 +58,7 @@ var radarBase = {
       label: 'Champion Stats',
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
       borderColor: 'rgba(0, 0, 0, 1)',
-      pointBorderColor: '#000000',
+      pointBorderColor: '#282727',
       scaleOverride:true,
       scaleSteps:2,
       scaleStartValue:0,
@@ -73,13 +68,34 @@ var radarBase = {
   ]
 };
 
+var barOptions = {
+    scales: {
+      xAxes: [{
+        gridLines: {
+          color: 'rgba(161, 161, 161, 1)',
+          lineWidth: 0.5
+        }
+      }],
+      yAxes: [{
+        gridLines: {
+          color: 'rgba(161, 161, 161, 1)',
+          lineWidth: 0.5
+        }
+      }]
+    }
+}
+
 var radarOptions = {
     scale: {
        ticks: {
-        display: false,
-        suggestedMin: 0,
-        suggestedMax: 3,
-        maxTicksLimit: 4
+         display: false,
+         suggestedMin: 0,
+         suggestedMax: 3,
+         maxTicksLimit: 4
+       },
+       gridLines: {
+              color: 'rgba(161, 161, 161, 1)',
+              lineWidth: 0.5
        }
     },
     tooltips: {
@@ -174,7 +190,7 @@ var RuneInfo = React.createClass({
                 <RadarGraph data={this.state.radarData} options={radarOptions}/>
             </div>
             <div className="row">
-                <BarGraph data={this.state.barData}/>
+                <BarGraph data={this.state.barData} options={barOptions}/>
             </div>
         </div>
         )

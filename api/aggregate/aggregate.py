@@ -31,7 +31,7 @@ def get_match(region, matchId):
 
 def serialize_match(accountId, matchJson):
     serialized = {}
-    participantId = next(id['participantId'] for id in matchJson['participantIdentities'] if id['player']['accountId'] == int(accountId))
+    participantId = next(id['participantId'] for id in matchJson['participantIdentities'] if id['player']['currentAccountId'] == int(accountId))
     playerInfo = next(id for id in matchJson['participants'] if id['participantId'] == participantId)
     serialized['champion'] = playerInfo['championId']
 
@@ -45,7 +45,7 @@ def serialize_match(accountId, matchJson):
             serialized['lane'] = 'SUPPORT'
     else:
         serialized['lane'] = playerInfo['timeline']['lane']
-    serialized['gameDate'] = datetime.fromtimestamp(matchJson['gameCreation']/1000).strftime("%d/%m/%y")
+    serialized['gameDate'] = datetime.fromtimestamp(matchJson['gameCreation']/1000).strftime("%m/%d/%y")
     serialized['gameDuration'] = str(timedelta(seconds=matchJson['gameDuration']))
 
     queue_info = next(q for q in list(json.loads(open(JSON_FOLDER + 'queue_types.json').read())) if q['queueId'] == matchJson['queueId'])
@@ -107,9 +107,9 @@ if __name__=='__main__':
     # for i in json.dumps(champs):
     #     print(i)
     #print(get_champions())
-    #print(get_summoner('na1', 'chow dog'))
-    #print(get_matchlist('na1', '226913554'))
-    print(serialize_match('210164502', get_match('na1', '2674242742')))
+    print(get_summoner('na1', 'chowdog'))
+    print(get_matchlist('na1', '226913554'))
+    print(serialize_match('226913554', get_match('na1', '2682393766')))
     #print(get_match('na1', '2674267941'))
     #start = time.time()
     #print(get_summoner('na1', 'owen3times'))
