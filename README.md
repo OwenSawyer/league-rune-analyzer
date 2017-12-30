@@ -13,31 +13,33 @@ Todo
     * New page -> view popular runes for a champion from some champion list..
 
 # Champions Reforged
-> Short blurb about what your product does.
 
-One to two paragraph statement about your product and what it does.
+### (Submission for Riot Games API Challenge 2017 - Educate Category)
 
-![pic](header.png)
+http://league-rune-analyzer.herokuapp.com/
+
+> Choose better runes for the champions you play!
+
+Our project allows users to look up their match histories and view the champions they have recently played, and which runes they selected on each one. Not only that, but users are also able to see how their runes compare to the optimal runes for each champion. A "Rune rating" also gives players more insight into how well their chosen runes fit with the champion and the champion's assigned role (e.g. Mage, Tank etc.)
+
+For more information about any rune, all rune icons on the page are click-able, and can provide more information about the rune itself, and how they add to a current champion's statistics in terms of Attack, Defense, Toughness, Mobility and Utility. We also provide a comparison of which roles each rune is most picked on, so that players can see the trends between runes and champion roles. This information feature, and the comparison between chosen and optimal runes are the highlights of our project, and what we believe will really help players understand the new runes and how to optimize them on their favourite champions.
+
+In addition, we've also added a few conveniance features, such as displaying basic match information, and links to other players in each match, with a green banner for game victories, and red in defeats.
+
+![Champions Reforged](assets/img/Logo.png?raw=true "Champions Reforged")
 
 ### Synopsis
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+This project is an application based on the Django REST framework along with React JS on the frontend. Our backend uses the Riot API to request match histories, match information and player information, while using Data Dragon for static information such as images, rune information etc. We aggregate common trends between champions/roles and rune choices to display this information in the form of graphs and ratings to help players improve. On the frontend, we used Bootstrap along with React to provide a dynamic, appealing and easy-to-use platform for players to interact with. 
 
 ### Motivation
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+The main motivation behind this project, was to create an application for the 2017 Riot Games API Challenge. While we did develop this application as part of the challenge, we mainly took this as an opportunity to grow as developers and explore new frameworks. The best part about this experience, is that we have now created something that we can use ourselves, and share with other League of Legends players!
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisities
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+To run this project locally, clone this repository and follow the installation steps below:
 
 ### Installing
 
@@ -47,9 +49,7 @@ Give examples
 * `pip install -r requirements.txt`
 * `python manage.py runserver`
 
-### Deployment
-
-Add additional notes about how to deploy this on a live system
+Open a browser and connect to `localhost:8000` and the application should be running locally!
 
 ## API Reference
 
@@ -80,33 +80,11 @@ Add additional notes about how to deploy this on a live system
 ```
 </details>
 
-## Release History
-
-* 0.1.0 12/31/17
-    * The first proper release
-    * CHANGE: Rename `foo()` to `bar()`
-* 0.0.1 12/29/17
-    * Work in progress
-
 ## Authors
 
-* **John Doe** - *Initial work* - [JohnDoe](https://github.com/JohnDoe)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Owen Sawyer** - [OwenSawyer](https://github.com/OwenSawyer)
+* **Meeral Qureshi** - [MeeralQureshi](https://github.com/MeeralQureshi)
 
 ## License
 
-This project is licensed under the **BSD License** - see the [LICENSE.md](LICENSE.md) file for details.
-
-
-## FAQ
-### What do I need to know before I start using the API?
-Got rust on your skills? No worries. Here are the docs you might need to get started:
-
-- HTTPS protocol
-- [REST software pattern][]
-- Authentication with [OAuth][] (or the official [Beginner’s Guide][])
-- Data serialization with [JSON][] (or see a [quick tutorial][])
-
-### Why did you decide to do *insert bad coding practice here*?
-time
+This project is licensed under the **MIT License** - see the [LICENSE.md](LICENSE.md) file for details.
