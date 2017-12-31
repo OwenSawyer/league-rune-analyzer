@@ -774,15 +774,17 @@ var Trigger = React.createClass({
 
                         <div className="row">
                             <div className="col-md-4 "></div>
-                            <div className="col-md-3 text-center centerItem" style={{backgroundColor:'rgba(0,0,0,0.25)', borderRadius: '25px'}}>
+                            <div className="col-md-4 text-center centerItem" style={{backgroundColor:'rgba(0,0,0,0.25)', borderRadius: '25px'}}>
                                 <div className="row">
-                                    <div className="col-md-6 ">
+                                    <div className="col-md-7 ">
                                         <div className="row">
-                                          <div className="col-md-6"><img className="img-fluid" style={{height:'60px', borderRadius: '25px'}} src={require(`../img/champion/${this.props.champion.id}.png`)}/></div>
-                                          <div className="col-md-6" style={{color: 'white', fontSize: '24px', paddingTop: '5%'}}>{this.props.champion.name}</div>
+                                          <div className="col-md-4">
+                                              <img className="img-fluid" style={{height:'60px', borderRadius: '25px'}} src={require(`../img/champion/${this.props.champion.id}.png`)}/>
+                                          </div>
+                                          <div className="col-md-8" style={{color: 'white', fontSize: '24px', paddingTop: '5%'}}>{this.props.champion.name}</div>
                                         </div>
                                     </div>
-                                    <div className="col-md-6" style={{paddingTop: '2.5%'}}>
+                                    <div className="col-md-5" style={{paddingTop: '2.5%'}}>
                                         <Select
                                             value={this.state.selectValue}
                                             onChange={this.handleRoleChange}
@@ -791,7 +793,7 @@ var Trigger = React.createClass({
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-5">
+                            <div className="col-md-4">
                                 <button className="btn btn-default" style={{float: 'right'}} onClick={this.closeModal}>Close</button>
                             </div>
                         </div>
@@ -815,7 +817,7 @@ var Trigger = React.createClass({
                             </div>
                             <div className="col-md-1 "></div>
                             <div className="col-md-4">
-                                <RuneInfo rune={this.state.rune}/>
+                                <RuneInfo rune={this.state.rune} championAttributes={this.props.champion.attr}/>
                             </div>
                             <div className="col-md-2 "></div>
                         </div>
