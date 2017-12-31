@@ -4,6 +4,7 @@
   "description": "Rune analysis website for League of Legends",
   "main": "index.js",
   "scripts": {
+    "postinstall": "node node_modules/webpack/bin/webpack.js",
     "webpack": "node node_modules/webpack/bin/webpack.js --progress --colors"
   },
   "keywords": [
