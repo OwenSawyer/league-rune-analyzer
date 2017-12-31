@@ -107,11 +107,26 @@ def serialize_match(accountId, matchJson):
 
 def get_sorted_champion_ids():
     res = []
+
+    champ_info = dict(json.loads(open(JSON_FOLDER + 'champion_info.json').read()))
     champion_json = dict(json.loads(open(JSON_FOLDER + 'champions.json').read())['data'])
+
+    #TODO: please change all name references to ids when I get time (this is my greatest regret of this project)
+    hacky_dict = {
+        'Chogath':'ChoGath',
+        'Khazix':'KhaZix',
+        'Velkoz':'VelKoz',
+        'Leblanc':'LeBlanc'
+    }
+
     for key, value in sorted(champion_json.items()):
+        compare_name = value['key']
+        if compare_name in hacky_dict:
+            compare_name = hacky_dict[compare_name]
         res.append({'id':value['id'],
                     'key':value['key'],
-                    'name':value['name']})
+                    'name':value['name'],
+                    'attr': next(v['attributes'] for (k,v) in champ_info.items() if k == compare_name)})
     return {'champions': sorted(res, key=lambda x: x['key'])}
 
 if __name__=='__main__':

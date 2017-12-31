@@ -6,3 +6,4 @@ assets/bundles
 .idea/
 static/
 webpack-stats.json
+package-lock.json
