@@ -1,19 +1,20 @@
 {
-  "name": "drf_react",
-  "version": "0.0.2",
-  "description": "Django and React",
+  "name": "leagur-rune-analyzer",
+  "version": "0.1.0",
+  "description": "Rune analysis website for League of Legends",
   "main": "index.js",
   "scripts": {
     "postinstall": "node node_modules/webpack/bin/webpack.js",
     "webpack": "node node_modules/webpack/bin/webpack.js --progress --colors"
   },
   "keywords": [
-    "django",
-    "react",
-    "webpack"
+    "riot",
+    "league",
+    "rune",
+    "reforged"
   ],
-  "author": "Jonathan Cox",
-  "license": "ISC",
+  "author": "Owen Sawyer and Meeral Qureshi",
+  "license": "MIT",
   "dependencies": {
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",

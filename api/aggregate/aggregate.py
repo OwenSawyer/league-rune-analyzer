@@ -83,8 +83,20 @@ def serialize_match(accountId, matchJson):
 
     serialized['championTags'] =  next(v['tags'] for (k,v) in dict(json.loads(open(JSON_FOLDER + 'champions.json').read())['data']).items()
                                       if k == serialized['championName'])
+
+    #TODO: please change all name references to ids when I get time (this is my greatest regret of this project)
+    hacky_dict = {
+        'Chogath':'ChoGath',
+        'Khazix':'KhaZix',
+        'Velkoz':'VelKoz',
+        'Leblanc':'LeBlanc'
+    }
+    compare_name = serialized['championName']
+    if serialized['championName'] in hacky_dict:
+        compare_name = hacky_dict[serialized['championName']]
+
     serialized['championAttributes'] = next(v['attributes'] for (k,v) in dict(json.loads(open(JSON_FOLDER + 'champion_info.json').read())).items()
-                                      if k == serialized['championName'])
+                                      if k == compare_name)
 
     players = {'team1': [],
                'team2': []}
@@ -130,7 +142,7 @@ def get_sorted_champion_ids():
     return {'champions': sorted(res, key=lambda x: x['key'])}
 
 if __name__=='__main__':
-    print(get_sorted_champion_ids())
+    #print(get_sorted_champion_ids())
     #champs = get_champions()
     # print(json.dumps(champs))
     # for i in json.dumps(champs):
@@ -138,7 +150,7 @@ if __name__=='__main__':
     #print(get_champions())
     #print(get_summoner('na1', 'Shimmerstar244'))
     #print(get_matchlist('na1', '226913554'))
-    #print(serialize_match('226913554', get_match('na1', '2682393766')))
+    print(serialize_match('204781816', get_match('na1', '2683297446')))
     #print(get_match('na1', '2674267941'))
     #start = time.time()
     #print(get_summoner('na1', 'owen3times'))

@@ -5,9 +5,9 @@ JSON_FOLDER = os.path.join(BASE_DIR, 'api/aggregate/json/')
 
 SECRET_KEY = 'v&r53xo5v!hwbh$#&o7-zc0xs59qu1ebt#r%9=(=qo^_e_#kaa'
 
-DEBUG = os.environ.get('DEBUG', 'on') == 'on'
+DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'league-rune-analyzer.herokuapp.com']
 
 
 INSTALLED_APPS = (
