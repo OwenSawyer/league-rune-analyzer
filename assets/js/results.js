@@ -4,10 +4,9 @@ import Slider from 'react-slick';
 
 var RuneInfo = require('./runeInfo.js')
 var ArcGauge = require('./gauge.js');
-var Donut = require('./chartjs').Doughnut
+import Modal from 'react-modal';
+import Select from 'react-select';
 
-
-// TODO: Create Match History Object
 function getAllUrlParams(url) {
 
   // get query string from url (optional) or window
@@ -296,11 +295,6 @@ var MatchPanel = React.createClass({
                                 <RunePanel handler={this.handler} runetype="player-runes secondary-tree" runes={PlayerSecondaryTree} chosen={this.state.MatchResponse.runes.secondary.runes}/>
                             </div>
                         </div>
-                         <div className="row">
-                             <div className="col-md-12 text-center">
-                                <RunePanelInfo spell={this.state.MatchResponse.runes.spellStyle} damage={this.state.MatchResponse.runes.damageStyle}/>
-                             </div>
-                         </div>
                      </div>
 
                     <div className="col-md-4">
@@ -322,11 +316,6 @@ var MatchPanel = React.createClass({
                               {OptimalSecondaryTreePanel}
                             </div>
                         </div>
-                         <div className="row">
-                             <div className="col-md-12 text-center">
-                                <RunePanelInfo spell={this.state.OptimalRunes.spellStyle} damage={this.state.OptimalRunes.damageStyle}/>
-                             </div>
-                         </div>
                      </div>
                 </div>
               </div>
@@ -351,6 +340,7 @@ var donutBaseData = {
     }]
 }
 
+//UNUSED - Maybe in the future?
 var RunePanelInfo = React.createClass({
 
   render : function(){
@@ -517,7 +507,7 @@ var MatchResults = React.createClass({
                                     </div>
                                     <div className="col-md-6 profile-usertitle">
                                         <div className="profile-usertitle-name">
-                                            {this.props.match.championName}
+                                            {this.props.match.displayName}
                                           </div>
                                           <div className="profile-usertitle-job">
                                             {(this.props.match.map == "Summoner's Rift") ? this.props.match.lane : ''}
@@ -598,5 +588,245 @@ var MatchPlayers = React.createClass({
 })
 
 
-ReactDOM.render(<h1>{SummonerName}</h1>, document.getElementById('summonerNameHeading'));
-ReactDOM.render(<MatchHistory />, document.getElementById('matchHistory'));
+var RuneBrowserPanel = React.createClass({
+    getInitialState: function() {
+        this.state = {}
+        this.state.show = false
+        this.state.champ = ''
+        var that = this;
+        $.ajax({
+            url: '/api/champions/',
+            type: 'get',
+            async: false,
+            success : function(response){
+              that.state.champs = response['champions'];
+            },
+            error : function(response){
+            }
+        })
+
+        return this.state
+    },
+    handleClick(champ) {
+       this.setState({
+          champ: champ,
+          show: true
+        });
+    },
+    render: function() {
+        var groupSize = 6;
+        var that = this;
+        var rows = this.state.champs.map(function(item, index) {
+            // map content to html elements
+        return (
+            <div className="col-md-2" onClick={() => that.handleClick(item['key'])}>
+                <div>
+                    <img src={require(`../img/champion/${item['id']}.png`)} className="img-fluid" alt="" style={{ cursor: 'pointer' }}/>
+                </div>
+                <div style={{color: 'white'}}>
+                    {item['name']}
+                </div>
+            </div>);
+        }).reduce(function(r, element, index) {
+            // create element groups with size 3, result looks like:
+            // [[elem1, elem2, elem3], [elem4, elem5, elem6], ...]
+            index % groupSize === 0 && r.push([]);
+            r[r.length - 1].push(element);
+            return r;
+        }, []).map(function(rowContent) {
+            // surround every group with 'row'
+            return <div className="row" style={{paddingTop: '10px'}}>{rowContent}</div>;
+        });
+        return (<div className="container">
+                <div className="row">
+                    <Trigger modal={this.state.show} champion={this.state.champ}/>
+                    <div className="col-md-2">
+                    </div>
+                    <div className="col-md-8" style={{top:'10px'}}>
+                        {rows}
+                    </div>
+                    <div className="col-md-2">
+                    </div>
+                </div>
+            </div>);
+    }
+});
+
+var Trigger = React.createClass({
+    getInitialState: function() {
+        this.state = { show: this.props.modal };
+        this.state.runeList = null
+        this.state.selectValue = ''
+        this.state.rune = -1
+        return this.state
+    },
+    handler(runeId) {
+        this.setState({
+          rune: runeId
+        })
+    },
+    selectTree : function(treeid){ //TODO this is copy and pasted from match panel
+      if(treeid == 8000){
+        return Precision;
+      }
+      else if(treeid == 8100){
+        return Domination;
+      }
+      else if(treeid == 8200){
+        return Sorcery;
+      }
+      else if(treeid == 8300){
+        return Inspiration;
+      }
+      else{
+        return Resolve;
+      }
+    },
+
+    setStateResponse(response){
+        let roleList = [];
+        let runeList = {};
+        for (var i = 0; i < response.length; i++) {
+          roleList.push(response[i]['role'])
+          runeList[response[i]['role']] = response[i]['runes']
+        }
+
+        let options = [];
+        roleList.map(item =>
+          options.push({ label: item, value: item }),
+        );
+
+        this.setState({
+            selectValue: roleList[0],
+            options : options,
+            runeList: runeList,
+            playerPrimaryTree: this.selectTree(runeList[roleList[0]].primary.id),
+            playerSecondaryTree: this.selectTree(runeList[roleList[0]].secondary.id)
+        });
+
+    },
+    setupModal(nextProps, response){
+        this.setStateResponse(response.roles)
+        this.setState({show: nextProps.modal})
+    },
+    componentWillReceiveProps(nextProps){
+    	if(this.state.show!==nextProps.modal){
+            fetch('/api/rune/champion/', {
+                method: 'post',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({'champion':nextProps.champion})})
+                .then((response) => response.json())
+                .then((response) => this.setupModal(nextProps, response));
+      }
+    },
+
+    closeModal() {
+      this.setState({
+            show: false,
+            runeList : null,
+            selectValue : '',
+            rune : -1});
+    },
+    handleRoleChange(selectedOption){
+        this.setState({
+            selectValue: selectedOption.value,
+            playerPrimaryTree: this.selectTree(this.state.runeList[selectedOption.value].primary.id),
+            playerSecondaryTree: this.selectTree(this.state.runeList[selectedOption.value].secondary.id)});
+        this.forceUpdate()
+    },
+    render(){
+        var ret = <div></div>
+        if (this.state.runeList) {
+
+            let close = () => this.setState({show: false});
+            ret = (
+                <div className="modal modal-container">
+                    <Modal
+                        isOpen={this.state.show}
+                        onRequestClose={this.closeModal}
+                        style={{
+                            overlay: {
+                                position: 'fixed',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                            },
+                            content: {
+                                position: 'absolute',
+                                top: '100px',
+                                left: '40px',
+                                right: '40px',
+                                bottom: '40px',
+                                border: '1px solid #ccc',
+                                background: '#fff',
+                                overflow: 'auto',
+                                WebkitOverflowScrolling: 'touch',
+                                borderRadius: '4px',
+                                outline: 'none',
+                                padding: '20px',
+                                backgroundImage: "url('../static/img/bg-results.png')",
+                                opacity: 0.95
+
+                            }
+                        }}
+                        contentLabel="Modal">
+
+                        <div className="row">
+                            <div className="col-md-1 "></div>
+                            <div className="col-md-3" style={{backgroundColor:'rgba(0,0,0,0.25)', borderRadius: '25px'}}>
+                                <div className="row">
+                                    <div className="col-md-6 ">
+                                        <div style={{color: 'white', fontSize: '24px'}}>{this.props.champion}</div>
+                                    </div>
+                                    <div className="col-md-6 ">
+                                        <Select
+                                            value={this.state.selectValue}
+                                            onChange={this.handleRoleChange}
+                                            options={this.state.options}
+                                            style={{width: '150px'}}/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-8">
+                                <button className="btn btn-default" style={{float: 'right'}} onClick={this.closeModal}>Close</button>
+                            </div>
+                        </div>
+
+                        <div className="row" style={{paddingTop: '20px'}}>
+                            <div className="col-md-1 "></div>
+                            <div className="col-md-4 text-center centerItem">
+                                <div className="row">
+                                    <div className="col-md-6 text-center centerItem">
+                                        <RunePanel handler={this.handler} runetype="player-runes"
+                                                   runes={this.state.playerPrimaryTree}
+                                                   chosen={this.state.runeList[this.state.selectValue].primary.runes}/>
+                                    </div>
+
+                                    <div className="col-md-6 text-center centerItem">
+                                        <RunePanel handler={this.handler} runetype="player-runes secondary-tree"
+                                                   runes={this.state.playerSecondaryTree}
+                                                   chosen={this.state.runeList[this.state.selectValue].secondary.runes}/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-1 "></div>
+                            <div className="col-md-4">
+                                <RuneInfo rune={this.state.rune}/>
+                            </div>
+                            <div className="col-md-2 "></div>
+                        </div>
+                    </Modal>
+                </div>);
+        }
+        return ret;
+    }
+});
+
+if(document.getElementById('summonerNameHeading')) {
+    ReactDOM.render(<h1>{SummonerName}</h1>, document.getElementById('summonerNameHeading'));
+    ReactDOM.render(<MatchHistory />, document.getElementById('matchHistory'));
+}
+if(document.getElementById('runeBrowserPanel')) {
+    ReactDOM.render(<RuneBrowserPanel/>, document.getElementById('runeBrowserPanel'));
+}

@@ -41,6 +41,29 @@ def get_popular_runes_for_champ(champ, role):
     rune_info['damageStyle'] = aggr_styles[1]
     return rune_info
 
+def get_all_runes_for_champ(champ):
+    runes_json = dict(json.loads(open(JSON_FOLDER + 'champ_role_popular_runes.json').read()))[champ]
+    items = [{k:v} for (k,v) in runes_json.items() if v]
+    role_list = []
+    for role in items:
+        values = list(role.values())[0]
+        id_mappings = [rune_name_to_number(i) for i in values]
+        rune_info = {"primary": {}, "secondary": {}}
+        rune_info['primary']['id'] = rune_class_type(values[0])
+        rune_info['secondary']['id'] = rune_class_type(values[-1])
+
+        rune_info['primary']['runes'] = id_mappings[:4]
+        rune_info['secondary']['runes'] = id_mappings[4:]
+        aggr_styles = rune_page_style_analytics(rune_info)
+        rune_info['spellStyle'] = aggr_styles[0]
+        rune_info['damageStyle'] = aggr_styles[1]
+        role_info = {
+            'role': list(role.keys())[0].title(),
+            'runes': rune_info
+        }
+        role_list.append(role_info)
+    return {'roles': role_list}
+
 def get_rune_page_rating_for_champ(runes, champ, role):
 
     score = 0
@@ -157,6 +180,7 @@ def rune_page_style_analytics(rune_page):
     return (aggr_spell_style, aggr_damage_Style)
 
 if __name__=='__main__':
+    print(get_all_runes_for_champ("Akali"))
     #print(get_rune_info('8014'))
     # print(scrape.champ_tag_lookup())
     # print(rune_number_to_name(8124))

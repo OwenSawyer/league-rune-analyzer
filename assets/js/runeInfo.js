@@ -127,7 +127,9 @@ var RuneInfo = React.createClass({
         radarBaseCopy['datasets'][0]['data'] = this.getRadarData(response.attributes).map(Number)
         radarBaseCopy['datasets'][0]['backgroundColor'] = categoryColors[response.category].backgroundColor
         radarBaseCopy['datasets'][0]['borderColor'] = categoryColors[response.category].borderColor
-        radarBaseCopy['datasets'][1]['data'] = this.getRadarData(this.props.championAttributes).map(Number)
+        if (this.props.championAttributes) {
+            radarBaseCopy['datasets'][1]['data'] = this.getRadarData(this.props.championAttributes).map(Number)
+        }
 
         this.setState({
             data : response,

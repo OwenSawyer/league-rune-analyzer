@@ -23,6 +23,7 @@
     <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://unpkg.com/react-select/dist/react-select.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/results-page.css' %}" rel="stylesheet">
@@ -34,13 +35,8 @@
     <!-- Navigation -->
     <nav class="results-nav navbar navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="/" style="color:white;"><img alt="Champions Reforged Logo" height="80px" src="{% static 'img/Logo.png' %}">Champions Reforged</a>
-        <ul class="navbar-nav ml-auto" style="padding-right: 75px">
-          <li class="nav-item">
-            <a class="nav-link" style="font-size: 20px; font-weight: bold;" href="/champions" >View Champions</a>
-          </li>
-        </ul>
         <form id="searchSummonerForm" class="form-inline">
-        <input type="text" name="summonerName" class="form-control" placeholder="Summoner Name...">&nbsp;&nbsp;&nbsp;    
+        <input type="text" name="summonerName" class="form-control" placeholder="Summoner Name...">&nbsp;&nbsp;&nbsp;
         <select class="form-control" name="execute_against" id="execute_against_match-v3_GET_getMatchlist">
           <option value="NA1" selected="true">North America</option>
           <option value="RU">Russia</option>
@@ -53,7 +49,7 @@
           <option value="TR1">Turkey</option>
           <option value="LA1">Latin America South</option>
           <option value="LA2">Latin America North</option>
-          </select>&nbsp;&nbsp;&nbsp;  
+          </select>&nbsp;&nbsp;&nbsp;
           <button type="submit" class="btn btn-primary">Reforge</button>
         </form>
     </nav>
@@ -61,8 +57,8 @@
     <!-- Recent game slides -->
     <section class="bg-light text-center">
       <div class="container-fluid text-center" style="background-image: url({% static 'img/bg-results.png' %}); opacity: 0.95;">
-        <div id="summonerNameHeading"></div>
-        <div id="matchHistory"></div>
+        <div id="runeBrowserPanel">
+        </div>
       </div>
     </section>
 

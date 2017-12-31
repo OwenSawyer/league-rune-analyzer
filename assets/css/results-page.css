@@ -497,3 +497,12 @@ footer.footer {
 	font: 400 10px Roboto;
 	letter-spacing: 3px;
 }
+
+/*Prevents background scrollbar from moving while in modal*/
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
+
+.Select-clear-zone {
+display: none !important;
+}
