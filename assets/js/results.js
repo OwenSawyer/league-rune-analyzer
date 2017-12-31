@@ -619,7 +619,7 @@ var RuneBrowserPanel = React.createClass({
         var rows = this.state.champs.map(function(item, index) {
             // map content to html elements
         return (
-            <div className="col-md-2" onClick={() => that.handleClick(item['key'])}>
+            <div className="col-md-2" onClick={() => that.handleClick(item)}>
                 <div>
                     <img src={require(`../img/champion/${item['id']}.png`)} className="img-fluid" alt="" style={{ cursor: 'pointer' }}/>
                 </div>
@@ -714,7 +714,7 @@ var Trigger = React.createClass({
             fetch('/api/rune/champion/', {
                 method: 'post',
                 headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({'champion':nextProps.champion})})
+                body: JSON.stringify({'champion':nextProps.champion.key})})
                 .then((response) => response.json())
                 .then((response) => this.setupModal(nextProps, response));
       }
@@ -773,13 +773,16 @@ var Trigger = React.createClass({
                         contentLabel="Modal">
 
                         <div className="row">
-                            <div className="col-md-1 "></div>
-                            <div className="col-md-3" style={{backgroundColor:'rgba(0,0,0,0.25)', borderRadius: '25px'}}>
+                            <div className="col-md-4 "></div>
+                            <div className="col-md-3 text-center centerItem" style={{backgroundColor:'rgba(0,0,0,0.25)', borderRadius: '25px'}}>
                                 <div className="row">
                                     <div className="col-md-6 ">
-                                        <div style={{color: 'white', fontSize: '24px'}}>{this.props.champion}</div>
+                                        <div className="row">
+                                          <div className="col-md-6"><img className="img-fluid" style={{height:'60px', borderRadius: '25px'}} src={require(`../img/champion/${this.props.champion.id}.png`)}/></div>
+                                          <div className="col-md-6" style={{color: 'white', fontSize: '24px', paddingTop: '5%'}}>{this.props.champion.name}</div>
+                                        </div>
                                     </div>
-                                    <div className="col-md-6 ">
+                                    <div className="col-md-6" style={{paddingTop: '2.5%'}}>
                                         <Select
                                             value={this.state.selectValue}
                                             onChange={this.handleRoleChange}
@@ -788,7 +791,7 @@ var Trigger = React.createClass({
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-8">
+                            <div className="col-md-5">
                                 <button className="btn btn-default" style={{float: 'right'}} onClick={this.closeModal}>Close</button>
                             </div>
                         </div>
