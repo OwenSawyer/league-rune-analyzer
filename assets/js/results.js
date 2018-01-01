@@ -510,7 +510,8 @@ var MatchResults = React.createClass({
                                             {this.props.match.displayName}
                                           </div>
                                           <div className="profile-usertitle-job">
-                                            {(this.props.match.map == "Summoner's Rift") ? this.props.match.lane : ''}
+                                            {(this.props.match.map == "Summoner's Rift"
+                                            && this.props.match.gameType.includes("5v5")) ? this.props.match.lane : ''}
                                           </div>
                                           <div className="profile-usertitle-kda">
                                             {this.props.match.kills}/{this.props.match.deaths}/{this.props.match.assists}
