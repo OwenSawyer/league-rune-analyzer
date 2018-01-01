@@ -2,7 +2,7 @@
 
 ### (Submission for Riot Games API Challenge 2017 - Educate Category)
 
-http://league-rune-analyzer.herokuapp.com/
+https://champions-reforged.herokuapp.com/
 
 > Choose better runes for the champions you play!
 
@@ -10,7 +10,7 @@ Our project allows users to look up their match histories and view the champions
 
 For more information about any rune, all rune icons on the page are click-able, and can provide more information about the rune itself, and how they add to a current champion's statistics in terms of Attack, Defense, Toughness, Mobility and Utility. We also provide a comparison of which roles each rune is most picked on, so that players can see the trends between runes and champion roles. This information feature, and the comparison between chosen and optimal runes are the highlights of our project, and what we believe will really help players understand the new runes and how to optimize them on their favourite champions.
 
-We also feature a page where users can click any champion and view their most popular runes by role.
+We also feature a page where users can click any champion and view their most popular runes by role. (The 'View Champions' tab in the nav bar)
 
 ![Champions Reforged](assets/img/screenshot.PNG?raw=true "Champions Reforged")
 
@@ -29,10 +29,11 @@ To run this project locally, clone this repository and follow the installation s
 
 ### Installing
 
+This project requires python 3+
 Start by setting a system environment variable `RIOT_API_KEY` with your Riot Developer API key as the value. Then run the following commands in the root folder of your cloned repository:
 
 * `npm install`
-* `pip install -r requirements.txt`
+* `pip3 install -r requirements.txt`
 * `npm run webpack`
 * `python manage.py collectstatic`
 * `python manage.py runserver`
