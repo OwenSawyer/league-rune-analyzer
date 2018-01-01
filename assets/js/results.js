@@ -642,7 +642,7 @@ var RuneBrowserPanel = React.createClass({
                     <Trigger modal={this.state.show} champion={this.state.champ}/>
                     <div className="col-md-2">
                     </div>
-                    <div className="col-md-8" style={{top:'10px'}}>
+                    <div className="col-md-8" style={{top:'10px', paddingBottom: '20px'}}>
                         {rows}
                     </div>
                     <div className="col-md-2">
