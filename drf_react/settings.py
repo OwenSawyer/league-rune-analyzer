@@ -7,7 +7,7 @@ SECRET_KEY = 'v&r53xo5v!hwbh$#&o7-zc0xs59qu1ebt#r%9=(=qo^_e_#kaa'
 
 DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'league-rune-analyzer.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'league-rune-analyzer.herokuapp.com', 'champions-reforged.herokuapp.com']
 
 
 INSTALLED_APPS = (
